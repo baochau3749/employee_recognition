@@ -14,7 +14,7 @@
 	<h2>Login Page</h2>
 	<hr>
 	
-	<a href="${pageContext.request.contextPath}/user">Go to User Main Page</a>
+	<a href="${pageContext.request.contextPath}/user">Go to User Main Page Page Page</a>
 	<br><br>
 	<a href="${pageContext.request.contextPath}/admin">Go to Admin Main Page</a>	
 	
