@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: Bao Chau
+Build-Jdk: 10.0.2
+Implementation-Title: employee_recognition
+Implementation-Version: 1
+Implementation-Vendor-Id: com
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/employee_recognition
+Created-By: Maven Integration for Eclipse
+
