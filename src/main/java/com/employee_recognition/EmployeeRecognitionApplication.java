@@ -10,6 +10,5 @@ public class EmployeeRecognitionApplication{
 
 	public static void main(String[] args) {
 		SpringApplication.run(EmployeeRecognitionApplication.class, args);
-		System.out.println("testing branch change");
 	}
 }
