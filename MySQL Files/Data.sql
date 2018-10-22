@@ -24,7 +24,8 @@ ALTER TABLE user AUTO_INCREMENT = 1;
 INSERT INTO user (email, password, role_id, user_profile_id) VALUES 
 	("chaub@oregonstate.edu", "abc", 2,  1),
     ("leonarca@oregonstate.edu", "abc", 2, 2),
-    ("allisbri@oregonstate.edu", "abc", 1, NULL);
+    ("allisbri@oregonstate.edu", "abc", 1, NULL),
+    ("cs467.project@gmail.com", "abc", 1, NULL);
 
 
 
