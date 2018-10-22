@@ -3,6 +3,9 @@ package com.employee_recognition.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,6 +49,11 @@ public class UserServiceImpl implements UserService {
 		userRepository.deleteById(id);
 	}
 
-
+	@Override
+	public User getLoggedInUser() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userEmail = ((UserDetails)authentication.getPrincipal()).getUsername();
+		return getUserByEmail(userEmail);
+	}
 
 }

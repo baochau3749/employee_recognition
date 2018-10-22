@@ -1,23 +1,26 @@
 package com.employee_recognition.Controller;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.employee_recognition.Entity.User;
+import com.employee_recognition.Service.UserService;
 
 
 
 @Controller
 public class LoginController {
 	
+	@Autowired
+	private UserService userService;
+	
 	@RequestMapping("/")
-	public String loginPage(Authentication authentication) {
+	public String loginPage() {
 
-		UserDetails loggedInUser = (UserDetails)authentication.getPrincipal();
-		GrantedAuthority authority = (GrantedAuthority)loggedInUser.getAuthorities().toArray()[0];
-
-		if (authority.getAuthority().compareTo("ROLE_ADMIN") == 0) {
+		User user = userService.getLoggedInUser();
+		
+		if (user.getRole().getRole().compareTo("ADMIN") == 0) {
 			return "admin";
 		}
 		

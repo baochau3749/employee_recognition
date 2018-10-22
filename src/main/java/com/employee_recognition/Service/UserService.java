@@ -11,6 +11,7 @@ public interface UserService {
 	public User getUserById(Long id);
 	public User saveUser(User user, String type);
 	public void deleteUserById(Long id);
+	public User getLoggedInUser();
 }
 
 
