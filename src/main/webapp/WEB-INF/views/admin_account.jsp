@@ -13,6 +13,7 @@
 		<c:set var="pageLabel" value="Update Admin Account"/>
 	</c:if>		
 	<h2>${pageLabel}</h2>			
+	<h4>Logged In: ${loggedInUser.email}</h4>
 	<hr>
 	
 	<form:form modelAttribute="account" method="POST"

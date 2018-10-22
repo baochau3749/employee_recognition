@@ -10,6 +10,7 @@
 </head>
 <body>
 	<h2>Admin Main Page</h2>
+	<h4>Logged In: ${loggedInUser.email}</h4>
 	<hr>
 	
 	<a href="${pageContext.request.contextPath}/admin/user_management">User Management</a>

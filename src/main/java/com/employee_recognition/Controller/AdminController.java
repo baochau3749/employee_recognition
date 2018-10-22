@@ -24,20 +24,31 @@ public class AdminController {
 	public AdminController() {
 	}		
 
-	@GetMapping("")
-	public String showAdminMainPage() {
-		return "admin";
-	}
+//	@GetMapping("")
+//	public String showAdminMainPage(Model theModel) {
+//		User loggedInUser = userService.getLoggedInUser();
+//		System.out.println(">>> loggedInUser = " + loggedInUser);
+//		theModel.addAttribute("loggedInUser", loggedInUser);
+//		
+//		return "admin";
+//	}
 	
 	@GetMapping("/user_management")
-	public String showUserManagementPage(Model theModel) {		
+	public String showUserManagementPage(Model theModel) {
+
+		theModel.addAttribute("loggedInUser", userService.getLoggedInUser());
+		
 		List<User> users = this.userService.getAllUsers();
 		theModel.addAttribute("users", users);
+		
 		return "user_management";
 	}
 	
 	@GetMapping("/account/{id}")
 	public String updateUser(@ModelAttribute("id") Long id, Model theModel) {		
+		
+		theModel.addAttribute("loggedInUser", userService.getLoggedInUser());
+		
 		User user = userService.getUserById(id);
 		theModel.addAttribute("account", user);
 		
@@ -49,6 +60,7 @@ public class AdminController {
 	
 	@GetMapping("/account/add_user")
 	public String addUser(Model theModel) {		
+		theModel.addAttribute("loggedInUser", userService.getLoggedInUser());
 		theModel.addAttribute("user", null);
 		return "user_account";
 	}
@@ -61,6 +73,7 @@ public class AdminController {
 	
 	@GetMapping("/account/add_admin")
 	public String addAdmin(Model theModel) {		
+		theModel.addAttribute("loggedInUser", userService.getLoggedInUser());
 		theModel.addAttribute("account", null);
 		return "admin_account";
 	}

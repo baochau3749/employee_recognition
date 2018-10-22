@@ -26,8 +26,12 @@ tr, th, td {
 </head>
 
 <body>
+	<h2>User Management Page</h2>
+	<h4>Logged In: ${loggedInUser.email}</h4>
+	<hr>
+	
 	<div>
-		<div>
+		<div>			
 			<h3>USER LIST</h3>
 		</div>
 		<table>
@@ -49,8 +53,11 @@ tr, th, td {
 						<td>${user.email}</td>
 						<td>${user.timeCreated}</td>
 						<td>${user.role.role}</td>
-						<td><a href="${updateLink}">Update</a> | <a
-							href="${deleteLink}">Delete</a></td>
+						<td><a href="${updateLink}">Update</a>
+							<c:if test="${!loggedInUser.email.equals(user.email)}">
+								 | <a href="${deleteLink}">Delete</a>
+							</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

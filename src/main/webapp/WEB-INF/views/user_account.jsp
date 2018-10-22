@@ -12,7 +12,8 @@
 	<c:if test="${account != null}">
 		<c:set var="pageLabel" value="Update User Account"/>
 	</c:if>		
-	<h2>${pageLabel}</h2>			
+	<h2>${pageLabel}</h2>	
+	<h4>Logged In: ${loggedInUser.email}</h4>	
 	<hr>
 
 	<form:form modelAttribute="account" method="POST"
