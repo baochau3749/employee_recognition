@@ -18,5 +18,9 @@
 	<br><br>
 	<a href="${pageContext.request.contextPath}/admin">Go to Admin Main Page</a>	
 	
+	<hr><br>
+	<form:form action="${pageContect.request.contextPath}/logout" method="POST">
+		<input type="submit" value="Logout">
+	</form:form>
 </body>
 </html>

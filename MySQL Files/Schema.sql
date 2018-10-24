@@ -54,42 +54,26 @@ CREATE TABLE IF NOT EXISTS `user` (
   	`email` 			VARCHAR(255) NOT NULL,
   	`password` 			VARCHAR(255) NOT NULL,
   	`time_created` 		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `role_id` 	INT NULL,
   	`user_profile_id` 	INT NULL,
 
 	PRIMARY KEY (`user_id`),
   	UNIQUE INDEX `email_UNIQUE` (`email`),  
 	
     INDEX `fk_user_user_profile_id1_idx` (`user_profile_id` ASC) VISIBLE,
-  	CONSTRAINT `fk_user_user_profile_id1`
+    INDEX `fk_user_role_id1_idx` (`role_id` ASC) VISIBLE,
+    
+	CONSTRAINT `fk_user_role_id1`
+		FOREIGN KEY (`role_id`)	REFERENCES `role`(`role_id`)
+			ON DELETE NO ACTION
+			ON UPDATE NO ACTION,
+            
+    CONSTRAINT `fk_user_user_profile_id1`
 		FOREIGN KEY (`user_profile_id`)	REFERENCES `user_profile`(`user_profile_id`)
 			ON DELETE CASCADE
-			ON UPDATE CASCADE   	     	
+			ON UPDATE CASCADE   
+	     	
 ) ENGINE = InnoDB;
-
--- -----------------------------------------------------
--- Table `cs467_employee_recognition`.`user_role`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `user_role` ;
-CREATE TABLE IF NOT EXISTS `user_role` (
-  	`user_id` 	INT NOT NULL,  	
-  	`role_id` 	INT NOT NULL,
-
-	PRIMARY KEY (`user_id`, `role_id`),
-	
-    INDEX `fk_user_role_user_id1_idx` (`user_id` ASC) VISIBLE,
-    INDEX `fk_user_role_role_id1_idx` (`role_id` ASC) VISIBLE,
-  	
-    CONSTRAINT `fk_user_role_user_id1`
-		FOREIGN KEY (`user_id`)	REFERENCES `user`(`user_id`)
-			ON DELETE CASCADE 
-            ON UPDATE CASCADE,
-	
-    CONSTRAINT `fk_user_role_role_id1`
-		FOREIGN KEY (`role_id`)	REFERENCES `role`(`role_id`)
-			ON DELETE CASCADE 
-			ON UPDATE CASCADE
-) ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `cs467_employee_recognition`.`position`

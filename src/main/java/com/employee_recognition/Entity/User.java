@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -37,15 +38,14 @@ public class User {
 	@Column(name = "user_profile_id")
 	private Long userProfile;
 
-	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH }, fetch = FetchType.EAGER)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles;
-
+	@ManyToOne(cascade = { CascadeType.REFRESH }, fetch = FetchType.EAGER)
+	@JoinColumn(name = "role_id")
+	private Role role;
+	
 	public User() {
 		timeCreated = new Timestamp(System.currentTimeMillis());
-		roles = new HashSet<Role>();
 	}
-
+	
 	public User(String email, String password) {
 		this();
 		this.email = email;
@@ -92,30 +92,16 @@ public class User {
 		this.userProfile = userProfile;
 	}
 
-	public void setRole(Role role) {
-		roles.clear();
-		roles.add(role);
-	}
-	
-	public Set<Role> getRoles() {
-		return roles;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	@Override
-	public String toString() {
-		String roleDescription = "";
-		for (Role role : roles) {
-			if (role != null) {
-				if (roleDescription.isEmpty())
-					roleDescription = role.getRole();
-				else
-					roleDescription += ", " + role.getRole();
-			}
-		}
-		return "User [id=" + id + ", email=" + email + ", password=" + password + ", roles=(" + roleDescription + ")]";
+	public String toString() {	
+		return "User [id=" + id + ", email=" + email + ", password=" + password + ", roles=(" + role.getRole() + ")]";
 	}
 }
