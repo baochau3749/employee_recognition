@@ -7,19 +7,14 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
--- -----------------------------------------------------
--- Schema cs467_employee_recognition
--- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `cs467_employee_recognition` ;
 
 -- -----------------------------------------------------
--- Schema cs467_employee_recognition
+-- Schema heroku_73fe7765a7c5676
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `cs467_employee_recognition` DEFAULT CHARACTER SET utf8 ;
-USE `cs467_employee_recognition` ;
+USE `heroku_73fe7765a7c5676` ;
 
 -- -----------------------------------------------------
--- Table `cs467_employee_recognition`.`role`
+-- Table `role`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE IF NOT EXISTS `role` (  
@@ -32,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `role` (
 
 
 -- -----------------------------------------------------
--- Table `cs467_employee_recognition`.`user_profile`
+-- Table `user_profile`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `user_profile` ;
 CREATE TABLE IF NOT EXISTS `user_profile` (  
@@ -46,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `user_profile` (
 
 
 -- -----------------------------------------------------
--- Table `cs467_employee_recognition`.`user`
+-- Table `user`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `user` ;
 CREATE TABLE IF NOT EXISTS `user` (
@@ -61,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   	UNIQUE INDEX `email_UNIQUE` (`email`),  
 	
     INDEX `fk_user_user_profile_id1_idx` (`user_profile_id` ASC),
-    INDEX `fk_user_role_id1_idx` (`role_id` ASC) ,
+    INDEX `fk_user_role_id1_idx` (`role_id` ASC),
     
 	CONSTRAINT `fk_user_role_id1`
 		FOREIGN KEY (`role_id`)	REFERENCES `role`(`role_id`)
@@ -76,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `cs467_employee_recognition`.`position`
+-- Table `position`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `position` ;
 CREATE TABLE IF NOT EXISTS `position` (
@@ -89,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `position` (
 
 
 -- -----------------------------------------------------
--- Table `cs467_employee_recognition`.`department`
+-- Table `department`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `department` ;
 
@@ -103,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `department` (
 
 
 -- -----------------------------------------------------
--- Table `cs467_employee_recognition`.`state`
+-- Table `state`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `state` ;
 CREATE TABLE IF NOT EXISTS `state` (
@@ -116,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `state` (
 
 
 -- -----------------------------------------------------
--- Table `cs467_employee_recognition`.`employee`
+-- Table `employee`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `employee` ;
 CREATE TABLE IF NOT EXISTS `employee` (
@@ -151,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
 
 
 -- -----------------------------------------------------
--- Table `cs467_employee_recognition`.`award_type`
+-- Table `award_type`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `award_type` ;
 CREATE TABLE IF NOT EXISTS `award_type` (
@@ -164,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `award_type` (
 
 
 -- -----------------------------------------------------
--- Table `cs467_employee_recognition`.`award`
+-- Table `award`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `award` ;
 CREATE TABLE IF NOT EXISTS `award` (
