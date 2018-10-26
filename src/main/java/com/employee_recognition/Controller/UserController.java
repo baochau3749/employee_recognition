@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.employee_recognition.Entity.Award;
 import com.employee_recognition.Entity.User;
 import com.employee_recognition.Service.AwardService;
 import com.employee_recognition.Service.UserService;
@@ -32,7 +31,6 @@ public class UserController {
 	public String userMainPage(@SessionAttribute("userID") Long userID, Model model) {
 
 		User currentUser = userDAO.getUserById(userID);
-		currentUser.setUserAwards(awardDAO.getAwardsByUserID(userID));
 		
 		model.addAttribute("user", currentUser);
 		model.addAttribute("awards", currentUser.getUserAwards());

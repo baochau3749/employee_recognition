@@ -29,14 +29,11 @@
 	<h2>User Main Page</h2>
 
 	<a href="user/${user.id}">Update Profile</a>
-	<br>
-	<br>
+	<br><br>
 	<a href="">Employee Management</a>
-	<br>
-	<br>
+	<br><br>
 	<a href="">Create Award</a>
-	<br>
-	<br>
+	<br><br>
 	<form:form action="${pageContect.request.contextPath}/logout"
 		method="POST">
 		<input type="submit" value="Logout">
