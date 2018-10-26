@@ -30,7 +30,7 @@
 
 	<a href="user/${user.id}">Update Profile</a>
 	<br><br>
-	<a href="">Employee Management</a>
+	<a href="user/employees">Employee Management</a>
 	<br><br>
 	<a href="">Create Award</a>
 	<br><br>

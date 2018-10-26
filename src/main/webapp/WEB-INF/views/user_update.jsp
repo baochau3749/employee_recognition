@@ -11,7 +11,7 @@
 <body>
 	<h2>User Update Page</h2>
 	
-	<a href="">Employee Management</a>
+	<a href="/user/employees">Employee Management</a>
 	<br><br>
 	<a href="">Create Award</a>
 	<br><br>

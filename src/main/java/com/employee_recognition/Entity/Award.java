@@ -75,6 +75,8 @@ public class Award
 		return timeCreated;
 	}
 
+	@ManyToOne
+	@JoinColumn(name="employee_id")
 	public Long getEmployee()
 	{
 		return employee;
