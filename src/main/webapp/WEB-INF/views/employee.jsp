@@ -39,8 +39,8 @@
 				<br><br>
 		
 				Gender: <form:select path="gender">
-				<option value="f">female</option>
-				<option value="m">male</option>
+				<option value="f">Female</option>
+				<option value="m">Male</option>
 				</form:select>
 				<br><br>
 				
