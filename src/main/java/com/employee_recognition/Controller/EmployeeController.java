@@ -31,20 +31,24 @@ public class EmployeeController {
 	
 	@GetMapping("/employees")
 	public String employeeMainPage(Model model) {
-		//gets string list
+		employees = employeeDAO.getEmployees();
+		model.addAttribute("employees", employees);
+		return "employee_management";
+	}
+	
+	@GetMapping("/employee")
+	public String employeePage(Model model) {
 		states = employeeDAO.getStateList();
 		departments = employeeDAO.getDepartmentList();
 		positions = employeeDAO.getPositionList();
 		ArrayList<State> sList = employeeDAO.createStateList(states);
 		ArrayList<Department> dList = employeeDAO.createDepartmentList(departments);
 		ArrayList<Position> pList = employeeDAO.createPositionList(positions);
-		employees = employeeDAO.getEmployees();
 		model.addAttribute("employee", emp);
-		model.addAttribute("employees", employees);
 		model.addAttribute("states", sList);
 		model.addAttribute("positions", pList);
 		model.addAttribute("departments", dList);
-		return "employees";
+		return "employee";
 	}
 	
 	@GetMapping("/addEmployee")

@@ -60,8 +60,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 	PRIMARY KEY (`user_id`),
   	UNIQUE INDEX `email_UNIQUE` (`email`),  
 	
-    INDEX `fk_user_user_profile_id1_idx` (`user_profile_id` ASC) VISIBLE,
-    INDEX `fk_user_role_id1_idx` (`role_id` ASC) VISIBLE,
+    INDEX `fk_user_user_profile_id1_idx` (`user_profile_id` ASC),
+    INDEX `fk_user_role_id1_idx` (`role_id` ASC),
     
 	CONSTRAINT `fk_user_role_id1`
 		FOREIGN KEY (`role_id`)	REFERENCES `role`(`role_id`)
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `department` (
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `state` ;
 CREATE TABLE IF NOT EXISTS `state` (
-  	`state_id` INT NOT NULL,
+  	`state_id` INT NOT NULL AUTO_INCREMENT,
   	`state` VARCHAR(50) NOT NULL,
   	
   	PRIMARY KEY (`state_id`),
@@ -131,9 +131,9 @@ CREATE TABLE IF NOT EXISTS `employee` (
   	`department_id` INT NOT NULL,
   	
   	PRIMARY KEY (`employee_id`),
-  	INDEX `fk_employee_position1_idx` (`position_id` ASC) VISIBLE,
-  	INDEX `fk_employee_department1_idx` (`department_id` ASC) VISIBLE,
-  	INDEX `fk_employee_state1_idx` (`state_id` ASC) VISIBLE,
+  	INDEX `fk_employee_position1_idx` (`position_id` ASC),
+  	INDEX `fk_employee_department1_idx` (`department_id` ASC),
+  	INDEX `fk_employee_state1_idx` (`state_id` ASC),
   
   	CONSTRAINT `fk_employee_position1`
     	FOREIGN KEY (`position_id`)	REFERENCES `position` (`position_id`)
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `award_type` ;
 CREATE TABLE IF NOT EXISTS `award_type` (
-  	`award_type_id` 	INT NOT NULL,
+  	`award_type_id` 	INT NOT NULL AUTO_INCREMENT,
   	`type` VARCHAR(255) NOT NULL,
   	
   	PRIMARY KEY (`award_type_id`),
@@ -175,9 +175,9 @@ CREATE TABLE IF NOT EXISTS `award` (
   	`date_time` 	DATETIME NOT NULL,
   
   	PRIMARY KEY (`award_id`),
-  	INDEX `fk_award_user1_idx` (`user_id` ASC) VISIBLE,
-  	INDEX `fk_award_employee1_idx` (`employee_id` ASC) VISIBLE,
-  	INDEX `fk_award_award_type1_idx` (`award_type_id` ASC) VISIBLE,
+  	INDEX `fk_award_user1_idx` (`user_id` ASC),
+  	INDEX `fk_award_employee1_idx` (`employee_id` ASC),
+  	INDEX `fk_award_award_type1_idx` (`award_type_id` ASC),
   	CONSTRAINT `fk_award_user1`
     	FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
     		ON DELETE NO ACTION

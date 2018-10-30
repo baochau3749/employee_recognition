@@ -30,7 +30,7 @@ public class UserController {
 	@GetMapping("/user")
 	public String userMainPage(@SessionAttribute("userID") Long userID, Model model) {
 
-		User currentUser = userDAO.getUserById(userID);
+		User currentUser = userDAO.getUserById(userID); 
 		
 		model.addAttribute("user", currentUser);
 		model.addAttribute("awards", currentUser.getUserAwards());
@@ -56,14 +56,14 @@ public class UserController {
 		System.out.println(user.toString());
 		user = userDAO.saveUser(user,"USER");
 		
-		return "redirect:/user";
+		return "redirect:/user"; 
 	}
 	
 	// Deleting an Award
 	@RequestMapping(value="/delete_award")
 	public String deleteAward(@RequestParam("id") Long id)
 	{
-		awardDAO.deleteAwardByID(id);;
+		awardDAO.deleteAwardByID(id);
 		return "redirect:/user";
 	}
 }

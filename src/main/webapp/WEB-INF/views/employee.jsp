@@ -7,24 +7,24 @@
 <html>
 
 <head> 	
-	<title>Employees</title>
+	<title>Add Employee</title>
 </head>
 
 <body>
+
+<a href="/user/employees">Employee Management</a>
+	<br><br>
+	<a href="">Create Award</a>
+	<br><br>
+	<form:form action="${pageContect.request.contextPath}/logout" method="POST">
+		<input type="submit" value="Logout">
+	</form:form>
 	<div>
 		<div>
-			<h2>Employees</h2>
+			<h2>Add Employee</h2>
 		</div>
 	</div>
-	<div>
-		
-	<h3>Add Employee Page</h3>
 		<div>
-		<div>
-			<form:form action="${pageContect.request.contextPath}/logout" method="POST">
-			<input type="submit" value="Logout">
-			</form:form>
-		</div>
 			<form:form action="addEmployee" modelAttribute="employee" method="GET">
 				First Name: <form:input path="firstName"/>
 				<br><br>
@@ -39,8 +39,8 @@
 				<br><br>
 		
 				Gender: <form:select path="gender">
-				<option value="f">female</option>
-				<option value="m">male</option>
+				<option value="f">Female</option>
+				<option value="m">Male</option>
 				</form:select>
 				<br><br>
 				
@@ -68,27 +68,6 @@
 			<input type="submit" value="Add Employee">
 	</form:form>
 	</div>
-<div>
-<div>	
-<div>
-		<table>
-			<tr>
-				<th>First Name</th>
-				<th>Last Name</th>
-				<th>Email</th>
 
-				<!-- loop over and print our customers -->
-				<c:forEach var="emp" items="${employees}">
-					<tr>
-						<td> ${emp.firstName} </td> 
-						<td> ${emp.lastName} </td> 
-						<td> ${emp.email} </td> 
-					</tr>
-				</c:forEach>
-		</table>
-		</div>
-		</div>
-	</div>
-	</div>
 </body>
 </html>
