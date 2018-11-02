@@ -24,18 +24,15 @@
 		<input type="submit" value="Logout">
 	</form:form>
 	<hr>
-	<form:form action="${pageContect.request.contextPath}/logout" method="POST">
-		<input type="submit" value="Logout">
-	</form:form>
 	<div>
 		<div>
-			<h2>Add Employee</h2>
+			<h2>Give Award</h2>
 		</div>
 	</div>
 		<div>
 			<form:form action="createAward" modelAttribute="award" method="POST">
-				user is ${user.email}
-				<br><br>
+				<%-- user is ${user.email} --%>
+				<br>
 			
 				Employee: <form:select path="employee">
 				<c:forEach var="e" items="${employees}">
@@ -51,7 +48,7 @@
 				</form:select>
 				<br><br>
 				
-				Date: <form:input name="dateGiven" path="dateGiven"/>
+				Date and Time (ex. 11/2/2018 12:00 pm): <form:input name="dateGiven" path="dateGiven"/>
 				<br><br>
 				
 			<input type="submit" value="Create Award">
