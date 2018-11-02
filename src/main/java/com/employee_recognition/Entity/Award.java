@@ -100,13 +100,12 @@ public class Award
 		this.awardType = awardType;
 	}
 
-	public void setdateGiven(String dateGiven) throws ParseException
+	public void setdateGiven(Timestamp dateGiven)
 	{
-		this.dateGiven = Timestamp(0);
+		this.dateGiven = dateGiven;
 		
 		//Timestamp time = new Timestamp(parsedDate.getTime());
 		//this.dateGiven = time;
-		
 	}
 		
 		

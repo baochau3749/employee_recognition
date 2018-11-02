@@ -25,10 +25,13 @@ tr, th, td {
 </head>
 
 <body>
-<a href="/user/employees">Employee Management</a>
+	<a href="user/${user.id}">Update Profile</a>
 	<br><br>
-	<a href="">Create Award</a>
+	<a href="">Employee Management</a>
 	<br><br>
+	<a href="user/award">Create Award</a>
+	<br><br>
+
 	<form:form action="${pageContect.request.contextPath}/logout" method="POST">
 		<input type="submit" value="Logout">
 	</form:form>

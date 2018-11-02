@@ -1,5 +1,8 @@
 package com.employee_recognition.Controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.employee_recognition.Entity.Award;
+import com.employee_recognition.Entity.Employee;
 import com.employee_recognition.Entity.User;
+import com.employee_recognition.Repository.EmployeeRepository;
 import com.employee_recognition.Service.AwardService;
 import com.employee_recognition.Service.UserService;
 
@@ -24,16 +30,30 @@ public class UserController {
 	private UserService userDAO;
 	
 	@Autowired
+	private EmployeeRepository employeeDAO;
+	
+	@Autowired
 	private AwardService awardDAO;
 	
 	// User Main Page
 	@GetMapping("/user")
 	public String userMainPage(@SessionAttribute("userID") Long userID, Model model) {
-
+		List<Award> awards;
+		List<String> employees = new ArrayList<String>();
 		User currentUser = userDAO.getUserById(userID); 
+		awards = currentUser.getUserAwards();
+		Employee emp = new Employee();
+		for (int i = 0; i < awards.size(); i++) {
+			Long empId = awards.get(i).getEmployee();
+			System.out.println("printing employee info " + employeeDAO.findById(empId).getFirstName() + " " + 
+			employeeDAO.findById(empId).getLastName());
+			employees.add(employeeDAO.findById(empId).getFirstName() + " " + 
+			employeeDAO.findById(empId).getLastName());
+		}
 		
 		model.addAttribute("user", currentUser);
 		model.addAttribute("awards", currentUser.getUserAwards());
+		model.addAttribute("employees", employees);
 		
 		return "user";
 	}

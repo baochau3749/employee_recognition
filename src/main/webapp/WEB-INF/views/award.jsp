@@ -12,10 +12,18 @@
 
 <body>
 
-<a href="/user/employees">Give New Award</a>
+	<a href="user/${user.id}">Update Profile</a>
+	<br><br>
+	<a href="user/employees">Employee Management</a>
 	<br><br>
 	<a href="">Create Award</a>
 	<br><br>
+
+	<form:form action="${pageContect.request.contextPath}/logout"
+		method="POST">
+		<input type="submit" value="Logout">
+	</form:form>
+	<hr>
 	<form:form action="${pageContect.request.contextPath}/logout" method="POST">
 		<input type="submit" value="Logout">
 	</form:form>
@@ -43,7 +51,7 @@
 				</form:select>
 				<br><br>
 				
-				Date: <form:input path="dateGiven"/>
+				Date: <form:input name="dateGiven" path="dateGiven"/>
 				<br><br>
 				
 			<input type="submit" value="Create Award">

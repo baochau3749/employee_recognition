@@ -1,14 +1,12 @@
 package com.employee_recognition.Controller;
 
 import java.beans.PropertyEditorSupport;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.ClassEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -21,10 +19,6 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.employee_recognition.Entity.Award;
 import com.employee_recognition.Entity.AwardType;
-import com.employee_recognition.Entity.Department;
-import com.employee_recognition.Entity.Employee;
-import com.employee_recognition.Entity.Position;
-import com.employee_recognition.Entity.State;
 import com.employee_recognition.Entity.User;
 import com.employee_recognition.Repository.AwardTypeRepository;
 import com.employee_recognition.Repository.EmployeeRepository;
@@ -33,6 +27,7 @@ import com.employee_recognition.Service.UserService;
 
 @Controller
 @SessionAttributes({"userID","user"})
+@RequestMapping("/user")
 public class AwardController {
 
 	@Autowired
@@ -49,21 +44,39 @@ public class AwardController {
 	
 	private Award award = new Award();
 	private AwardType at = new AwardType();
-	private List<AwardType> awardTypes;
-	private List<Employee> employees;
-	
-	private Employee emp = new Employee();
-	
+
+	private Timestamp formDate;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder, WebRequest request) {
 
 	        binder.registerCustomEditor(AwardType.class, "awardType", new PropertyEditorSupport() {
 	         @Override
-	         public void setAsText(String text) {
-	            setValue((text.equals(""))?null:awardTypeDAO.findById((Long.parseLong((String) text))));
+	         public void setAsText(String type) {
+	            setValue((awardTypeDAO.findById(Long.parseLong((String) type))));
 	         }
 	     });
+	        
+	        binder.registerCustomEditor(Timestamp.class, "dateGiven", new PropertyEditorSupport() {
+		         @Override
+		         public void setAsText(String date) {
+		        	 if (date.equals("")) {
+		        		 formDate = new Timestamp(System.currentTimeMillis());
+		        	 }
+		        	 else {
+		        		 SimpleDateFormat dateFormatObj = new SimpleDateFormat("MM/dd/yyyy hh:mm aaa");
+		        		 java.util.Date parsedDate = null;
+						try {
+							parsedDate = dateFormatObj.parse(date);
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+		        		 formDate = new Timestamp(parsedDate.getTime());
+		        	 }
+		        	 	setValue(formDate);
+		         }
+		     });
 	}
 	
 	@GetMapping("/award")
@@ -81,25 +94,13 @@ public class AwardController {
 		return "award";
 	}
 	
-/*	@GetMapping("/employee")
-	public String employeePage(Model model) {
-		states = employeeDAO.getStateList();
-		departments = employeeDAO.getDepartmentList();
-		positions = employeeDAO.getPositionList();
-		ArrayList<State> sList = employeeDAO.createStateList(states);
-		ArrayList<Department> dList = employeeDAO.createDepartmentList(departments);
-		ArrayList<Position> pList = employeeDAO.createPositionList(positions);
-		model.addAttribute("employee", emp);
-		model.addAttribute("states", sList);
-		model.addAttribute("positions", pList);
-		model.addAttribute("departments", dList);
-		return "employee";
-	}*/
 	
 	@PostMapping("/createAward")
-	public String saveAward(@ModelAttribute("award")Award award) {	
+	public String saveAward(@ModelAttribute("award")Award award, @SessionAttribute("userID") Long userId) {	
+		User currentUser = userDAO.getUserById(userId); 
+		award.setUser(currentUser);
 		awardDAO.saveAward(award);
-		return "redirect:/award";
+		return "redirect:";
 	}
 	
 }
