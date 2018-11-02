@@ -24,7 +24,7 @@ public class AwardTypeRepository {
 	@Autowired
 	private EntityManager entityManager;
 	
-	public AwardType findById(int id) {
+	public AwardType findById(Long id) {
 		return entityManager.find(AwardType.class, id);
 	}
 	//state functions

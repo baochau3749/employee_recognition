@@ -9,10 +9,10 @@ import com.employee_recognition.Repository.AwardTypeRepository;
 
 public class AwardTypeEditor extends PropertyEditorSupport {
 	public void setById(String awardType) {
-		System.out.println("id is " + awardType);
+		/*System.out.println("id is " + awardType);
 		AwardTypeRepository a = new AwardTypeRepository();
 		AwardType at = new AwardType();
 		at = a.findById(Integer.parseInt(awardType));
-		setValue(at);
+		setValue(at);*/
 	}
 }

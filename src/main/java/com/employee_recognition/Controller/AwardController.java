@@ -1,5 +1,6 @@
 package com.employee_recognition.Controller;
 
+import java.beans.PropertyEditorSupport;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.request.WebRequest;
 
 import com.employee_recognition.Entity.Award;
 import com.employee_recognition.Entity.AwardType;
@@ -53,7 +55,16 @@ public class AwardController {
 	private Employee emp = new Employee();
 	
 	
-	
+	@InitBinder
+	public void initBinder(WebDataBinder binder, WebRequest request) {
+
+	        binder.registerCustomEditor(AwardType.class, "awardType", new PropertyEditorSupport() {
+	         @Override
+	         public void setAsText(String text) {
+	            setValue((text.equals(""))?null:awardTypeDAO.findById((Long.parseLong((String) text))));
+	         }
+	     });
+	}
 	
 	@GetMapping("/award")
 	public String employeeMainPage(@SessionAttribute("userID") Long userID, Model model) {

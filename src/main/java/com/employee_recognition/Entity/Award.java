@@ -1,5 +1,6 @@
 package com.employee_recognition.Entity;
 
+import java.sql.Timestamp;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,7 +35,7 @@ public class Award
 	private AwardType awardType;
 	
 	@Column(name="date_time")
-	private Date dateGiven;
+	private Timestamp dateGiven;
 	
 	// default constructor
 	public Award()
@@ -72,7 +73,7 @@ public class Award
 		this.user = user;
 	}
 
-	public Date getdateGiven()
+	public Timestamp getdateGiven()
 	{
 		return dateGiven;
 	}
@@ -101,8 +102,12 @@ public class Award
 
 	public void setdateGiven(String dateGiven) throws ParseException
 	{
-		SimpleDateFormat dateFormatObj = new SimpleDateFormat("MM/dd/yyyy");
-		java.util.Date parsedDate = dateFormatObj.parse(dateGiven);
-		this.dateGiven = new Date(parsedDate.getTime());
+		this.dateGiven = Timestamp(0);
+		
+		//Timestamp time = new Timestamp(parsedDate.getTime());
+		//this.dateGiven = time;
+		
 	}
+		
+		
 }
