@@ -46,7 +46,7 @@ public class UserController {
 		for (int i = 0; i < awards.size(); i++) {
 			Long empId = awards.get(i).getEmployee();
 			//System.out.println("printing employee info " + employeeDAO.findById(empId).getFirstName() + " " + 
-			employeeDAO.findById(empId).getLastName());
+			//employeeDAO.findById(empId).getLastName());
 			employees.add(employeeDAO.findById(empId).getFirstName() + " " + 
 			employeeDAO.findById(empId).getLastName());
 		}
