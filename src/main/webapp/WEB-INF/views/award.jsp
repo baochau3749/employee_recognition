@@ -12,9 +12,9 @@
 
 <body>
 
-	<a href="user/${user.id}">Update Profile</a>
+	<a href="${user.id}">Update Profile</a>
 	<br><br>
-	<a href="user/employees">Employee Management</a>
+	<a href="employees">Employee Management</a>
 	<br><br>
 	<a href="">Create Award</a>
 	<br><br>

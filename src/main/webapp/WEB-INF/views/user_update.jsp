@@ -21,7 +21,7 @@
 	<hr>
 	<br>
 	
-	<form:form modelAttribute="user">
+	<form:form modelAttribute="user" enctype="multipart/form-data">
 		First Name: <form:input path="userProfile.firstName"/>
 		<br><br>
 		
@@ -34,7 +34,7 @@
 		Password: <form:input path="password"/>
 		<br><br>
 		
-		Signature: <input type="file" name="userProfile.targetFile">
+		Signature: <input type="file" name="file" >
 		<br><br>
 		
 		<input type="submit" value="Save">

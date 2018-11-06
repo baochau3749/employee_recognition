@@ -3,6 +3,13 @@ package com.employee_recognition.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.employee_recognition.Entity.Award;
 import com.employee_recognition.Entity.Employee;
 import com.employee_recognition.Entity.User;
+import com.employee_recognition.Entity.UserProfile;
 import com.employee_recognition.Repository.EmployeeRepository;
 import com.employee_recognition.Service.AwardService;
 import com.employee_recognition.Service.UserService;
@@ -34,6 +43,8 @@ public class UserController {
 	
 	@Autowired
 	private AwardService awardDAO;
+	
+	private String uploadDirectory = System.getProperty("user.dir")+"\\src\\main\\webapp\\award_files";
 	
 	// User Main Page
 	@GetMapping("/user")
@@ -71,9 +82,30 @@ public class UserController {
 	
 	// User Update Page POST
 	@RequestMapping(value = "/user/{userID}", method=RequestMethod.POST)
-	public String saveUserPage(@ModelAttribute("user") User user)
+	public String saveUserPage(@ModelAttribute("user") User user, @RequestParam("file") 
+	MultipartFile file)
 	{
-		System.out.println(user.toString());
+		
+		//System.out.println(uploadDirectory);
+		//System.out.println(user.toString());
+		//System.out.println(file.getContentType());
+		//System.out.println("printing test " + file.getOriginalFilename().replaceAll(".*\\.", ""));
+		//System.out.println(file.getOriginalFilename());
+		String f = file.getOriginalFilename();
+		//replaces everything before the "."
+		String fExt = f.replaceAll(".*\\.", "");
+		//System.out.println(fExt);
+		UserProfile profile = user.getUserProfile();
+		String fileName = profile.getFirstName() + profile.getLastName() + "." + fExt;
+		//System.out.println("filename is " + fileName);
+		Path pathAndName = Paths.get(uploadDirectory, fileName);
+		profile.setTargetFile(fileName);
+		try {
+			Files.write(pathAndName, file.getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		user = userDAO.saveUser(user,"USER");
 		
 		return "redirect:/user"; 
