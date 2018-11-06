@@ -94,7 +94,7 @@ public class UserController {
 		//System.out.println(file.getOriginalFilename());
 		String f = file.getOriginalFilename();
 		//replaces everything before the "."
-		System.out.println("f is " + f + (f.equals("")));
+		//System.out.println("f is " + f + (f.equals("")));
 		String fExt = f.replaceAll(".*\\.", "");
 		//System.out.println(fExt);
 		if (fExt.equals("jpeg") || fExt.equals("png") || fExt.equals("bmp") || fExt.equals("gif")){
