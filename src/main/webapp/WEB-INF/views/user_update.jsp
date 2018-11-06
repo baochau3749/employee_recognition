@@ -34,7 +34,10 @@
 		Password: <form:input path="password"/>
 		<br><br>
 		
-		Signature: <input type="file" name="file" >
+		Signature: <input type="file" name="file">
+		<c:if test="${not empty er}">
+   			${er}
+		</c:if>
 		<br><br>
 		
 		<input type="submit" value="Save">

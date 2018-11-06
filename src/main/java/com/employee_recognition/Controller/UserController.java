@@ -13,6 +13,7 @@ import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,7 +45,7 @@ public class UserController {
 	@Autowired
 	private AwardService awardDAO;
 	
-	private String uploadDirectory = System.getProperty("user.dir")+"\\src\\main\\webapp\\award_files";
+	private String uploadDirectory = System.getProperty("user.dir")+"\\src\\main\\webapp\\signature_files";
 	
 	// User Main Page
 	@GetMapping("/user")
@@ -83,7 +84,7 @@ public class UserController {
 	// User Update Page POST
 	@RequestMapping(value = "/user/{userID}", method=RequestMethod.POST)
 	public String saveUserPage(@ModelAttribute("user") User user, @RequestParam("file") 
-	MultipartFile file)
+	MultipartFile file, Model model)
 	{
 		
 		//System.out.println(uploadDirectory);
@@ -93,22 +94,36 @@ public class UserController {
 		//System.out.println(file.getOriginalFilename());
 		String f = file.getOriginalFilename();
 		//replaces everything before the "."
+		System.out.println("f is " + f + (f.equals("")));
 		String fExt = f.replaceAll(".*\\.", "");
 		//System.out.println(fExt);
-		UserProfile profile = user.getUserProfile();
-		String fileName = profile.getFirstName() + profile.getLastName() + "." + fExt;
-		//System.out.println("filename is " + fileName);
-		Path pathAndName = Paths.get(uploadDirectory, fileName);
-		profile.setTargetFile(fileName);
-		try {
-			Files.write(pathAndName, file.getBytes());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (fExt.equals("jpeg") || fExt.equals("png") || fExt.equals("bmp") || fExt.equals("gif")){
+			UserProfile profile = user.getUserProfile();
+			String fileName = user.getId().toString() + "." + fExt;
+			//System.out.println("filename is " + fileName);
+			Path pathAndName = Paths.get(uploadDirectory, fileName);
+			profile.setTargetFile(fileName);
+			try {
+				Files.write(pathAndName, file.getBytes());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			user = userDAO.saveUser(user,"USER");
+			return "redirect:/user"; 
 		}
-		user = userDAO.saveUser(user,"USER");
-		
-		return "redirect:/user"; 
+		else if (f.equals("")){
+			user = userDAO.saveUser(user,"USER");
+			return "redirect:/user"; 
+		}
+		else {
+			user = userDAO.saveUser(user,"USER");
+			
+			model.addAttribute("user", user);
+			
+			model.addAttribute("er", "Invalid file type. Signature not uploaded.");
+			return "user_update";
+		}
 	}
 	
 	// Deleting an Award
