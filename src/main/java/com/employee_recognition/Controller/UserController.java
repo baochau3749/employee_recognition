@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -130,10 +131,19 @@ public class UserController {
 			
 			model.addAttribute("user", user);
 			
-			model.addAttribute("er", "Invalid file type. Signature not uploaded.");
+			model.addAttribute("er", uploadDirectory);
 			return "user_update";
 		}
+
 	}
+	
+	@RequestMapping(value = "/image")
+    @ResponseBody
+    public byte[] getImage() throws IOException {
+		java.io.File serverFile = new java.io.File(uploadDirectory + "\\1.png");
+
+        return Files.readAllBytes(serverFile.toPath());
+    }
 	
 	// Deleting an Award
 	@RequestMapping(value="/delete_award")

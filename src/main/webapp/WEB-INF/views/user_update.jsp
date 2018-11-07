@@ -42,6 +42,7 @@
 		
 		<input type="submit" value="Save">
 	</form:form>
+	<img src="/image" /> 
 
 </body>
 </html>
