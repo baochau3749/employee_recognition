@@ -3,6 +3,8 @@ package com.employee_recognition.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -46,6 +48,10 @@ public class UserController {
 	private AwardService awardDAO;
 	
 	private String uploadDirectory = System.getProperty("user.dir")+"\\src\\main\\webapp\\signature_files";
+	
+	 @Autowired
+     ServletContext context;
+
 	
 	// User Main Page
 	@GetMapping("/user")
@@ -92,6 +98,9 @@ public class UserController {
 		//System.out.println(file.getContentType());
 		//System.out.println("printing test " + file.getOriginalFilename().replaceAll(".*\\.", ""));
 		//System.out.println(file.getOriginalFilename());
+		System.out.println("upload directory is  " + uploadDirectory);
+		String pathc = context.getRealPath("/");
+		System.out.println("path is  r " + pathc);
 		String f = file.getOriginalFilename();
 		//replaces everything before the "."
 		//System.out.println("f is " + f + (f.equals("")));
