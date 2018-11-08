@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.employee_recognition.Entity.Employee;
 import com.employee_recognition.Entity.User;
 import com.employee_recognition.Service.UserService;
 
@@ -68,6 +69,8 @@ public class LoginController {
 			
 			// sending the email notification
 			userService.sendEmailResetPassword(current);
+			
+			userService.sendEmailAward("Dog.jpg", new Employee());
 			
 			message = "An email containing a temporary password has been sent";
 			model.addAttribute("message", message);
