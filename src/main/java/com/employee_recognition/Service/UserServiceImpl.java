@@ -96,13 +96,13 @@ public class UserServiceImpl implements UserService
 		String userPassword = user.getPassword();
 
 		Email email = new SimpleEmail();
-		email.setHostName("smtp.googlemail.com");
+		email.setHostName("smtp.mail.yahoo.com");
 		email.setSmtpPort(465);
 
-		email.setAuthenticator(new DefaultAuthenticator("cs467.project@gmail.com", "employee"));
+		email.setAuthenticator(new DefaultAuthenticator("cs467.project@yahoo.com", "employee123"));
 		email.setSSLOnConnect(true);
 
-		email.setFrom("cs467.project@gmail.com");
+		email.setFrom("cs467.project@yahoo.com");
 		email.setSubject("Password Reset");
 
 		email.setMsg("Hello " + name + "\n\nWe receieved a request to reset your account password. "
@@ -126,13 +126,13 @@ public class UserServiceImpl implements UserService
 		attachment.setDisposition(EmailAttachment.ATTACHMENT);
 		
 		MultiPartEmail email = new MultiPartEmail();
-		email.setHostName("smtp.googlemail.com");
+		email.setHostName("smtp.mail.yahoo.com");
 		email.setSmtpPort(465);
 
-		email.setAuthenticator(new DefaultAuthenticator("cs467.project@gmail.com", "employee"));
+		email.setAuthenticator(new DefaultAuthenticator("cs467.project@yahoo.com", "employee123"));
 		email.setSSLOnConnect(true);
 
-		email.setFrom("cs467.project@gmail.com");
+		email.setFrom("cs467.project@yahoo.com");
 		email.setSubject("Employee Award");
 		email.setMsg("Hello " + name);
 		email.addTo("carlosleonard33@outlook.com");
