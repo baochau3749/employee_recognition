@@ -135,7 +135,7 @@ public class UserServiceImpl implements UserService
 		email.setFrom("cs467.project@yahoo.com");
 		email.setSubject("Employee Award");
 		email.setMsg("Hello " + name);
-		email.addTo("carlosleonard33@outlook.com");
+		email.addTo(employeeEmail);
 		
 		email.attach(attachment);
 		
