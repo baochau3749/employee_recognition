@@ -15,6 +15,7 @@ import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -48,10 +49,9 @@ public class UserController {
 	@Autowired
 	private AwardService awardDAO;
 	
-	private String uploadDirectory = System.getProperty("user.dir")+"\\src\\main\\webapp\\signature_files";
-	
 	 @Autowired
-     ServletContext context;
+     private ServletContext context;
+	 
 
 	
 	// User Main Page
@@ -93,18 +93,20 @@ public class UserController {
 	public String saveUserPage(@ModelAttribute("user") User user, @RequestParam("file") 
 	MultipartFile file, Model model)
 	{
-		
+		String uploadDirectory = context.getRealPath("/signature_files");
 		//System.out.println(uploadDirectory);
 		//System.out.println(user.toString());
 		//System.out.println(file.getContentType());
 		//System.out.println("printing test " + file.getOriginalFilename().replaceAll(".*\\.", ""));
 		//System.out.println(file.getOriginalFilename());
-		System.out.println("upload directory is  " + uploadDirectory);
-		String pathc = context.getRealPath("/");
-		System.out.println("path is  r " + pathc);
+		//System.out.println("upload directory is  " + uploadDirectory);
+		
+		//System.out.println("path is  r " + pathc);
 		String f = file.getOriginalFilename();
 		//replaces everything before the "."
 		//System.out.println("f is " + f + (f.equals("")));
+		
+		//get extension
 		String fExt = f.replaceAll(".*\\.", "");
 		//System.out.println(fExt);
 		if (fExt.equals("jpeg") || fExt.equals("png") || fExt.equals("bmp") || fExt.equals("gif")){
@@ -115,6 +117,7 @@ public class UserController {
 			profile.setTargetFile(fileName);
 			try {
 				Files.write(pathAndName, file.getBytes());
+				//FileCopyUtils.copy(file.getBytes(), new java.io.File(uploadDirectory));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -127,11 +130,13 @@ public class UserController {
 			return "redirect:/user"; 
 		}
 		else {
+			String er = "improper file format";
 			user = userDAO.saveUser(user,"USER");
 			
 			model.addAttribute("user", user);
-			
-			model.addAttribute("er", uploadDirectory);
+			//java.io.File fa = new java.io.File(uploadDirectory);
+			//fa.getAbsolutePath();
+			model.addAttribute("er", er);
 			return "user_update";
 		}
 
@@ -139,8 +144,10 @@ public class UserController {
 	
 	@RequestMapping(value = "/image")
     @ResponseBody
-    public byte[] getImage() throws IOException {
-		java.io.File serverFile = new java.io.File(uploadDirectory + "\\1.png");
+    public byte[] getImage(@ModelAttribute("user") User user) throws IOException {
+		String uploadDirectory = context.getRealPath("/");
+		System.out.println("up " + uploadDirectory);
+		java.io.File serverFile = new java.io.File(uploadDirectory + "/" + user.getUserProfile().getTargetFile());
 
         return Files.readAllBytes(serverFile.toPath());
     }
