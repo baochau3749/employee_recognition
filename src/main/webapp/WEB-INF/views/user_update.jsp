@@ -42,6 +42,8 @@
 		
 		<input type="submit" value="Save">
 	</form:form>
+	<br><br>
+	<img src="/image" /> 
 
 </body>
 </html>

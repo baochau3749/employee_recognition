@@ -3,6 +3,8 @@ package com.employee_recognition.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,6 +15,7 @@ import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,7 +49,10 @@ public class UserController {
 	@Autowired
 	private AwardService awardDAO;
 	
-	private String uploadDirectory = System.getProperty("user.dir")+"\\src\\main\\webapp\\signature_files";
+	 @Autowired
+     private ServletContext context;
+	 
+
 	
 	// User Main Page
 	@GetMapping("/user")
@@ -86,27 +93,23 @@ public class UserController {
 	public String saveUserPage(@ModelAttribute("user") User user, @RequestParam("file") 
 	MultipartFile file, Model model)
 	{
-		
-		//System.out.println(uploadDirectory);
-		//System.out.println(user.toString());
-		//System.out.println(file.getContentType());
-		//System.out.println("printing test " + file.getOriginalFilename().replaceAll(".*\\.", ""));
-		//System.out.println(file.getOriginalFilename());
+		String uploadDirectory = context.getRealPath("/signature_files");
+		System.out.println(uploadDirectory);
+		System.out.println("upload directory is  " + uploadDirectory);
+
 		String f = file.getOriginalFilename();
-		//replaces everything before the "."
-		//System.out.println("f is " + f + (f.equals("")));
 		String fExt = f.replaceAll(".*\\.", "");
-		//System.out.println(fExt);
-		if (fExt.equals("jpeg") || fExt.equals("png") || fExt.equals("bmp") || fExt.equals("gif")){
+
+		if (fExt.equals("jpeg") || fExt.equals("jpg") || fExt.equals("png") || fExt.equals("bmp") || fExt.equals("gif")){
 			UserProfile profile = user.getUserProfile();
 			String fileName = user.getId().toString() + "." + fExt;
-			//System.out.println("filename is " + fileName);
+
 			Path pathAndName = Paths.get(uploadDirectory, fileName);
 			profile.setTargetFile(fileName);
 			try {
 				Files.write(pathAndName, file.getBytes());
+
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			user = userDAO.saveUser(user,"USER");
@@ -121,10 +124,21 @@ public class UserController {
 			
 			model.addAttribute("user", user);
 			
-			model.addAttribute("er", "Invalid file type. Signature not uploaded.");
+			model.addAttribute("er", "Error: File must be an image");
 			return "user_update";
 		}
+
 	}
+	
+	@RequestMapping(value = "/image")
+    @ResponseBody
+    public byte[] getImage(@ModelAttribute("user") User user) throws IOException {
+		String uploadDirectory = context.getRealPath("/signature_files");
+		System.out.println("up " + uploadDirectory);
+		java.io.File serverFile = new java.io.File(uploadDirectory + "/" + user.getUserProfile().getTargetFile());
+
+        return Files.readAllBytes(serverFile.toPath());
+    }
 	
 	// Deleting an Award
 	@RequestMapping(value="/delete_award")
