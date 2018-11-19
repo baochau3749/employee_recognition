@@ -35,6 +35,15 @@ public class CommandRunner implements CommandLineRunner {
 		pa = Runtime.getRuntime().exec(fileName);
 		pa.waitFor();
 		
+		String uploadDirectory = context.getRealPath("/signature_files/");
+		String imageFile = uploadDirectory + "1.png";
+		
+		pa = Runtime.getRuntime().exec("echo '123' > " + imageFile);
+		pa.waitFor();
+
+		pa = Runtime.getRuntime().exec("cat " + imageFile);
+		pa.waitFor();
+		
 //		if (!isWindows()) {
 //			System.out.println("Run process - 1a");
 //			Process p1 = Runtime.getRuntime().exec("chmod +x /app/src/main/webapp/pdfScript");
