@@ -158,7 +158,7 @@ public class UserController {
 		Process p;
 		try {
 			p = Runtime.getRuntime().exec("~/src/main/webapp/latex_compiler");
-			p.waitFor();
+			//p.waitFor();
 			BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));		
 			BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 			
@@ -173,9 +173,10 @@ public class UserController {
 	        }
 		} catch (IOException e) {
 			throw new RuntimeException("There's an error in compiling latex file.");			
-		} catch (InterruptedException e) {
-			throw new RuntimeException("There's an error in compiling latex file.");
-		}	
+		} 
+//		catch (InterruptedException e) {
+//			throw new RuntimeException("There's an error in compiling latex file.");
+//		}	
 		
 		
 		

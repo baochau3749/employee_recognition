@@ -29,7 +29,13 @@ public class CommandRunner implements CommandLineRunner {
 		String fileName = mainDirectory + "pdfScript";
 		
 		System.out.println("Execute script");
-		Process pa = Runtime.getRuntime().exec("chmod +x " + fileName);
+		
+		
+		Process pa = Runtime.getRuntime().exec("chmod +x ~/src/main/webapp/latex_compiler");
+		pa.waitFor();
+		
+		
+		pa = Runtime.getRuntime().exec("chmod +x " + fileName);
 		pa.waitFor();
 		
 		pa = Runtime.getRuntime().exec(fileName);
