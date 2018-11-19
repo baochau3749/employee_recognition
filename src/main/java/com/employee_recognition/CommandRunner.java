@@ -1,5 +1,8 @@
 package com.employee_recognition;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,24 +34,36 @@ public class CommandRunner implements CommandLineRunner {
 		System.out.println("Execute script");
 		
 		
-		Process pa = Runtime.getRuntime().exec("chmod +x ~/src/main/webapp/latex_compiler");
+		Process pa = Runtime.getRuntime().exec("chmod +x ./src/main/webapp/latex_compiler");
 		pa.waitFor();
 		
+		String s;
 		
-		pa = Runtime.getRuntime().exec("chmod +x " + fileName);
-		pa.waitFor();
+		BufferedReader stdInput = new BufferedReader(new InputStreamReader(pa.getInputStream()));		
+		BufferedReader stdError = new BufferedReader(new InputStreamReader(pa.getErrorStream()));
 		
-		pa = Runtime.getRuntime().exec(fileName);
-		pa.waitFor();
 		
-		String uploadDirectory = context.getRealPath("/signature_files/");
-		String imageFile = uploadDirectory + "1.png";
+		System.out.println("Result Status:");
+        while ((s = stdInput.readLine()) != null) { System.out.println(s); }     
+        
+        System.out.println("Result error:");
+        while ((s = stdError.readLine()) != null) { System.out.println(s); }
+        
 		
-		pa = Runtime.getRuntime().exec("echo '123' > " + imageFile);
-		pa.waitFor();
-
-		pa = Runtime.getRuntime().exec("cat " + imageFile);
-		pa.waitFor();
+//		pa = Runtime.getRuntime().exec("chmod +x " + fileName);
+//		pa.waitFor();
+//		
+//		pa = Runtime.getRuntime().exec(fileName);
+//		pa.waitFor();
+//		
+//		String uploadDirectory = context.getRealPath("/signature_files/");
+//		String imageFile = uploadDirectory + "1.png";
+//		
+//		pa = Runtime.getRuntime().exec("echo '123' > " + imageFile);
+//		pa.waitFor();
+//
+//		pa = Runtime.getRuntime().exec("cat " + imageFile);
+//		pa.waitFor();
 		
 //		if (!isWindows()) {
 //			System.out.println("Run process - 1a");
