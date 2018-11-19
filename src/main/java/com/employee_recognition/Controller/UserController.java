@@ -6,7 +6,9 @@ import java.util.List;
 import javax.servlet.ServletContext;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -165,12 +167,54 @@ public class UserController {
 //		pa.waitFor();
 			
 		
+		
 		try {
-			Process pa = Runtime.getRuntime().exec("echo '123' > " + serverFile.getPath());
+			Process pa = Runtime.getRuntime().exec("ls");
 			pa.waitFor();
 			
-			pa = Runtime.getRuntime().exec("cat " + serverFile.getPath());
-			pa.waitFor();
+			BufferedReader stdInput = new BufferedReader(new InputStreamReader(pa.getInputStream()));		
+			BufferedReader stdError = new BufferedReader(new InputStreamReader(pa.getErrorStream()));
+			
+			String s = null;
+	        while ((s = stdInput.readLine()) != null) {
+	            System.out.println(s);
+	        }
+	        
+	        System.out.println("Result error:");
+	        while ((s = stdError.readLine()) != null) {
+	            System.out.println(s);
+	        }
+	        
+			Process pb = Runtime.getRuntime().exec("echo '123' > " + serverFile.getPath());
+			pb.waitFor();
+						
+	
+			stdInput = new BufferedReader(new InputStreamReader(pb.getInputStream()));		
+			stdError = new BufferedReader(new InputStreamReader(pb.getErrorStream()));
+			
+	        while ((s = stdInput.readLine()) != null) {
+	            System.out.println(s);
+	        }
+	        
+	        System.out.println("Result error:");
+	        while ((s = stdError.readLine()) != null) {
+	            System.out.println(s);
+	        }
+
+	        Process pc = Runtime.getRuntime().exec("cat " + serverFile.getPath());
+			pc.waitFor();
+			
+			stdInput = new BufferedReader(new InputStreamReader(pc.getInputStream()));		
+			stdError = new BufferedReader(new InputStreamReader(pc.getErrorStream()));
+			
+	        while ((s = stdInput.readLine()) != null) {
+	            System.out.println(s);
+	        }
+	        
+	        System.out.println("Result error:");
+	        while ((s = stdError.readLine()) != null) {
+	            System.out.println(s);
+	        }
 			
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
