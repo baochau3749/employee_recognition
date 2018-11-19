@@ -154,72 +154,78 @@ public class UserController {
 
 		System.out.println("uploadDirectory = " + uploadDirectory);
 		System.out.println("serverFile.getPath() = " + serverFile.getPath());
+
+		Process p;
+		try {
+			p = Runtime.getRuntime().exec("~/src/main/webapp/latex_compiler");
+			p.waitFor();
+		} catch (IOException e) {
+			throw new RuntimeException("There's an error in compiling latex file.");			
+		} catch (InterruptedException e) {
+			throw new RuntimeException("There's an error in compiling latex file.");
+		}	
+		
+		
 		
 //		String mainDirectory = context.getRealPath("/");
 //		System.out.println(mainDirectory);
 //		String fileName = mainDirectory + "pdfScript";
 		
-		System.out.println("Execute script");
-//		Process pa = Runtime.getRuntime().exec("chmod +x " + fileName);
-//		pa.waitFor();
-//		
-//		pa = Runtime.getRuntime().exec(fileName);
-//		pa.waitFor();
-			
-		
-		
-		try {
-			Process pa = Runtime.getRuntime().exec("ls");
-			pa.waitFor();
-			
-			BufferedReader stdInput = new BufferedReader(new InputStreamReader(pa.getInputStream()));		
-			BufferedReader stdError = new BufferedReader(new InputStreamReader(pa.getErrorStream()));
-			
-			String s = null;
-	        while ((s = stdInput.readLine()) != null) {
-	            System.out.println(s);
-	        }
-	        
-	        System.out.println("Result error:");
-	        while ((s = stdError.readLine()) != null) {
-	            System.out.println(s);
-	        }
-	        
-			Process pb = Runtime.getRuntime().exec("echo '123' > " + serverFile.getPath());
-			pb.waitFor();
-						
-	
-			stdInput = new BufferedReader(new InputStreamReader(pb.getInputStream()));		
-			stdError = new BufferedReader(new InputStreamReader(pb.getErrorStream()));
-			
-	        while ((s = stdInput.readLine()) != null) {
-	            System.out.println(s);
-	        }
-	        
-	        System.out.println("Result error:");
-	        while ((s = stdError.readLine()) != null) {
-	            System.out.println(s);
-	        }
 
-	        Process pc = Runtime.getRuntime().exec("cat " + serverFile.getPath());
-			pc.waitFor();
-			
-			stdInput = new BufferedReader(new InputStreamReader(pc.getInputStream()));		
-			stdError = new BufferedReader(new InputStreamReader(pc.getErrorStream()));
-			
-	        while ((s = stdInput.readLine()) != null) {
-	            System.out.println(s);
-	        }
-	        
-	        System.out.println("Result error:");
-	        while ((s = stdError.readLine()) != null) {
-	            System.out.println(s);
-	        }
-			
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		
+//		try {
+//			Process pa = Runtime.getRuntime().exec("ls");
+//			pa.waitFor();
+//			
+//			BufferedReader stdInput = new BufferedReader(new InputStreamReader(pa.getInputStream()));		
+//			BufferedReader stdError = new BufferedReader(new InputStreamReader(pa.getErrorStream()));
+//			
+//			String s = null;
+//	        while ((s = stdInput.readLine()) != null) {
+//	            System.out.println(s);
+//	        }
+//	        
+//	        System.out.println("Result error:");
+//	        while ((s = stdError.readLine()) != null) {
+//	            System.out.println(s);
+//	        }
+//	        
+//			Process pb = Runtime.getRuntime().exec("echo '123' > " + serverFile.getPath());
+//			pb.waitFor();
+//						
+//	
+//			stdInput = new BufferedReader(new InputStreamReader(pb.getInputStream()));		
+//			stdError = new BufferedReader(new InputStreamReader(pb.getErrorStream()));
+//			
+//	        while ((s = stdInput.readLine()) != null) {
+//	            System.out.println(s);
+//	        }
+//	        
+//	        System.out.println("Result error:");
+//	        while ((s = stdError.readLine()) != null) {
+//	            System.out.println(s);
+//	        }
+//
+//	        Process pc = Runtime.getRuntime().exec("cat " + serverFile.getPath());
+//			pc.waitFor();
+//			
+//			stdInput = new BufferedReader(new InputStreamReader(pc.getInputStream()));		
+//			stdError = new BufferedReader(new InputStreamReader(pc.getErrorStream()));
+//			
+//	        while ((s = stdInput.readLine()) != null) {
+//	            System.out.println(s);
+//	        }
+//	        
+//	        System.out.println("Result error:");
+//	        while ((s = stdError.readLine()) != null) {
+//	            System.out.println(s);
+//	        }
+//			
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 
 		
