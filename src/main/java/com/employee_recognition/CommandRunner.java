@@ -22,7 +22,7 @@ public class CommandRunner implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		if (!isWindows()) {
 			System.out.println("Run process - 1a");
-			Process p1 = Runtime.getRuntime().exec("chmod +x ./target/classes/pdfScript");
+			Process p1 = Runtime.getRuntime().exec("chmod +x /app/src/main/webapp/pdfScript");
 			p1.waitFor();
 			
 //			System.out.println("Run process - 1b");
@@ -30,7 +30,7 @@ public class CommandRunner implements CommandLineRunner {
 //			p2.waitFor();
 
 			System.out.println("Run process - 1c");
-			Process p3 = Runtime.getRuntime().exec("./target/classes/pdfScript");
+			Process p3 = Runtime.getRuntime().exec("/app/src/main/webapp/pdfScript");
 			p3.waitFor();
         }
 	}
