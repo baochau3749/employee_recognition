@@ -182,6 +182,19 @@ public class UserController {
         System.out.println("Result error:");
         while ((s = stdError.readLine()) != null) { System.out.println(s); }
         
+        
+        
+		p = Runtime.getRuntime().exec("ls -l " + uploadDirectory + "/signature_files");
+		//p.waitFor();
+		stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));		
+		stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+				
+		System.out.println("Result Status:");
+        while ((s = stdInput.readLine()) != null) { System.out.println(s); }   
+        
+        System.out.println("Result error:");
+        while ((s = stdError.readLine()) != null) { System.out.println(s); }
+        
 //		try {
 //			p = Runtime.getRuntime().exec(uploadDirectory + "/latex_compiler");
 //			//p.waitFor();
