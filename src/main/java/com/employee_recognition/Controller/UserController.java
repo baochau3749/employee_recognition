@@ -160,45 +160,45 @@ public class UserController {
 		System.out.println("uploadDirectory = " + uploadDirectory);
 		System.out.println("serverFile.getPath() = " + serverFile.getPath());
 
-		Process p, pa;
-		String s = null;
-		
-		pa = Runtime.getRuntime().exec("ls");
-		//p.waitFor();
-		BufferedReader stdInput = new BufferedReader(new InputStreamReader(pa.getInputStream()));		
-		BufferedReader stdError = new BufferedReader(new InputStreamReader(pa.getErrorStream()));
-		
-		
-		System.out.println("Result Status:");
-        while ((s = stdInput.readLine()) != null) { System.out.println(s); }     
-        
-        System.out.println("Result error:");
-        while ((s = stdError.readLine()) != null) { System.out.println(s); }
-        
-		p = Runtime.getRuntime().exec(uploadDirectory + "/latex_compiler");
-		//p.waitFor();
-		stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));		
-		stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-				
-		System.out.println("Result Status:");
-        while ((s = stdInput.readLine()) != null) { System.out.println(s); }   
-        
-        System.out.println("Result error:");
-        while ((s = stdError.readLine()) != null) { System.out.println(s); }
-        
-        
-        
-		p = Runtime.getRuntime().exec("ls -l " + uploadDirectory + "/signature_files");
-		//p.waitFor();
-		stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));		
-		stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-				
-		System.out.println("Result Status:");
-        while ((s = stdInput.readLine()) != null) { System.out.println(s); }   
-        
-        System.out.println("Result error:");
-        while ((s = stdError.readLine()) != null) { System.out.println(s); }
-        
+//		Process p, pa;
+//		String s = null;
+//		
+//		pa = Runtime.getRuntime().exec("ls");
+//		//p.waitFor();
+//		BufferedReader stdInput = new BufferedReader(new InputStreamReader(pa.getInputStream()));		
+//		BufferedReader stdError = new BufferedReader(new InputStreamReader(pa.getErrorStream()));
+//		
+//		
+//		System.out.println("Result Status:");
+//        while ((s = stdInput.readLine()) != null) { System.out.println(s); }     
+//        
+//        System.out.println("Result error:");
+//        while ((s = stdError.readLine()) != null) { System.out.println(s); }
+//        
+//		p = Runtime.getRuntime().exec(uploadDirectory + "/latex_compiler");
+//		//p.waitFor();
+//		stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));		
+//		stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+//				
+//		System.out.println("Result Status:");
+//        while ((s = stdInput.readLine()) != null) { System.out.println(s); }   
+//        
+//        System.out.println("Result error:");
+//        while ((s = stdError.readLine()) != null) { System.out.println(s); }
+//        
+//        
+//        
+//		p = Runtime.getRuntime().exec("ls -l " + uploadDirectory + "/signature_files");
+//		//p.waitFor();
+//		stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));		
+//		stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+//				
+//		System.out.println("Result Status:");
+//        while ((s = stdInput.readLine()) != null) { System.out.println(s); }   
+//        
+//        System.out.println("Result error:");
+//        while ((s = stdError.readLine()) != null) { System.out.println(s); }
+//        
 		
 		
 		
@@ -212,28 +212,107 @@ public class UserController {
 	{
 		awardDAO.deleteAwardByID(id);
 		return "redirect:/user";
-	}
+	}	
 	
-	@RequestMapping(value = "/awardImage")
-    public void getAwardImage(HttpServletResponse response) throws IOException {
-		String uploadDirectory = context.getRealPath("/");
-		java.io.File imageFile = new java.io.File(uploadDirectory + "/signature_files/1.txt");
-
-		System.out.println("uploadDirectory = " + uploadDirectory);
-		System.out.println("imageFile.getPath() = " + imageFile.getPath());
+	// show an Award
+	@RequestMapping(value="/show_award")
+	public void showAward(HttpServletResponse response)
+	{
+		String mainDirectory = context.getRealPath("/");
 		
+		java.io.File awardFile = new java.io.File(mainDirectory + "/award_files/award.pdf");
+		System.out.println("awardFile.getPath() = " + awardFile.getPath());
 
-		
-	    try {
-	      // get your file as InputStream
-	      InputStream targetStream = new FileInputStream(imageFile);  
-      	      
-	      // copy it to response's OutputStream
-	      IOUtils.copy(targetStream, response.getOutputStream());
-	      response.flushBuffer();	       
-	      
-	    } catch (IOException ex) {
-	    	throw new RuntimeException("IOError writing file to output stream");
-	    }
-    }
+		try {
+			// get your file as InputStream
+			InputStream targetStream = new FileInputStream(awardFile);
+
+			// copy it to response's OutputStream
+			IOUtils.copy(targetStream, response.getOutputStream());
+			response.flushBuffer();
+
+		} 
+		catch (IOException ex) {
+			throw new RuntimeException("IOError writing file to output stream");
+		}
+
+	}	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//@RequestMapping(value = "/awardImage")
+//public void getAwardImage(HttpServletResponse response) throws IOException {
+//	String mainDirectory = context.getRealPath("/");
+//	
+//	java.io.File signatureFile = new java.io.File(mainDirectory + "/signature_files/1.png");
+//	java.io.File awardFile = new java.io.File(mainDirectory + "/award_files/1.png");
+//
+//	System.out.println("signatureFile.getPath() = " + signatureFile.getPath());
+//	System.out.println("awardFile.getPath() = " + awardFile.getPath());
+//	
+////	Process p, pa;
+////	String s = null;
+////	
+////	pa = Runtime.getRuntime().exec("ls");
+////	//p.waitFor();
+////	BufferedReader stdInput = new BufferedReader(new InputStreamReader(pa.getInputStream()));		
+////	BufferedReader stdError = new BufferedReader(new InputStreamReader(pa.getErrorStream()));
+////	
+////	
+////	System.out.println("Result Status:");
+////  while ((s = stdInput.readLine()) != null) { System.out.println(s); }     
+////  
+////  System.out.println("Result error:");
+////  while ((s = stdError.readLine()) != null) { System.out.println(s); }
+////  
+////	p = Runtime.getRuntime().exec(uploadDirectory + "/latex_compiler");
+////	//p.waitFor();
+////	stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));		
+////	stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+////			
+////	System.out.println("Result Status:");
+////  while ((s = stdInput.readLine()) != null) { System.out.println(s); }   
+////  
+////  System.out.println("Result error:");
+////  while ((s = stdError.readLine()) != null) { System.out.println(s); }
+////  
+////  
+////  
+////	p = Runtime.getRuntime().exec("ls -l " + uploadDirectory + "/signature_files");
+////	//p.waitFor();
+////	stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));		
+////	stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+////			
+////	System.out.println("Result Status:");
+////  while ((s = stdInput.readLine()) != null) { System.out.println(s); }   
+////  
+////  System.out.println("Result error:");
+////  while ((s = stdError.readLine()) != null) { System.out.println(s); }
+////  
+//	
+//	
+//	
+//			
+//  try {
+//    // get your file as InputStream
+//    InputStream targetStream = new FileInputStream(signatureFile);  
+//	      
+//    // copy it to response's OutputStream
+//    IOUtils.copy(targetStream, response.getOutputStream());
+//    response.flushBuffer();	       
+//    
+//  } catch (IOException ex) {
+//  	throw new RuntimeException("IOError writing file to output stream");
+//  }
+//}
