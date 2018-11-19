@@ -151,6 +151,7 @@ public class UserController {
 		String uploadDirectory = context.getRealPath("/");
 		System.out.println("up " + uploadDirectory);
 		java.io.File serverFile = new java.io.File(uploadDirectory + "/signature_files/" + user.getUserProfile().getTargetFile());
+		//java.io.File serverFile = new java.io.File(uploadDirectory + "/signature_files/1.txt");
 
 		System.out.println("uploadDirectory = " + uploadDirectory);
 		System.out.println("serverFile.getPath() = " + serverFile.getPath());
