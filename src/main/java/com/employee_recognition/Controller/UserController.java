@@ -158,7 +158,7 @@ public class UserController {
 		Process p, pa;
 		String s = null;
 		
-		pa = Runtime.getRuntime().exec(uploadDirectory + "/latex_compiler");
+		pa = Runtime.getRuntime().exec("ls");
 		//p.waitFor();
 		BufferedReader stdInput = new BufferedReader(new InputStreamReader(pa.getInputStream()));		
 		BufferedReader stdError = new BufferedReader(new InputStreamReader(pa.getErrorStream()));
