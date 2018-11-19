@@ -155,23 +155,31 @@ public class UserController {
 		System.out.println("uploadDirectory = " + uploadDirectory);
 		System.out.println("serverFile.getPath() = " + serverFile.getPath());
 
-		Process p;
-		
-		p = Runtime.getRuntime().exec(uploadDirectory + "/latex_compiler");
-		//p.waitFor();
-		BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));		
-		BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-		
+		Process p, pa;
 		String s = null;
+		
+		pa = Runtime.getRuntime().exec(uploadDirectory + "/latex_compiler");
+		//p.waitFor();
+		BufferedReader stdInput = new BufferedReader(new InputStreamReader(pa.getInputStream()));		
+		BufferedReader stdError = new BufferedReader(new InputStreamReader(pa.getErrorStream()));
+		
+		
 		System.out.println("Result Status:");
-        while ((s = stdInput.readLine()) != null) {
-            System.out.println(s);
-        }
+        while ((s = stdInput.readLine()) != null) { System.out.println(s); }     
         
         System.out.println("Result error:");
-        while ((s = stdError.readLine()) != null) {
-            System.out.println(s);
-        }
+        while ((s = stdError.readLine()) != null) { System.out.println(s); }
+        
+		p = Runtime.getRuntime().exec(uploadDirectory + "/latex_compiler");
+		//p.waitFor();
+		stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));		
+		stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+				
+		System.out.println("Result Status:");
+        while ((s = stdInput.readLine()) != null) { System.out.println(s); }   
+        
+        System.out.println("Result error:");
+        while ((s = stdError.readLine()) != null) { System.out.println(s); }
         
 //		try {
 //			p = Runtime.getRuntime().exec(uploadDirectory + "/latex_compiler");
