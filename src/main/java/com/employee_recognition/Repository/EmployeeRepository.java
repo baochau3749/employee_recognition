@@ -22,10 +22,15 @@ public class EmployeeRepository {
 	@Autowired
 	private EntityManager entityManager;
 	
-	public Employee findById(int id) {
+	public Employee findById(Long id) {
 		return entityManager.find(Employee.class, id);
 	}
 	//state functions
+	public State findStateById(int id)
+	{
+		return entityManager.find(State.class, id);
+	}
+	
 	public int findStateByName(String state) {
 		String queryStr = "SELECT state_id FROM state WHERE state='" + state + "'";
 		Query q = entityManager.createNativeQuery(queryStr);
@@ -65,6 +70,11 @@ public class EmployeeRepository {
 	}
 	
 	//position functions
+	public Position findPositionById(int id)
+	{
+		return entityManager.find(Position.class, id);
+	}
+	
 	public int findPositionByName(String position) {
 		String queryStr = "SELECT position_id FROM position WHERE position='" + position + "'";
 		Query q = entityManager.createNativeQuery(queryStr);
@@ -104,6 +114,11 @@ public class EmployeeRepository {
 	
 	
 	//department functions
+	public Department findDepartmentById(int id)
+	{
+		return entityManager.find(Department.class, id);
+	}
+	
 	public int findDepartmentByName(String department) {
 		String queryStr = "SELECT department_id FROM department WHERE department='" + 
 				department + "'";

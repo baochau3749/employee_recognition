@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.employee_recognition.Entity.Report;
 import com.employee_recognition.Entity.User;
+import com.employee_recognition.Service.ReportService;
 import com.employee_recognition.Service.UserService;
 
 @Controller
@@ -31,6 +32,9 @@ public class AdminController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ReportService reportService;
 	
 	public AdminController() {
 	}		
@@ -59,14 +63,15 @@ public class AdminController {
 	@GetMapping("/award_report")
 	public String showAwardReportingPage(Model model)
 	{
-		List<Report> reportList = new ArrayList();
-		
+		// Analytics Reports
+		List<Report> reportList = new ArrayList<>();
 		reportList.add(new Report("Gender Report", "gender"));
 		reportList.add(new Report("Department Report", "department"));
-		reportList.add(new Report("Region Report", "region"));
+		reportList.add(new Report("State Report", "state"));
+		reportList.add(new Report("Position Report", "position"));
+		reportList.add(new Report("Award Type Report", "awardType"));
 		
 		model.addAttribute("report", reportList);
-		
 		
 		return "award_report";
 	}
@@ -122,10 +127,38 @@ public class AdminController {
 	public String downloadReport(@RequestParam("label") String label, HttpServletRequest request, HttpServletResponse response)
 	{
 		// create CSV file based on label provided
-		String filename = "books.csv";
+		String filename = new String();
+		switch (label)
+		{
+			case "state":
+			{
+				filename = reportService.stateReport();
+				break;
+			}
+			case "department":
+			{
+				filename = reportService.departmentReport();
+				break;
+			}
+			case "gender":
+			{
+				filename = reportService.genderReport();
+				break;
+			}
+			case "position":
+			{
+				filename = reportService.positionReport();
+				break;
+			}
+			case "awardType":
+			{
+				filename = reportService.awardTypeReport();
+				break;
+			}
+		}
 		
 		// target the new CSV file
-		String filePath = System.getProperty("user.dir")+"\\src\\main\\webapp\\award_files";
+		String filePath = System.getProperty("user.dir")+"\\src\\main\\webapp\\report_files";
 		Path file = Paths.get(filePath, filename);
 		
 		// type of download

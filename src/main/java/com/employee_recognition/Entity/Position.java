@@ -13,6 +13,9 @@ public class Position {
 	private int position_id;
 	@Column(name = "position")
 	private String position;
+	
+	public Position() {}
+	
 	public Position(String p, int i) {
 		position_id = i;
 		position = p;
