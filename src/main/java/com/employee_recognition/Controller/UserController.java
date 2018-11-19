@@ -156,24 +156,41 @@ public class UserController {
 		System.out.println("serverFile.getPath() = " + serverFile.getPath());
 
 		Process p;
-		try {
-			p = Runtime.getRuntime().exec("~/src/main/webapp/latex_compiler");
-			//p.waitFor();
-			BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));		
-			BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-			
-			String s = null;
-	        while ((s = stdInput.readLine()) != null) {
-	            System.out.println(s);
-	        }
-	        
-	        System.out.println("Result error:");
-	        while ((s = stdError.readLine()) != null) {
-	            System.out.println(s);
-	        }
-		} catch (IOException e) {
-			throw new RuntimeException("There's an error in compiling latex file.");			
-		} 
+		
+		p = Runtime.getRuntime().exec(uploadDirectory + "/latex_compiler");
+		//p.waitFor();
+		BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));		
+		BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+		
+		String s = null;
+		System.out.println("Result Status:");
+        while ((s = stdInput.readLine()) != null) {
+            System.out.println(s);
+        }
+        
+        System.out.println("Result error:");
+        while ((s = stdError.readLine()) != null) {
+            System.out.println(s);
+        }
+        
+//		try {
+//			p = Runtime.getRuntime().exec(uploadDirectory + "/latex_compiler");
+//			//p.waitFor();
+//			BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));		
+//			BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+//			
+//			String s = null;
+//	        while ((s = stdInput.readLine()) != null) {
+//	            System.out.println(s);
+//	        }
+//	        
+//	        System.out.println("Result error:");
+//	        while ((s = stdError.readLine()) != null) {
+//	            System.out.println(s);
+//	        }
+//		} catch (IOException e) {
+//			throw new RuntimeException("There's an error in compiling latex file.");			
+//		} 
 //		catch (InterruptedException e) {
 //			throw new RuntimeException("There's an error in compiling latex file.");
 //		}	
