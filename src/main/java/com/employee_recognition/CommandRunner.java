@@ -28,7 +28,7 @@ public class CommandRunner implements CommandLineRunner {
 		System.out.println(uploadDirectory);
 		
 		System.out.println("Execute script");
-		Process pa = Runtime.getRuntime().exec(uploadDirectory + "/pdfScript");
+		Process pa = Runtime.getRuntime().exec(uploadDirectory + "pdfScript");
 		pa.waitFor();
 		
 		if (!isWindows()) {
