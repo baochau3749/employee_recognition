@@ -43,6 +43,9 @@
 		<input type="submit" value="Save">
 	</form:form>
 	<img src="/image" /> 
+	
+	<%-- <c:url var="updateLink4" value="${pageContect.request.contextPath}/my_text.txt" /> --%>
+	<a href="/awardImage">1.txt</a>
 
 </body>
 </html>

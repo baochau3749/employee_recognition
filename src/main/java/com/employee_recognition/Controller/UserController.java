@@ -4,16 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.apache.tomcat.jni.File;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -209,4 +213,27 @@ public class UserController {
 		awardDAO.deleteAwardByID(id);
 		return "redirect:/user";
 	}
+	
+	@RequestMapping(value = "/awardImage")
+    public void getAwardImage(HttpServletResponse response) throws IOException {
+		String uploadDirectory = context.getRealPath("/");
+		java.io.File imageFile = new java.io.File(uploadDirectory + "/signature_files/1.txt");
+
+		System.out.println("uploadDirectory = " + uploadDirectory);
+		System.out.println("imageFile.getPath() = " + imageFile.getPath());
+		
+
+		
+	    try {
+	      // get your file as InputStream
+	      InputStream targetStream = new FileInputStream(imageFile);  
+      	      
+	      // copy it to response's OutputStream
+	      IOUtils.copy(targetStream, response.getOutputStream());
+	      response.flushBuffer();	       
+	      
+	    } catch (IOException ex) {
+	    	throw new RuntimeException("IOError writing file to output stream");
+	    }
+    }
 }
