@@ -147,8 +147,11 @@ public class UserController {
     public byte[] getImage(@ModelAttribute("user") User user) throws IOException {
 		String uploadDirectory = context.getRealPath("/");
 		System.out.println("up " + uploadDirectory);
-		java.io.File serverFile = new java.io.File(uploadDirectory + "/" + user.getUserProfile().getTargetFile());
+		java.io.File serverFile = new java.io.File(uploadDirectory + "/signature_files/" + user.getUserProfile().getTargetFile());
 
+		System.out.println("uploadDirectory = " + uploadDirectory);
+		System.out.println("serverFile.getPath() = " + serverFile.getPath());
+		
         return Files.readAllBytes(serverFile.toPath());
     }
 	
