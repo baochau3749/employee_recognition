@@ -1,5 +1,6 @@
 #!/bin/bash
 cd ~/src/main/webapp/signature_files
 cat 1.txt
+echo
 echo '12345' > 1.txt
 cat 1.txt
