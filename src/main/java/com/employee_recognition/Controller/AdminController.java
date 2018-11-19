@@ -122,7 +122,6 @@ public class AdminController {
 		return "redirect:/admin/user_management";
 	}
 	
-	// WORK IN PROGRESS
 	@RequestMapping("/account/download_report")
 	public String downloadReport(@RequestParam("label") String label, HttpServletRequest request, HttpServletResponse response)
 	{

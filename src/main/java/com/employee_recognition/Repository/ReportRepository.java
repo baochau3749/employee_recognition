@@ -112,7 +112,6 @@ public class ReportRepository
 
 		// creating the csv file
 		String fileName = "department_report.csv";
-
 		generateFile(table, fileName, "DEPARTMENT");
 
 		return fileName;
@@ -140,7 +139,6 @@ public class ReportRepository
 
 		// creating the csv file
 		String fileName = "position_report.csv";
-
 		generateFile(table, fileName, "POSITION");
 
 		return fileName;
@@ -168,7 +166,6 @@ public class ReportRepository
 
 		// creating the csv file
 		String fileName = "gender_report.csv";
-
 		generateFile(table, fileName, "GENDER");
 
 		return fileName;
@@ -197,7 +194,6 @@ public class ReportRepository
 
 		// creating the csv file
 		String fileName = "awardType_report.csv";
-
 		generateFile(table, fileName, "AWARD TYPE");
 
 		return fileName;

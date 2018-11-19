@@ -70,11 +70,9 @@ public class LoginController {
 			// sending the email notification
 			userService.sendEmailResetPassword(current);
 			
-			//userService.sendEmailAward("Dog.jpg", new Employee());
-			
-			message = "An email containing a temporary password has been sent";
+			message = "An email containing a temporary password has been sent to the provided email.";
 			model.addAttribute("message", message);
-			return "user_reset_password";
+			return "user_reset_password_valid";
 		}
 	}
 }
