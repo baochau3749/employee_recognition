@@ -24,26 +24,30 @@ public class CommandRunner implements CommandLineRunner {
 	private static String OS = System.getProperty("os.name").toLowerCase();
 	@Override
 	public void run(String... args) throws Exception {
-		String uploadDirectory = context.getRealPath("/");
-		System.out.println(uploadDirectory);
+		String mainDirectory = context.getRealPath("/");
+		System.out.println(mainDirectory);
+		String fileName = mainDirectory + "pdfScript";
 		
 		System.out.println("Execute script");
-		Process pa = Runtime.getRuntime().exec(uploadDirectory + "pdfScript");
+		Process pa = Runtime.getRuntime().exec("chmod +x " + fileName);
 		pa.waitFor();
 		
-		if (!isWindows()) {
-			System.out.println("Run process - 1a");
-			Process p1 = Runtime.getRuntime().exec("chmod +x /app/src/main/webapp/pdfScript");
-			p1.waitFor();
-			
-//			System.out.println("Run process - 1b");
-//			Process p2 = Runtime.getRuntime().exec("chmod +x ./target/classes/latex_compiler");
-//			p2.waitFor();
-
-			System.out.println("Run process - 1c");
-			Process p3 = Runtime.getRuntime().exec("/app/src/main/webapp/pdfScript");
-			p3.waitFor();
-        }
+		pa = Runtime.getRuntime().exec(fileName);
+		pa.waitFor();
+		
+//		if (!isWindows()) {
+//			System.out.println("Run process - 1a");
+//			Process p1 = Runtime.getRuntime().exec("chmod +x /app/src/main/webapp/pdfScript");
+//			p1.waitFor();
+//			
+////			System.out.println("Run process - 1b");
+////			Process p2 = Runtime.getRuntime().exec("chmod +x ./target/classes/latex_compiler");
+////			p2.waitFor();
+//
+//			System.out.println("Run process - 1c");
+//			Process p3 = Runtime.getRuntime().exec("/app/src/main/webapp/pdfScript");
+//			p3.waitFor();
+//        }
 	}
 	
     private static boolean isWindows() {
