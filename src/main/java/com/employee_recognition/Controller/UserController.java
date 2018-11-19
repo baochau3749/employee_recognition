@@ -145,6 +145,7 @@ public class UserController {
 	@RequestMapping(value = "/image")
     @ResponseBody
     public byte[] getImage(@ModelAttribute("user") User user) throws IOException {
+		
 		String uploadDirectory = context.getRealPath("/");
 		System.out.println("up " + uploadDirectory);
 		java.io.File serverFile = new java.io.File(uploadDirectory + "/signature_files/" + user.getUserProfile().getTargetFile());
@@ -152,7 +153,36 @@ public class UserController {
 		System.out.println("uploadDirectory = " + uploadDirectory);
 		System.out.println("serverFile.getPath() = " + serverFile.getPath());
 		
-        return Files.readAllBytes(serverFile.toPath());
+//		String mainDirectory = context.getRealPath("/");
+//		System.out.println(mainDirectory);
+//		String fileName = mainDirectory + "pdfScript";
+		
+		System.out.println("Execute script");
+//		Process pa = Runtime.getRuntime().exec("chmod +x " + fileName);
+//		pa.waitFor();
+//		
+//		pa = Runtime.getRuntime().exec(fileName);
+//		pa.waitFor();
+			
+		
+		try {
+			Process pa = Runtime.getRuntime().exec("echo '123' > " + serverFile.getPath());
+			pa.waitFor();
+			
+			pa = Runtime.getRuntime().exec("cat " + serverFile.getPath());
+			pa.waitFor();
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+		
+		
+		
+		
+		return Files.readAllBytes(serverFile.toPath());
     }
 	
 	// Deleting an Award
