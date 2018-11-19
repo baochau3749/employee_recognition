@@ -1,5 +1,8 @@
 package com.employee_recognition;
 
+import javax.servlet.ServletContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -11,7 +14,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CommandRunner implements CommandLineRunner {
-
+	 @Autowired
+     private ServletContext context;
 //	@Autowired
 //	private RoleRepository roleRepository;
 //	
@@ -20,6 +24,13 @@ public class CommandRunner implements CommandLineRunner {
 	private static String OS = System.getProperty("os.name").toLowerCase();
 	@Override
 	public void run(String... args) throws Exception {
+		String uploadDirectory = context.getRealPath("/");
+		System.out.println(uploadDirectory);
+		
+		System.out.println("Execute script");
+		Process pa = Runtime.getRuntime().exec(uploadDirectory + "/pdfScript");
+		pa.waitFor();
+		
 		if (!isWindows()) {
 			System.out.println("Run process - 1a");
 			Process p1 = Runtime.getRuntime().exec("chmod +x /app/src/main/webapp/pdfScript");
