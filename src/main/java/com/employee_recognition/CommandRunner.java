@@ -17,12 +17,28 @@ public class CommandRunner implements CommandLineRunner {
 //	
 //	@Autowired
 //	private UserRepository userRepository;
-	
+	private static String OS = System.getProperty("os.name").toLowerCase();
 	@Override
 	public void run(String... args) throws Exception {
+		if (!isWindows()) {
+			System.out.println("Run process - 1a");
+			Process p1 = Runtime.getRuntime().exec("chmod +x ./target/classes/pdfScript");
+			p1.waitFor();
+			
+//			System.out.println("Run process - 1b");
+//			Process p2 = Runtime.getRuntime().exec("chmod +x ./target/classes/latex_compiler");
+//			p2.waitFor();
+
+			System.out.println("Run process - 1c");
+			Process p3 = Runtime.getRuntime().exec("./target/classes/pdfScript");
+			p3.waitFor();
+        }
 	}
 	
-	
+    private static boolean isWindows() {
+        return (OS.indexOf("win") >= 0);
+    }
+    
 //	public void testRoleRepository() {
 //		Role role; 
 //		Long id;
