@@ -1,5 +1,12 @@
 package com.employee_recognition.Controller;
 
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +59,10 @@ public class UserController {
 	 @Autowired
      private ServletContext context;
 	 
-
+	 AWSCredentials cred = new BasicAWSCredentials(
+			 "AKIAITT4IL4UYY34C3OQ",
+			 "U7VB7Ijj+E+0LeaLRt75WbL8TK5KSXs97Iy7GxTJ"
+	 );
 	
 	// User Main Page
 	@GetMapping("/user")
@@ -113,6 +123,7 @@ public class UserController {
 				e.printStackTrace();
 			}
 			user = userDAO.saveUser(user,"USER");
+			uploadaws(fileName);
 			return "redirect:/user"; 
 		}
 		else if (f.equals("")){
@@ -146,5 +157,20 @@ public class UserController {
 	{
 		awardDAO.deleteAwardByID(id);
 		return "redirect:/user";
+	}
+	
+	public void uploadaws(String fileName) {
+		final AmazonS3 s3 = AmazonS3ClientBuilder
+				.standard()
+				.withCredentials(new AWSStaticCredentialsProvider(cred))
+				.withRegion(Regions.US_EAST_2)
+				.build();
+		String uploadDirectory = context.getRealPath("/signature_files");
+		s3.putObject(
+				"empb",
+				fileName,
+				new java.io.File(uploadDirectory + "/" + fileName)
+		);
+		
 	}
 }
