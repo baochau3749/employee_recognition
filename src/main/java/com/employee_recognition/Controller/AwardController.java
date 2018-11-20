@@ -19,10 +19,12 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.employee_recognition.Entity.Award;
 import com.employee_recognition.Entity.AwardType;
+import com.employee_recognition.Entity.Employee;
 import com.employee_recognition.Entity.User;
 import com.employee_recognition.Repository.AwardTypeRepository;
 import com.employee_recognition.Repository.EmployeeRepository;
 import com.employee_recognition.Service.AwardService;
+import com.employee_recognition.Service.LatexService;
 import com.employee_recognition.Service.UserService;
 
 @Controller
@@ -41,6 +43,9 @@ public class AwardController {
 	
 	@Autowired
 	private AwardService awardDAO;
+	
+	@Autowired
+	private LatexService latexService;
 	
 	private Award award = new Award();
 	private AwardType at = new AwardType();
@@ -100,6 +105,21 @@ public class AwardController {
 		User currentUser = userDAO.getUserById(userId); 
 		award.setUser(currentUser);
 		awardDAO.saveAward(award);
+		
+		latexService.CreateAwardFile(award);
+		
+//		System.out.println(currentUser);
+//		System.out.println(award);
+		
+//		System.out.println("**************************************");
+//		System.out.println("Date = " + award.getdateGiven());
+//		System.out.println("Type = " + award.getAwardType());
+//		System.out.println("User = " + currentUser.getUserProfile().getFirstName() + " " + currentUser.getUserProfile().getLastName());
+//		Long employeeId = award.getEmployee();
+//		Employee employee = employeeDAO.findById(employeeId);
+//		System.out.println("employee = " + employee.getFirstName() + " " + employee.getLastName());
+//		System.out.println("**************************************");
+		
 		return "redirect:";
 	}
 	

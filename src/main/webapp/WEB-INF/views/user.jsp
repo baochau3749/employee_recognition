@@ -34,6 +34,8 @@
 	<br><br>
 	<a href="user/award">Create Award</a>
 	<br><br>
+	<a href="user/show_award">show award</a>
+	
 	<form:form action="${pageContect.request.contextPath}/logout"
 		method="POST">
 		<input type="submit" value="Logout">

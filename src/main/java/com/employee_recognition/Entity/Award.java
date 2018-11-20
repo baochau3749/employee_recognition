@@ -107,6 +107,12 @@ public class Award
 		//Timestamp time = new Timestamp(parsedDate.getTime());
 		//this.dateGiven = time;
 	}
+
+	@Override
+	public String toString() {
+		return "Award [id=" + id + ", user=" + user + ", employee=" + employee + ", awardType=" + awardType
+				+ ", dateGiven=" + dateGiven + "]";
+	}
 		
 		
 }

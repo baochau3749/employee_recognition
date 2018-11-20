@@ -45,7 +45,7 @@
 	</form:form>
 	<img src="/image" /> 
 	
-	<a href="/show_award">show award</a>
+	
 	
 
 </body>

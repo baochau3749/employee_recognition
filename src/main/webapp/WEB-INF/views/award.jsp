@@ -48,7 +48,7 @@
 				</form:select>
 				<br><br>
 				
-				Date and Time (ex. 11/2/2018 12:00 pm): <form:input name="dateGiven" path="dateGiven"/>
+				Date and Time (ex. 11/2/2018 12:00 pm): <form:input name="dateGiven" path="dateGiven" value="11/2/2018 12:00 pm"/>
 				<br><br>
 				
 			<input type="submit" value="Create Award">			

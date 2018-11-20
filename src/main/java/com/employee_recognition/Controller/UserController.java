@@ -215,7 +215,7 @@ public class UserController {
 	}	
 	
 	// show an Award
-	@RequestMapping(value="/show_award")
+	@RequestMapping(value="/user/show_award")
 	public void showAward(HttpServletResponse response)
 	{
 		String mainDirectory = context.getRealPath("/");

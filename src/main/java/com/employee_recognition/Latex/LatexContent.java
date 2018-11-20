@@ -6,16 +6,21 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
+@Component
 public class LatexContent {	
+	 @Autowired
+     private ServletContext context;
+	 
 	public static final int EMPLOYEE_OF_THE_MONTH = 1;
 	public static final int TOP_PERFORMER_OF_THE_YEAR = 2;
 	
-	public static final String LATEX_FOLDER = System.getProperty("user.dir") + "/target/classes/static/latex_files";
-	
-	int type;
-	
+	int type;	
 	private String title;
 	private String description;
 	private String name = "";
@@ -25,26 +30,36 @@ public class LatexContent {
 	private String awarder = "";
 	
 	public LatexContent() {
-		this(EMPLOYEE_OF_THE_MONTH);
+		//this(EMPLOYEE_OF_THE_MONTH);
+		description = "In recognition of your dedicated service " +
+				  "to our customers and our company.";		
+		background = "award_background_1";
 	}
 	
-	public LatexContent(int type) {
-		if (type == EMPLOYEE_OF_THE_MONTH) {
-			title = "Employee of the Month";
-			description = "In recognition of your dedicated service " +
-						  "to our customers and our company.";
-			background = "award_background_1";
-		}
-		else {
-			title = "Top Performer of the Year Award";
-			description = "In appreciation of your outstanding service " + 
-						  "to our customers and our company.";
-			background = "award_background_2";
-		}
-	}
+//	public LatexContent(int type) {
+////		if (type == EMPLOYEE_OF_THE_MONTH) {
+////			title = "Employee of the Month";
+////			description = "In recognition of your dedicated service " +
+////						  "to our customers and our company.";
+////			background = "award_background_1";
+////		}
+////		else {
+////			title = "Top Performer of the Year Award";
+////			description = "In appreciation of your outstanding service " + 
+////						  "to our customers and our company.";
+////			background = "award_background_2";
+////		}
+//	}
 
 	public File createLatexFile() {
-		String latexFilePath = LATEX_FOLDER + "/sample.tex";		
+		//public static final String LATEX_FOLDER = System.getProperty("user.dir") + "/target/classes/static/latex_files";
+		
+		String mainDirectory = context.getRealPath("/");
+		
+//		java.io.File awardFile = new java.io.File(mainDirectory + "/award_files/award.pdf");
+//		System.out.println("awardFile.getPath() = " + awardFile.getPath());
+		
+		String latexFilePath = mainDirectory + "/award_files/award.tex";		
 		File latexFile = null;
 		
 		try {
@@ -64,24 +79,24 @@ public class LatexContent {
 		return latexFile;
 	}
 	
-	public File createTempLatexFile() {
-		File latexFolder = null, latexFile = null;
-		
-		try {
-			latexFolder = ResourceUtils.getFile(LATEX_FOLDER);
-			latexFile = File.createTempFile("award", ".tex", latexFolder);			
-		    BufferedWriter writer = new BufferedWriter(new FileWriter(latexFile));
-		    writer.write(this.getContent());
-		    writer.close();
-		    
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException("There's an error in creating latex file.");
-		} catch (IOException e) {
-			throw new RuntimeException("There's an error in creating latex file.");
-		}
-		
-		return latexFile;
-	}
+//	public File createTempLatexFile() {
+//		File latexFolder = null, latexFile = null;
+//		
+//		try {
+//			latexFolder = ResourceUtils.getFile(LATEX_FOLDER);
+//			latexFile = File.createTempFile("award", ".tex", latexFolder);			
+//		    BufferedWriter writer = new BufferedWriter(new FileWriter(latexFile));
+//		    writer.write(this.getContent());
+//		    writer.close();
+//		    
+//		} catch (FileNotFoundException e) {
+//			throw new RuntimeException("There's an error in creating latex file.");
+//		} catch (IOException e) {
+//			throw new RuntimeException("There's an error in creating latex file.");
+//		}
+//		
+//		return latexFile;
+//	}
 	
 	public String getContent() {
 		String content;
@@ -124,6 +139,12 @@ public class LatexContent {
 	
 	public void setTitle(String title) {
 		this.title = title;
+		if (this.title.equalsIgnoreCase("Employee of the Month")) {
+			background = "award_background_1";
+		}
+		else {
+			background = "award_background_2";
+		}
 	}
 
 	public void setDescription(String description) {

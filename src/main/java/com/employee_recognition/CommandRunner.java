@@ -27,28 +27,33 @@ public class CommandRunner implements CommandLineRunner {
 	private static String OS = System.getProperty("os.name").toLowerCase();
 	@Override
 	public void run(String... args) throws Exception {
-		String mainDirectory = context.getRealPath("/");
-		System.out.println(mainDirectory);
-		String fileName = mainDirectory + "pdfScript";
 		
-		System.out.println("Execute script");
-		
-		
-		Process pa = Runtime.getRuntime().exec("chmod +x ./src/main/webapp/latex_compiler");
-		pa.waitFor();
-		
-		String s;
-		
-		BufferedReader stdInput = new BufferedReader(new InputStreamReader(pa.getInputStream()));		
-		BufferedReader stdError = new BufferedReader(new InputStreamReader(pa.getErrorStream()));
-		
-		
-		System.out.println("Result Status:");
-        while ((s = stdInput.readLine()) != null) { System.out.println(s); }     
-        
-        System.out.println("Result error:");
-        while ((s = stdError.readLine()) != null) { System.out.println(s); }
-        
+		if (!isWindows()) {
+			Process pa = Runtime.getRuntime().exec("chmod +x ./src/main/webapp/latex_compiler");
+			pa.waitFor();
+		}
+//		String mainDirectory = context.getRealPath("/");
+//		System.out.println(mainDirectory);
+//		String fileName = mainDirectory + "pdfScript";
+//		
+//		System.out.println("Execute script");
+//		
+//		
+//		Process pa = Runtime.getRuntime().exec("chmod +x ./src/main/webapp/latex_compiler");
+//		pa.waitFor();
+//		
+//		String s;
+//		
+//		BufferedReader stdInput = new BufferedReader(new InputStreamReader(pa.getInputStream()));		
+//		BufferedReader stdError = new BufferedReader(new InputStreamReader(pa.getErrorStream()));
+//		
+//		
+//		System.out.println("Result Status:");
+//        while ((s = stdInput.readLine()) != null) { System.out.println(s); }     
+//        
+//        System.out.println("Result error:");
+//        while ((s = stdError.readLine()) != null) { System.out.println(s); }
+//        
 		
 //		pa = Runtime.getRuntime().exec("chmod +x " + fileName);
 //		pa.waitFor();

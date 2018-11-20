@@ -1,8 +1,12 @@
 #!/bin/bash
 #cd ~/src/main/webapp/signature_files
-cp ~/src/main/webapp/signature_files/1.png ~/src/main/webapp/award_files/1.png
+#cp ~/src/main/webapp/signature_files/1.png ~/src/main/webapp/award_files/1.png
 
 #cat 1.txt
 #echo
 #echo '12345' > 1.txt
 #cat 1.txt
+
+cd ~/src/main/webapp/award_files
+pdflatex award.tex
+pdflatex award.tex
