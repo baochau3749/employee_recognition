@@ -177,10 +177,10 @@ public class UserServiceImpl implements UserService
 		email.setHostName("smtp.mail.yahoo.com");
 		email.setSmtpPort(465);
 
-		message = "Hello " + employeeName + ",\n";
+		message = "Hello " + employeeName + ",\n\n";
 		message += "In recognition of your dedicated service to our customers " +
 				   "and our company, you have been chosen to receive the attached " +
-				   awardType.getType() + "award.\n\n" + userName;
+				   awardType.getType() + " award.\n\n" + userName;
 
 		email.setAuthenticator(new DefaultAuthenticator("cs467.project@yahoo.com", "employee123"));
 		email.setSSLOnConnect(true);
