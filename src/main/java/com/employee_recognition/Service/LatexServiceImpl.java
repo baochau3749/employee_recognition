@@ -47,6 +47,7 @@ public class LatexServiceImpl implements LatexService {
 		latexContent.setName(employeeName);
 		latexContent.setDate(awardDate);
 		latexContent.setAwarder(userName);
+		latexContent.setSignature(currentUser.getUserProfile().getTargetFile());
 
 		// File latexFile = latexContent.createLatexFile();
 		latexContent.createLatexFile();

@@ -1,0 +1,704 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.4)  19 NOV 2018 22:30
+entering extended mode
+**C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files
+/award.tex
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files/
+award.tex
+LaTeX2e <2018-04-01> patch level 5
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+scrartcl.cls
+Document Class: scrartcl 2018/03/30 v3.25 KOMA-Script document class (article)
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+scrkbase.sty
+Package: scrkbase 2018/03/30 v3.25 KOMA-Script package (KOMA-Script-dependent b
+asics and keyval usage)
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+scrbase.sty
+Package: scrbase 2018/03/30 v3.25 KOMA-Script package (KOMA-Script-independent 
+basics and keyval usage)
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+scrlfile.sty
+Package: scrlfile 2018/03/30 v3.25 KOMA-Script package (loading files)
+)))
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+tocbasic.sty
+Package: tocbasic 2018/03/30 v3.25 KOMA-Script package (handling toc-files)
+\scr@dte@tocline@numberwidth=\skip41
+\scr@dte@tocline@numbox=\box26
+)
+Package tocbasic Info: omitting babel extension for `toc'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `toc' on input line 134.
+Class scrartcl Info: You've used standard option `oneside'.
+(scrartcl)           This is correct!
+(scrartcl)           Internally I'm using `twoside=false'.
+(scrartcl)           If you'd like to set the option with \KOMAoptions,
+(scrartcl)           you'd have to use `twoside=false' there
+(scrartcl)           instead of `oneside', too.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <16> not available
+(Font)              size <17.28> substituted on input line 2114.
+
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+typearea.sty
+Package: typearea 2018/03/30 v3.25 KOMA-Script package (type area)
+\ta@bcor=\skip42
+\ta@div=\count80
+Package typearea Info: You've used standard option `oneside'.
+(typearea)             This is correct!
+(typearea)             Internally I'm using `twoside=false'.
+(typearea)             If you'd like to set the option with \KOMAoptions,
+(typearea)             you'd have to use `twoside=false' there
+(typearea)             instead of `oneside', too.
+Package typearea Info: You've used standard option `landscape'.
+(typearea)             This is correct!
+(typearea)             Internally I'm using `paper=landscape'.
+(typearea)             If you'd like to set the option with \KOMAoptions,
+(typearea)             you'd have to use `paper=landscape' there
+(typearea)             instead of `landscape', too.
+\ta@hblk=\skip43
+\ta@vblk=\skip44
+\ta@temp=\skip45
+\footheight=\skip46
+Package typearea Info: With paper sizes other than (almost) `A4' predefined
+(typearea)             DIV values do not exist. Using DIV calculation for good
+(typearea)             line width (unless using `version=3.24` or prior).
+
+DIV calculation for typearea with good linewidth.
+Package typearea Info: These are the values describing the layout:
+(typearea)             DIV  = 9
+(typearea)             BCOR = 0.0pt
+(typearea)             \paperwidth      = 794.96999pt
+(typearea)              \textwidth      = 529.98003pt
+(typearea)              DIV departure   = 0%
+(typearea)              \evensidemargin = 60.22499pt
+(typearea)              \oddsidemargin  = 60.22499pt
+(typearea)             \paperheight     = 614.295pt
+(typearea)              \textheight     = 419.19897pt
+(typearea)              \topmargin      = -56.81487pt
+(typearea)              \headheight     = 23.99994pt
+(typearea)              \headsep        = 28.79993pt
+(typearea)              \topskip        = 16.0pt
+(typearea)              \footskip       = 67.19983pt
+(typearea)              \baselineskip   = 19.19995pt
+(typearea)              on input line 1706.
+)
+\c@part=\count81
+\c@section=\count82
+\c@subsection=\count83
+\c@subsubsection=\count84
+\c@paragraph=\count85
+\c@subparagraph=\count86
+\scr@dte@part@maxnumwidth=\skip47
+\scr@dte@section@maxnumwidth=\skip48
+\scr@dte@subsection@maxnumwidth=\skip49
+\scr@dte@subsubsection@maxnumwidth=\skip50
+\scr@dte@paragraph@maxnumwidth=\skip51
+\scr@dte@subparagraph@maxnumwidth=\skip52
+\abovecaptionskip=\skip53
+\belowcaptionskip=\skip54
+\c@pti@nb@sid@b@x=\box27
+\scr@dte@figure@maxnumwidth=\skip55
+Package tocbasic Info: omitting babel extension for `lof'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lof' on input line 5439.
+\c@figure=\count87
+\scr@dte@table@maxnumwidth=\skip56
+Package tocbasic Info: omitting babel extension for `lot'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lot' on input line 5451.
+\c@table=\count88
+Class scrartcl Info: Redefining `\numberline' on input line 5615.
+\bibindent=\dimen102
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+contour.sty
+Package: contour 2004/11/18 v2.14 Print contoured text (HH, MH)
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\color.sty"
+Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\color.cfg"
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 147.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-def\pdftex.def"
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+\con@length=\skip57
+
+Loading configuration file `contour.cfg'.
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+contour.cfg
+File: contour.cfg 2004/11/18 v2.14 Print contoured text (HH, MH)
+)
+contour: Using driver file `pdftex.cnt'.
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pdftex.cnt
+File: pdftex.cnt 2004/11/18 v2.14 Print contoured text (HH, MH)
+))
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+setspace.sty
+Package: setspace 2011/12/19 v6.7a set line spacing
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+background.sty
+Package: background 2014/03/04 v2.1 background material
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+xkeyval.sty
+Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+xkeyval.tex
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+xkvutils.tex
+\XKV@toks=\toks15
+\XKV@tempa@toks=\toks16
+)
+\XKV@depth=\count89
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+tikz.sty
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgf.sty
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfrcs.sty
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfutil-common.tex
+\pgfutil@everybye=\toks17
+\pgfutil@tempdima=\dimen103
+\pgfutil@tempdimb=\dimen104
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfutil-common-lists.tex))
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfutil-latex.def
+\pgfutil@abb=\box28
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfrcs.code.tex
+Package: pgfrcs 2015/08/07 v3.0.1a (rcs-revision 1.31)
+))
+Package: pgf 2015/08/07 v3.0.1a (rcs-revision 1.15)
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfcore.sty ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\graphics.cfg"
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+)
+\Gin@req@height=\dimen105
+\Gin@req@width=\dimen106
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfsys.sty
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfsys.code.tex
+Package: pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks18
+\pgfkeys@temptoks=\toks19
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfkeysfiltered.code.tex
+\pgfkeys@tmptoks=\toks20
+))
+\pgf@x=\dimen107
+\pgf@y=\dimen108
+\pgf@xa=\dimen109
+\pgf@ya=\dimen110
+\pgf@xb=\dimen111
+\pgf@yb=\dimen112
+\pgf@xc=\dimen113
+\pgf@yc=\dimen114
+\w@pgf@writea=\write3
+\r@pgf@reada=\read1
+\c@pgf@counta=\count90
+\c@pgf@countb=\count91
+\c@pgf@countc=\count92
+\c@pgf@countd=\count93
+\t@pgf@toka=\toks21
+\t@pgf@tokb=\toks22
+\t@pgf@tokc=\toks23
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgf.cfg
+File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
+)
+Driver file for pgf: pgfsys-pdftex.def
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2014/10/11  (rcs-revision 1.35)
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2013/10/10  (rcs-revision 1.13)
+)))
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
+\pgfsyssoftpath@smallbuffer@items=\count94
+\pgfsyssoftpath@bigbuffer@items=\count95
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
+))
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+xcolor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\color.cfg"
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+LaTeX Info: Redefining \color on input line 709.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfcore.code.tex
+Package: pgfcore 2010/04/11 v3.0.1a (rcs-revision 1.7)
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfmath.code.tex
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfmathcalc.code.tex
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfmathutil.code.tex)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfmathparser.code.tex
+\pgfmath@dimen=\dimen115
+\pgfmath@count=\count96
+\pgfmath@box=\box29
+\pgfmath@toks=\toks24
+\pgfmath@stack@operand=\toks25
+\pgfmath@stack@operation=\toks26
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfmathfunctions.code.tex
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfmathfunctions.basic.code.tex)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfmathfunctions.trigonometric.code.tex)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfmathfunctions.random.code.tex)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfmathfunctions.comparison.code.tex)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfmathfunctions.base.code.tex)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfmathfunctions.round.code.tex)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfmathfunctions.misc.code.tex)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfmathfunctions.integerarithmetics.code.tex)))
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count97
+))
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2013/10/07  (rcs-revision 1.27)
+\pgf@picminx=\dimen116
+\pgf@picmaxx=\dimen117
+\pgf@picminy=\dimen118
+\pgf@picmaxy=\dimen119
+\pgf@pathminx=\dimen120
+\pgf@pathmaxx=\dimen121
+\pgf@pathminy=\dimen122
+\pgf@pathmaxy=\dimen123
+\pgf@xx=\dimen124
+\pgf@xy=\dimen125
+\pgf@yx=\dimen126
+\pgf@yy=\dimen127
+\pgf@zx=\dimen128
+\pgf@zy=\dimen129
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2013/10/07  (rcs-revision 1.29)
+\pgf@path@lastx=\dimen130
+\pgf@path@lasty=\dimen131
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2014/11/02  (rcs-revision 1.24)
+\pgf@shorten@end@additional=\dimen132
+\pgf@shorten@start@additional=\dimen133
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2015/05/08  (rcs-revision 1.46)
+\pgfpic=\box30
+\pgf@hbox=\box31
+\pgf@layerbox@main=\box32
+\pgf@picture@serial@count=\count98
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2014/11/02  (rcs-revision 1.12)
+\pgflinewidth=\dimen134
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2015/08/07  (rcs-revision 1.20)
+\pgf@pt@x=\dimen135
+\pgf@pt@y=\dimen136
+\pgf@pt@temp=\dimen137
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2013/09/09  (rcs-revision 1.9)
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2015/05/14  (rcs-revision 1.43)
+\pgfarrowsep=\dimen138
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
+\pgf@max=\dimen139
+\pgf@sys@shading@range@num=\count99
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2013/07/15  (rcs-revision 1.18)
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2014/07/09  (rcs-revision 1.21)
+\pgfexternal@startupbox=\box33
+))
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2013/07/18  (rcs-revision 1.7)
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2013/09/30  (rcs-revision 1.5)
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2013/11/07  (rcs-revision 1.5)
+)))
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2014/03/21  (rcs-revision 1.35)
+\pgfnodeparttextbox=\box34
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2015/08/03  (rcs-revision 1.13)
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2007/07/03 v3.0.1a (rcs-revision 1.7)
+\pgf@nodesepstart=\dimen140
+\pgf@nodesepend=\dimen141
+)
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2007/07/23 v3.0.1a (rcs-revision 1.1)
+))
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgffor.sty
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfkeys.sty
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfkeys.code.tex))
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfmath.sty
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfmath.code.tex))
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgffor.code.tex
+Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfmath.code.tex)
+\pgffor@iter=\dimen142
+\pgffor@skip=\dimen143
+\pgffor@stack=\toks27
+\pgffor@toks=\toks28
+))
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+tikz.code.tex
+Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
+\pgf@plot@mark@count=\count100
+\pgfplotmarksize=\dimen144
+)
+\tikz@lastx=\dimen145
+\tikz@lasty=\dimen146
+\tikz@lastxsaved=\dimen147
+\tikz@lastysaved=\dimen148
+\tikzleveldistance=\dimen149
+\tikzsiblingdistance=\dimen150
+\tikz@figbox=\box35
+\tikz@figbox@bg=\box36
+\tikz@tempbox=\box37
+\tikz@tempbox@bg=\box38
+\tikztreelevel=\count101
+\tikznumberofchildren=\count102
+\tikznumberofcurrentchild=\count103
+\tikz@fig@count=\count104
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
+\pgfmatrixcurrentrow=\count105
+\pgfmatrixcurrentcolumn=\count106
+\pgf@matrix@numberofcolumns=\count107
+)
+\tikz@expandcount=\count108
+
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.1a (rcs-revision 1.2)
+)))
+(C:/CS-467/Group-Project-Code/employee_recognition/src/main/webapp/award_files\
+everypage.sty
+Package: everypage 2007/06/20 1.1 Hooks to run on every page
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\tools\afterpage.sty"
+Package: afterpage 2014/10/28 v1.08 After-Page Package (DPC)
+\AP@output=\toks29
+\AP@partial=\box39
+\AP@footins=\box40
+))
+No file award.aux.
+\openout1 = `award.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count109
+\scratchdimen=\dimen151
+\scratchbox=\box41
+\nofMPsegments=\count110
+\nofMParguments=\count111
+\everyMPshowfont=\toks30
+\MPscratchCnt=\count112
+\MPscratchDim=\dimen152
+\MPnumerator=\count113
+\makeMPintoPDFobject=\count114
+\everyMPtoPDFconversion=\toks31
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty"
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\kvdefinekeys.sty"
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)))
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\kvsetkeys.sty"
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\etexcmds.sty"
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
+Package: pdftexcmds 2018/09/10 v0.29 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
+Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+)
+ABD: EveryShipout initializing macros
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <16> not available
+(Font)              size <17.28> substituted on input line 13.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <39.8081> not available
+(Font)              size <24.88> substituted on input line 13.
+
+LaTeX Font Info:    Calculating math sizes for size <16> on input line 13.
+
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <16> not available
+(Font)              size <17.28> substituted on input line 13.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <16> not available
+(Font)              size <17.28> substituted on input line 13.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <16> on input line 13.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <11.19995> on input line 13.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 13.
+
+Underfull \vbox (badness 10000) detected at line 13
+ []
+
+
+Overfull \hbox (12.2458pt too wide) in paragraph at lines 13--14
+[]$[]$ 
+ []
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <19.19995> not available
+(Font)              size <20.74> substituted on input line 16.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <27.64795> not available
+(Font)              size <24.88> substituted on input line 18.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/it' in size <27.64795> not available
+
+(Font)              size <24.88> substituted on input line 18.
+
+LaTeX Font Info:    Calculating math sizes for size <19.19995> on input line 23
+.
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <19.19995> not available
+(Font)              size <20.74> substituted on input line 23.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <13.4399> not available
+(Font)              size <14.4> substituted on input line 23.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <9.59998> not available
+(Font)              size <10> substituted on input line 23.
+
+
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <19.19995> not available
+(Font)              size <20.74> substituted on input line 23.
+
+
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <13.4399> not available
+(Font)              size <14.4> substituted on input line 23.
+
+
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <9.59998> not available
+(Font)              size <10> substituted on input line 23.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <19.19995> not available
+(Font)              size <20.74> substituted on input line 23.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <13.4399> not available
+(Font)              size <14.4> substituted on input line 23.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <9.59998> not available
+(Font)              size <10> substituted on input line 23.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <19.19995> on input line 23.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <13.4399> on input line 23.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9.59998> on input line 23.
+! TeX capacity exceeded, sorry [input stack size=5000].
+\\->{\ifnum 0=
+              `}\fi \@ifstar \@xtabularcr \@xtabularcr 
+l.36 }}
+       
+If you really absolutely need more capacity,
+you can ask a wizard to enlarge me.
+
+ 
+Here is how much of TeX's memory you used:
+ 13722 strings out of 492970
+ 283020 string characters out of 3135844
+ 551273 words of memory out of 3000000
+ 17376 multiletter control sequences out of 15000+200000
+ 9489 words of font info for 33 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 5000i,7n,8329p,9182b,185s stack positions out of 5000i,500n,10000p,200000b,50000s
+!  ==> Fatal error occurred, no output PDF file produced!
