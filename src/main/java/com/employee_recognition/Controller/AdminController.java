@@ -82,6 +82,7 @@ public class AdminController {
 		reportList.add(new Report("Award Type Report", "awardType"));
 		
 		model.addAttribute("report", reportList);
+		model.addAttribute("loggedInUser", userService.getLoggedInUser());
 		
 		return "award_report";
 	}

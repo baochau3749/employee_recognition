@@ -47,6 +47,11 @@ setTimeout(function () {
 	<h4>Logged In: ${loggedInUser.email}</h4>
 	<hr>
 
+	<a href="${pageContext.request.contextPath}/admin/user_management">User Management</a>
+	<a href="${pageContext.request.contextPath}/admin/award_report">Award Report</a>
+
+	<hr><br>
+	
 	<div>
 		<div>
 			<h3>REPORT LIST</h3>

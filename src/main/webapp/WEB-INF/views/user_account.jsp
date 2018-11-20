@@ -15,7 +15,12 @@
 	<h2>${pageLabel}</h2>	
 	<h4>Logged In: ${loggedInUser.email}</h4>	
 	<hr>
+	
+	<a href="${pageContext.request.contextPath}/admin/user_management">User Management</a>
+	<a href="${pageContext.request.contextPath}/admin/award_report">Award Report</a>
 
+	<hr><br>
+	
 	<form:form modelAttribute="account" method="POST"
 			   action="${pageContext.request.contextPath}/admin/account/save_user">
 		
