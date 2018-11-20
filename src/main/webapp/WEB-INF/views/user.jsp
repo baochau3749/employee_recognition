@@ -28,11 +28,11 @@
 <body>
 	<h2>User Main Page</h2>
 
-	<a href="user/${user.id}">Update Profile</a>
+	<a href="${pageContect.request.contextPath}/user/${user.id}">Update Profile</a>
 	<br><br>
-	<a href="user/employees">Employee Management</a>
+	<a href="${pageContect.request.contextPath}/user/employees">Employee Management</a>
 	<br><br>
-	<a href="user/award">Create Award</a>
+	<a href="${pageContect.request.contextPath}/user/award">Create Award</a>
 	<br><br>
 	<form:form action="${pageContect.request.contextPath}/logout"
 		method="POST">

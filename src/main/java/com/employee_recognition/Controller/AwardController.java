@@ -112,7 +112,6 @@ public class AwardController {
 
 		try {
 			userDAO.sendEmailAward(awardFile, award, currentUser);
-			userDAO.sendEmailAward(null, award, currentUser);
 		} catch (EmailException e) {
 			e.printStackTrace();
 		}
