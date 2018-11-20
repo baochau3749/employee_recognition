@@ -10,4 +10,5 @@ public interface AwardService
 	public List<Award> getAwardsByUserID(Long id);
 	public void deleteAward(Award award);
 	public void deleteAwardByID(Long id);
+	public List<Award> getAwards(); 
 }

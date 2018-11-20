@@ -13,6 +13,9 @@ public class State {
 	private int state_id;
 	@Column(name = "state")
 	private String state;
+	
+	public State() {}
+	
 	public State(String s, int i) {
 		state_id = i;
 		state = s;

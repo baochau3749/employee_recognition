@@ -49,4 +49,13 @@ public class AwardRepository
 		return query.getResultList();
 	}
 	
+	
+	// Get all the awards
+	public List<Award> getAwards()
+	{
+		String queryString = "SELECT * FROM award";
+		Query query = entityManager.createNativeQuery(queryString, Award.class);
+		return query.getResultList();
+	}
+	
 }

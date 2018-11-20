@@ -14,6 +14,7 @@
 	<hr>
 	
 	<a href="${pageContext.request.contextPath}/admin/user_management">User Management</a>
+	<a href="${pageContext.request.contextPath}/admin/award_report">Award Report</a>
 
 	<hr><br>
 	<form:form action="${pageContect.request.contextPath}/logout" method="POST">

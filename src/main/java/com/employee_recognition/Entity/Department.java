@@ -13,6 +13,9 @@ public class Department {
 	private int department_id;
 	@Column(name = "department")
 	private String department;
+	
+	public Department() {}
+	
 	public Department(String d, int i) {
 		department_id = i;
 		department = d;

@@ -42,4 +42,10 @@ public class AwardServiceImpl implements AwardService
 		awardRepository.deleteByID(id);
 	}
 
+	@Override
+	public List<Award> getAwards()
+	{
+		return awardRepository.getAwards();
+	}
+
 }
