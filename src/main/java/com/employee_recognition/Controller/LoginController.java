@@ -69,10 +69,16 @@ public class LoginController {
 			
 			// sending the email notification
 			userService.sendEmailResetPassword(current);
-			
-			message = "An email containing a temporary password has been sent to the provided email.";
-			model.addAttribute("message", message);
-			return "user_reset_password_valid";
+
+			return "redirect:/reset_valid";
 		}
+	}
+	
+	@RequestMapping(value="reset_valid")
+	public String passwordHasBeenReset(Model model)
+	{
+		String message = "An email containing a temporary password has been sent to the provided email.";
+		model.addAttribute("message", message);
+		return "user_reset_password_valid";
 	}
 }
