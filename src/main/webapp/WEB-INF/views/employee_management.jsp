@@ -27,7 +27,7 @@ tr, th, td {
 <body>
 	<a href="${user.id}">Update Profile</a>
 	<br><br>
-	<a href="">Employee Management</a>
+	<a href="employees">Employee Management</a>
 	<br><br>
 	<a href="award">Create Award</a>
 	<br><br>
