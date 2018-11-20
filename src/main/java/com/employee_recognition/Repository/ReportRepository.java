@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.EntityManager;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -64,7 +62,7 @@ public class ReportRepository
 	}
 
 	// create the state report
-	public String stateReport()
+	public Map<String, Map<String, Integer>> stateReport()
 	{
 		// table for generating the state report
 		Map<String, Integer> table = new HashMap<>();
@@ -87,11 +85,13 @@ public class ReportRepository
 		String fileName = "state_report.csv";
 		generateFile(table, fileName, "STATE");
 
-		return fileName;
+		Map<String, Map<String, Integer>> result = new HashMap<>();
+		result.put(fileName, table);
+		return result;
 	}
 
 	// create the department report
-	public String departmentReport()
+	public Map<String, Map<String, Integer>> departmentReport()
 	{
 		// table for generating the department report
 		Map<String, Integer> table = new HashMap<>();
@@ -114,11 +114,13 @@ public class ReportRepository
 		String fileName = "department_report.csv";
 		generateFile(table, fileName, "DEPARTMENT");
 
-		return fileName;
+		Map<String, Map<String, Integer>> result = new HashMap<>();
+		result.put(fileName, table);
+		return result;
 	}
 
 	// create the position report
-	public String positionReport()
+	public Map<String, Map<String, Integer>> positionReport()
 	{
 		// table for generating the position report
 		Map<String, Integer> table = new HashMap<>();
@@ -141,11 +143,13 @@ public class ReportRepository
 		String fileName = "position_report.csv";
 		generateFile(table, fileName, "POSITION");
 
-		return fileName;
+		Map<String, Map<String, Integer>> result = new HashMap<>();
+		result.put(fileName, table);
+		return result;
 	}
 
 	// create the gender report
-	public String genderReport()
+	public Map<String, Map<String, Integer>> genderReport()
 	{
 		// table for generating the position report
 		Map<String, Integer> table = new HashMap<>();
@@ -168,7 +172,9 @@ public class ReportRepository
 		String fileName = "gender_report.csv";
 		generateFile(table, fileName, "GENDER");
 
-		return fileName;
+		Map<String, Map<String, Integer>> result = new HashMap<>();
+		result.put(fileName, table);
+		return result;
 	}
 
 	// WORK IN PROGRESS FIX AFTER MERGING EVERYTHING BACK

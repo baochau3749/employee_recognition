@@ -1,5 +1,7 @@
 package com.employee_recognition.Service;
 
+import java.util.Map;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,35 +17,34 @@ public class ReportServiceImpl implements ReportService
 	private ReportRepository reportRepository;
 	
 	@Override
-	public String stateReport()
+	public Map<String, Map<String, Integer>> stateReport()
 	{
 		return reportRepository.stateReport();
 	}
 
 	@Override
-	public String genderReport()
+	public Map< String,Map<String, Integer>> genderReport()
 	{
 		return reportRepository.genderReport();
 
 	}
 
 	@Override
-	public String departmentReport()
+	public Map< String,Map<String, Integer>> departmentReport()
 	{
 		
 		return reportRepository.departmentReport();
 	}
 
 	@Override
-	public String awardTypeReport()
-	{
-		return "";
-	}
-
-	@Override
-	public String positionReport()
+	public Map< String,Map<String, Integer>> positionReport()
 	{
 		return reportRepository.positionReport();
 	}
 
+	/*@Override
+	public Map< String,Map<String, Integer>> awardTypeReport()
+	{
+		return "";
+	}*/
 }

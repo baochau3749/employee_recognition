@@ -6,7 +6,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.print.attribute.standard.Media;
 import javax.servlet.http.HttpServletRequest;
@@ -20,14 +23,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.employee_recognition.Entity.Report;
 import com.employee_recognition.Entity.User;
+import com.employee_recognition.Service.AwardService;
 import com.employee_recognition.Service.ReportService;
 import com.employee_recognition.Service.UserService;
 
 @Controller
 @RequestMapping("/admin")
+@SessionAttributes({"title", "table", "total"})
 public class AdminController {
 	
 	@Autowired
@@ -35,6 +42,9 @@ public class AdminController {
 	
 	@Autowired
 	private ReportService reportService;
+	
+	@Autowired
+	private AwardService awardService;
 	
 	public AdminController() {
 	}		
@@ -123,38 +133,76 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/account/download_report")
-	public String downloadReport(@RequestParam("label") String label, HttpServletRequest request, HttpServletResponse response)
+	public void downloadReport(@RequestParam("label") String label, HttpServletRequest request, HttpServletResponse response, Model model)
 	{
 		// create CSV file based on label provided
 		String filename = new String();
+		String title = new String();
+		Map<String, Integer> table = new HashMap<>();
+		
 		switch (label)
 		{
 			case "state":
 			{
-				filename = reportService.stateReport();
+				for (Map.Entry<String, Map<String, Integer>> result : reportService.stateReport().entrySet())
+				{
+					filename = result.getKey();
+					table = result.getValue();
+				}
+
+				title = "STATE REPORT";
 				break;
 			}
 			case "department":
 			{
-				filename = reportService.departmentReport();
+				for (Map.Entry<String, Map<String, Integer>> result : reportService.departmentReport().entrySet())
+				{
+					filename = result.getKey();
+					table = result.getValue();
+				}
+
+				title = "DEPARTMENT REPORT";
 				break;
 			}
 			case "gender":
 			{
-				filename = reportService.genderReport();
+				for (Map.Entry<String, Map<String, Integer>> result : reportService.genderReport().entrySet())
+				{
+					filename = result.getKey();
+					table = result.getValue();
+				}
+
+				title = "GENDER REPORT";
 				break;
 			}
 			case "position":
 			{
-				filename = reportService.positionReport();
+				for (Map.Entry<String, Map<String, Integer>> result : reportService.positionReport().entrySet())
+				{
+					filename = result.getKey();
+					table = result.getValue();
+				}
+
+				title = "POSITION REPORT";
 				break;
 			}
 			case "awardType":
 			{
-				filename = reportService.awardTypeReport();
+				for (Map.Entry<String, Map<String, Integer>> result : reportService.stateReport().entrySet())
+				{
+					filename = result.getKey();
+					table = result.getValue();
+				}
+
+				title = "AWARD TYPE REPORT";
 				break;
 			}
 		}
+		
+		
+		model.addAttribute("title",title);
+		model.addAttribute("table", table);
+		model.addAttribute("total", awardService.getAwards().size());
 		
 		// target the new CSV file
 		String filePath = System.getProperty("user.dir")+"\\src\\main\\webapp\\report_files";
@@ -174,7 +222,5 @@ public class AdminController {
 		{
 			ex.printStackTrace();
 		}
-		
-		return "redirect:/admin/award_report";
 	}
 }

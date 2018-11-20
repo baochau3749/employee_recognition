@@ -1,10 +1,12 @@
 package com.employee_recognition.Service;
 
+import java.util.Map;
+
 public interface ReportService
 {
-	public String stateReport();
-	public String genderReport();
-	public String departmentReport();
-	public String awardTypeReport();
-	public String positionReport();
+	public Map< String,Map<String, Integer>> stateReport();
+	public Map< String,Map<String, Integer>> genderReport();
+	public Map< String,Map<String, Integer>> departmentReport();
+	public Map< String,Map<String, Integer>> positionReport();
+	// public Map< String,Map<String, Integer>> awardTypeReport();
 }
