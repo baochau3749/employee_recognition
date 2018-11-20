@@ -125,7 +125,8 @@ public class LatexContent {
 		content += "\\scalebox{.7}{\n";
 		content += "\\setlength{\\tabcolsep}{2.6em}\n";
 		content += "\\centering{\n";
-		content += "\\begin{tabular}{cccc}\n\\\\\n\\\\\n";		
+		content += "\\begin{tabular}{cccc}\n\\\\\n";
+		content += "\\includegraphics[width=8cm, height=2cm]{signature}\n";		
 		content += "& & & " + this.date + "\\\\\n";
 		content += "\\cline{1-1}\n";
 		content += "\\cline{4-4}\n";
