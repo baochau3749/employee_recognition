@@ -106,19 +106,7 @@ public class AwardController {
 		award.setUser(currentUser);
 		awardDAO.saveAward(award);
 		
-		latexService.CreateAwardFile(award);
-		
-//		System.out.println(currentUser);
-//		System.out.println(award);
-		
-//		System.out.println("**************************************");
-//		System.out.println("Date = " + award.getdateGiven());
-//		System.out.println("Type = " + award.getAwardType());
-//		System.out.println("User = " + currentUser.getUserProfile().getFirstName() + " " + currentUser.getUserProfile().getLastName());
-//		Long employeeId = award.getEmployee();
-//		Employee employee = employeeDAO.findById(employeeId);
-//		System.out.println("employee = " + employee.getFirstName() + " " + employee.getLastName());
-//		System.out.println("**************************************");
+		latexService.CreateAwardFile(award);		
 		
 		return "redirect:";
 	}
