@@ -21,7 +21,7 @@
 	<hr>
 	<br>
 	
-	<form:form modelAttribute="user">
+	<form:form modelAttribute="user" enctype="multipart/form-data">
 		First Name: <form:input path="userProfile.firstName"/>
 		<br><br>
 		
@@ -34,11 +34,16 @@
 		Password: <form:input path="password"/>
 		<br><br>
 		
-		Signature: <input type="file" name="userProfile.targetFile">
+		Signature: <input type="file" name="file">
+		<c:if test="${not empty er}">
+   			${er}
+		</c:if>
 		<br><br>
 		
 		<input type="submit" value="Save">
 	</form:form>
+	<br><br>
+	<img src="/image" /> 
 
 </body>
 </html>

@@ -35,8 +35,6 @@ public class EmployeeRepository {
 		String queryStr = "SELECT state_id FROM state WHERE state='" + state + "'";
 		Query q = entityManager.createNativeQuery(queryStr);
 		List<?> resultList = q.getResultList();
-		//int size = resultList.size(); 
-		//ArrayList<Integer> intList = new ArrayList<Integer>();
 		Integer id = (Integer) resultList.get(0);
 		
 		return id;
@@ -63,7 +61,7 @@ public class EmployeeRepository {
 		for (int i = 0; i < states.size(); i++) {	
 			int id = findStateByName(states.get(i));
 			State s = new State(states.get(i), id);
-			System.out.println(id);
+			//System.out.println(id);
 			sList.add(s);
 		}
 		return sList;
@@ -106,7 +104,7 @@ public class EmployeeRepository {
 		for (int i = 0; i < positions.size(); i++) {	
 			int id = findPositionByName(positions.get(i));
 			Position s = new Position(positions.get(i), id);
-			System.out.println(id);
+			//System.out.println(id);
 			sList.add(s);
 		}
 		return sList;
@@ -151,7 +149,7 @@ public class EmployeeRepository {
 		for (int i = 0; i < departments.size(); i++) {	
 			int id = findDepartmentByName(departments.get(i));
 			Department s = new Department(departments.get(i), id);
-			System.out.println(id);
+			//System.out.println(id);
 			sList.add(s);
 		}
 		return sList;

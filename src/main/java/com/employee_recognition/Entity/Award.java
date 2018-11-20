@@ -1,7 +1,9 @@
 package com.employee_recognition.Entity;
 
 import java.sql.Timestamp;
-
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,20 +30,21 @@ public class Award
 	@Column(name="employee_id")
 	private Long employee;
 	
-	@Column(name="award_type_id")
-	private Long awardType;
+	@ManyToOne
+	@JoinColumn(name="award_type_id")
+	private AwardType awardType;
 	
 	@Column(name="date_time")
-	private Timestamp timeCreated;
+	private Timestamp dateGiven;
 	
 	// default constructor
 	public Award()
 	{
-		timeCreated = new Timestamp(System.currentTimeMillis());
+		
 	}
 
 	// overload constructor
-	public Award(User user, Long employee, Long awardType)
+	public Award(User user, Long employee, AwardType awardType)
 	{
 		this();
 		this.user = user;
@@ -70,9 +73,9 @@ public class Award
 		this.user = user;
 	}
 
-	public Timestamp getTimeCreated()
+	public Timestamp getdateGiven()
 	{
-		return timeCreated;
+		return dateGiven;
 	}
 
 	@ManyToOne
@@ -87,18 +90,23 @@ public class Award
 		this.employee = employee;
 	}
 
-	public Long getAwardType()
+	public AwardType getAwardType()
 	{
 		return awardType;
 	}
 
-	public void setAwardType(Long awardType)
+	public void setAwardType(AwardType awardType)
 	{
 		this.awardType = awardType;
 	}
 
-	public void setTimeCreated(Timestamp timeCreated)
+	public void setdateGiven(Timestamp dateGiven)
 	{
-		this.timeCreated = timeCreated;
+		this.dateGiven = dateGiven;
+		
+		//Timestamp time = new Timestamp(parsedDate.getTime());
+		//this.dateGiven = time;
 	}
+		
+		
 }

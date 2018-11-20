@@ -32,7 +32,7 @@
 	<br><br>
 	<a href="user/employees">Employee Management</a>
 	<br><br>
-	<a href="">Create Award</a>
+	<a href="user/award">Create Award</a>
 	<br><br>
 	<form:form action="${pageContect.request.contextPath}/logout"
 		method="POST">
@@ -54,16 +54,16 @@
 		</thead>
 		
 		<tbody>
-			<c:forEach var="award" items="${awards}">
-
+			<c:forEach var="award" items="${awards}" varStatus="i">
 				<c:url var="deleteLink" value="/delete_award">
 					<c:param name="id" value="${award.id}"></c:param>
 				</c:url>
 				
 				<tr>
-					<td>${award.awardType}</td>
-					<td>${award.employee}</td>
-					<td>${award.timeCreated}</td>
+					<td>${award.awardType.type}</td>
+					<td>${employees[i.index]}</td>
+					
+					<td>${award.dateGiven}</td>
 					<td><a href="${deleteLink}">Delete</a></td>
 				</tr>
 			</c:forEach>
