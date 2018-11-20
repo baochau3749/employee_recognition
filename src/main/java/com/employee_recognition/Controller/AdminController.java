@@ -1,6 +1,5 @@
 package com.employee_recognition.Controller;
 
-import java.awt.PageAttributes.MediaType;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,9 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
-import javax.print.attribute.standard.Media;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,7 +20,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.employee_recognition.Entity.Report;
@@ -49,15 +45,6 @@ public class AdminController {
 	public AdminController() {
 	}		
 
-//	@GetMapping("")
-//	public String showAdminMainPage(Model theModel) {
-//		User loggedInUser = userService.getLoggedInUser();
-//		System.out.println(">>> loggedInUser = " + loggedInUser);
-//		theModel.addAttribute("loggedInUser", loggedInUser);
-//		
-//		return "admin";
-//	}
-	
 	@GetMapping("/user_management")
 	public String showUserManagementPage(Model theModel) {
 

@@ -1,0 +1,40 @@
+\documentclass[paper=letter,oneside,fontsize=16pt, landscape, parskip=full]{scrartcl}
+\usepackage{contour}
+\usepackage[onehalfspacing]{setspace}
+%\usepackage[placement=top,angle=0,color=black!40,scale=4,hshift=60,vshift=-25]{background}
+\usepackage[placement=top,hshift=-72.5,vshift=-542]{background}
+\newcommand{\setfont}[1]{\fontfamily{#1}\selectfont}
+\pagestyle{empty}
+\begin{document}
+\backgroundsetup{scale = 1, angle = 0, opacity = 0.6,
+    contents = {\includegraphics[width = \paperwidth,
+    height = \paperheight] {award_background_2}}}
+\parbox[c][2cm][s]{18.5cm}{
+\bfseries\center
+\Huge\textcolor{blue}{Employee of the Month}}
+\bfseries\center
+\begin{spacing}{2}
+\large{Presented to}\\
+\end{spacing}
+\LARGE\textit{<NAME>}
+
+
+\large\parbox{18cm}{\center{
+In recognition of your dedicated service
+to our customers and our company.
+\begin{spacing}{3.2}\end{spacing}}}
+
+\scalebox{.7}{
+\setlength{\tabcolsep}{2.6em}
+\centering{
+\begin{tabular}{cccc}
+\\
+\\
+ & & & 11/04/2018\\
+\cline{1-1}
+\cline{4-4}
+Bao Chau & &  & Date
+\end{tabular}
+}}
+\begin{spacing}{.5}\end{spacing}
+\end{document} 

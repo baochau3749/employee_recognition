@@ -15,8 +15,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.employee_recognition.Entity.Award;
+import com.employee_recognition.Entity.AwardType;
 import com.employee_recognition.Entity.Employee;
 import com.employee_recognition.Entity.User;
+import com.employee_recognition.Entity.UserProfile;
+import com.employee_recognition.Repository.EmployeeRepository;
 import com.employee_recognition.Repository.RoleRepository;
 import com.employee_recognition.Repository.UserRepository;
 
@@ -31,6 +35,9 @@ public class UserServiceImpl implements UserService
 	@Autowired
 	private RoleRepository roleRepository;
 
+	@Autowired
+	private EmployeeRepository employeeDAO;
+	
 	@Override
 	public List<User> getAllUsers()
 	{
@@ -117,28 +124,80 @@ public class UserServiceImpl implements UserService
 	@Override
 	public void sendEmailAward(String award, Employee employee) throws EmailException
 	{
-		String awardPath = System.getProperty("user.dir")+"\\src\\main\\webapp\\award_files\\" + award;
-		String name = employee.getFirstName() + " " + employee.getLastName();
-		String employeeEmail = employee.getEmail();
+//		User currentUser = award.getUser();
+//		Employee employee = employeeDAO.findById(award.getEmployee());
+//		AwardType awardType = award.getAwardType();
+//		
+//		String name = employee.getFirstName() + " " + employee.getLastName();
+//		String employeeEmail = employee.getEmail();		
+//		String message;
+//		MultiPartEmail email = new MultiPartEmail();
+//		email.setHostName("smtp.mail.yahoo.com");
+//		email.setSmtpPort(465);
+//
+//		message = "Hello " + name + ",\n";
+//		message = "Hello " + name + ",\n";
+//		message += "In recognition of your dedicated service to our customers " +
+//		           "and our company, you have been cho";
+//		//description = "In recognition of your dedicated service " + "to our customers and our company.";
+//		
+//		
+//		email.setAuthenticator(new DefaultAuthenticator("cs467.project@yahoo.com", "employee123"));
+//		email.setSSLOnConnect(true);
+//
+//		email.setFrom("cs467.project@yahoo.com");
+//		email.setSubject("Employee Award");
+//		email.setMsg("Hello " + name);
+//		email.addTo(employeeEmail);
+//		
+//		if (award != null) {
+//			String awardPath = award;
+//			System.out.println("Email attachment = " + awardPath);
+//			EmailAttachment attachment = new EmailAttachment();
+//			attachment.setPath(awardPath);
+//			attachment.setDisposition(EmailAttachment.ATTACHMENT);
+//			email.attach(attachment);
+//		}
+//		System.out.println("Email sent.");
+//		email.send();
+	}
+
+	@Override
+	public void sendEmailAward(String awardFile, Award award, User user) throws EmailException {
+		UserProfile userProfile = user.getUserProfile();
+		Employee employee = employeeDAO.findById(award.getEmployee());
+		AwardType awardType = award.getAwardType();
 		
-		EmailAttachment attachment = new EmailAttachment();
-		attachment.setPath(awardPath);
-		attachment.setDisposition(EmailAttachment.ATTACHMENT);
+		String employeeName = employee.getFirstName() + " " + employee.getLastName();
+		String userName = userProfile.getFirstName() + " " + userProfile.getLastName();
+		String employeeEmail = employee.getEmail();		
+		String message;
 		
 		MultiPartEmail email = new MultiPartEmail();
 		email.setHostName("smtp.mail.yahoo.com");
 		email.setSmtpPort(465);
+
+		message = "Hello " + employeeName + ",\n";
+		message += "In recognition of your dedicated service to our customers " +
+				   "and our company, you have been chosen to receive the attached " +
+				   awardType.getType() + "award.\n\n" + userName;
 
 		email.setAuthenticator(new DefaultAuthenticator("cs467.project@yahoo.com", "employee123"));
 		email.setSSLOnConnect(true);
 
 		email.setFrom("cs467.project@yahoo.com");
 		email.setSubject("Employee Award");
-		email.setMsg("Hello " + name);
+		email.setMsg(message);
 		email.addTo(employeeEmail);
 		
-		email.attach(attachment);
+		if (awardFile != null) {
+			EmailAttachment attachment = new EmailAttachment();
+			attachment.setPath(awardFile);
+			attachment.setDisposition(EmailAttachment.ATTACHMENT);
+			email.attach(attachment);
+		}
 		
-		email.send();
+		System.out.println("Email sent.");
+		email.send();		
 	}
 }

@@ -93,7 +93,7 @@ public class UserController {
 	public String saveUserPage(@ModelAttribute("user") User user, @RequestParam("file") 
 	MultipartFile file, Model model)
 	{
-		String uploadDirectory = context.getRealPath("/signature_files");
+		String uploadDirectory = context.getRealPath("/award_files");
 		System.out.println(uploadDirectory);
 		System.out.println("upload directory is  " + uploadDirectory);
 
@@ -133,7 +133,7 @@ public class UserController {
 	@RequestMapping(value = "/image")
     @ResponseBody
     public byte[] getImage(@ModelAttribute("user") User user) throws IOException {
-		String uploadDirectory = context.getRealPath("/signature_files");
+		String uploadDirectory = context.getRealPath("/award_files");
 		System.out.println("up " + uploadDirectory);
 		java.io.File serverFile = new java.io.File(uploadDirectory + "/" + user.getUserProfile().getTargetFile());
 
