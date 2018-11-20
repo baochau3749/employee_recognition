@@ -8,5 +8,5 @@ public interface ReportService
 	public Map< String,Map<String, Integer>> genderReport();
 	public Map< String,Map<String, Integer>> departmentReport();
 	public Map< String,Map<String, Integer>> positionReport();
-	// public Map< String,Map<String, Integer>> awardTypeReport();
+	public Map< String,Map<String, Integer>> awardTypeReport();
 }

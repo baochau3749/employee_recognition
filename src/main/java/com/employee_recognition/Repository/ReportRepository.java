@@ -177,17 +177,16 @@ public class ReportRepository
 		return result;
 	}
 
-	// WORK IN PROGRESS FIX AFTER MERGING EVERYTHING BACK
 	// create the award type report
-	/*public String awardTypeReport()
+	public Map<String, Map<String, Integer>> awardTypeReport()
 	{
 		// table for generating the award type report
-		Map<Long, Integer> table = new HashMap<>();
+		Map<String, Integer> table = new HashMap<>();
 
-		// analyzing the content of each employee that received an award
+		// analyzing each award
 		for (Award current : awardDAO.getAwards())
 		{
-			Long currentAward = current.getAwardType();
+			String currentAward = current.getAwardType().getType();
 
 			if (table.containsKey(currentAward))
 			{
@@ -202,6 +201,8 @@ public class ReportRepository
 		String fileName = "awardType_report.csv";
 		generateFile(table, fileName, "AWARD TYPE");
 
-		return fileName;
-	}*/
+		Map<String, Map<String, Integer>> result = new HashMap<>();
+		result.put(fileName, table);
+		return result;
+	}
 }

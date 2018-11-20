@@ -188,7 +188,7 @@ public class AdminController {
 			}
 			case "awardType":
 			{
-				for (Map.Entry<String, Map<String, Integer>> result : reportService.stateReport().entrySet())
+				for (Map.Entry<String, Map<String, Integer>> result : reportService.awardTypeReport().entrySet())
 				{
 					filename = result.getKey();
 					table = result.getValue();
@@ -198,7 +198,6 @@ public class AdminController {
 				break;
 			}
 		}
-		
 		
 		model.addAttribute("title",title);
 		model.addAttribute("table", table);

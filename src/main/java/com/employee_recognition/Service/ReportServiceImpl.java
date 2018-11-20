@@ -42,9 +42,9 @@ public class ReportServiceImpl implements ReportService
 		return reportRepository.positionReport();
 	}
 
-	/*@Override
+	@Override
 	public Map< String,Map<String, Integer>> awardTypeReport()
 	{
-		return "";
-	}*/
+		return reportRepository.awardTypeReport();
+	}
 }
