@@ -48,5 +48,4 @@ public class AwardType {
 	public void setType(String awardType) {
 		this.type = awardType;
 	}
-	
 }

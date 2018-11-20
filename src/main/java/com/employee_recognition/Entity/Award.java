@@ -27,7 +27,8 @@ public class Award
 	@JoinColumn(name="user_id")
 	private User user;
 	
-	@Column(name="employee_id")
+	@ManyToOne
+	@JoinColumn(name="employee_id")
 	private Long employee;
 	
 	@ManyToOne
@@ -78,8 +79,6 @@ public class Award
 		return dateGiven;
 	}
 
-	@ManyToOne
-	@JoinColumn(name="employee_id")
 	public Long getEmployee()
 	{
 		return employee;
