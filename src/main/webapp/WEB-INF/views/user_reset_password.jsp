@@ -10,16 +10,20 @@
 </head>
 <body>
 	<h2>Reset Password Page</h2>
-	
-	<p>${message} </p>
-	
 	<a href="/">Login</a>
+	
 	<hr>
 	
-	<form:form modelAttribute="user">
-		<p>Please provide an email to retrieve a new password </p>
+	<form:form modelAttribute="user"
+			   action="${pageContect.request.contextPath}/reset_password">
+			   
+		<c:if test="${message != null}">
+			<p>${message}</p>
+		</c:if>
+
+		<p>Please provide an email to retrieve a new password.</p>
 		
-		Email: <form:input path="email"/>
+		<p>Email: <form:input path="email"/></p>
 		<br><br>
 		
 		<input type="submit" value="Reset Password">

@@ -61,7 +61,7 @@ public class UserController {
 		List<String> employees = new ArrayList<String>();
 		User currentUser = userDAO.getUserById(userID); 
 		awards = currentUser.getUserAwards();
-		Employee emp = new Employee();
+		//Employee emp = new Employee();
 		for (int i = 0; i < awards.size(); i++) {
 			Long empId = awards.get(i).getEmployee();
 			//System.out.println("printing employee info " + employeeDAO.findById(empId).getFirstName() + " " + 

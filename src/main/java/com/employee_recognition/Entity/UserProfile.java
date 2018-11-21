@@ -47,6 +47,11 @@ public class UserProfile
 		this.id = id;
 	}
 
+	public String getFullName()
+	{
+		return firstName + " " + lastName;
+	}
+	
 	public String getFirstName()
 	{
 		return firstName;
@@ -75,5 +80,10 @@ public class UserProfile
 	public void setTargetFile(String targetFile)
 	{
 		this.targetFile = targetFile;
+	}
+
+	@Override
+	public String toString() {
+		return "UserProfile [id=" + id + ", fullName=" + getFullName() + ", targetFile=" + targetFile + "]";
 	}
 }
