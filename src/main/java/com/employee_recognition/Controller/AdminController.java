@@ -23,6 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -34,13 +36,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionAttributeStore;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.employee_recognition.Entity.AwardType;
 import com.employee_recognition.Entity.Report;
 import com.employee_recognition.Entity.User;
 import com.employee_recognition.Entity.UserProfile;
+import com.employee_recognition.Repository.UserProfileRepository;
 import com.employee_recognition.Service.AwardService;
 import com.employee_recognition.Service.ReportService;
 import com.employee_recognition.Service.UserService;
@@ -61,11 +67,24 @@ public class AdminController {
 	
 	 @Autowired
      private ServletContext context;
+	 
+	 @Autowired
+	 private UserProfileRepository profileDAO;
+	 
 	
 	public AdminController() {
 	}		
-	
-	
+	/*
+	@InitBinder
+	public void initBinder(WebDataBinder binder, WebRequest request) {
+
+	        binder.registerCustomEditor(UserProfile.class, "userProfile", new PropertyEditorSupport() {
+	         @Override
+	         public void setAsText(String profileId) {
+	           setValue(Long.parseLong(profileId));
+	         }
+	     });
+	}*/
 
 //	@GetMapping("")
 //	public String showAdminMainPage(Model theModel) {
@@ -126,18 +145,24 @@ public class AdminController {
 		return "user_account";
 	}
 	
-	
+	//Brian's changes start here
 	@PostMapping("/account/save_user")
-	public String saveUser(@ModelAttribute("user") User user, @ModelAttribute("userProfile") UserProfile prof,
-	MultipartFile file, Model theModel) {	
+	public String saveUser(@ModelAttribute("user") User user, 
+			@ModelAttribute("sig") String sig, 
+			@ModelAttribute("userProfile") UserProfile prof,
+			@ModelAttribute("userProfileId") Long pid,
+			@RequestParam("file") MultipartFile file, RedirectAttributes attr,
+			Model theModel) {	
+		
 		String uploadDirectory = context.getRealPath("/signature_files");
 		String f = file.getOriginalFilename();
 		String fExt = f.replaceAll(".*\\.", "");
+
 		if (fExt.equals("jpeg") || fExt.equals("jpg") || fExt.equals("png") || fExt.equals("bmp") || fExt.equals("gif")){
 			user = userService.saveUser(user,"USER");
 			String fileName = user.getId().toString() + "." + fExt;
 			Path pathAndName = Paths.get(uploadDirectory, fileName);
-			//System.out.println("printing name from profile " + profile.getFirstName());
+			
 			try {
 				Files.write(pathAndName, file.getBytes());
 
@@ -146,18 +171,44 @@ public class AdminController {
 			}
 			prof.setTargetFile(fileName);
 			user.setUserProfile(prof);
-			user = userService.saveUser(user,"USER");
+			//if user already has a profile, delete the old one
+			if (pid >= 0) {
+				UserProfile oldProf = profileDAO.findById(pid);
+				profileDAO.removeProfile(oldProf);
+			}
+			userService.saveUser(user,"USER");
 			return "redirect:/admin/user_management"; 
 		}
-		else if (f.equals("")){
+		//only enters if no sig file was included and if updating user, 
+		//due to sig != null condition, will not enter block on new user creation
+		else if (f.equals("") && (!sig.equals(""))){
+			//prof.setTargetFile('');
+			//prof.setId(id);
+			user.setUserProfile(prof);
+			prof.setTargetFile(sig);
+			UserProfile oldProf = profileDAO.findById(pid);
+			profileDAO.removeProfile(oldProf);
 			user = userService.saveUser(user,"USER");
 			return "redirect:/admin/user_management";
 		}
+		//improper file format for new user or current user, or no file chosen
 		else {	
-			theModel.addAttribute("er", "Error: File must be an image");
-			return "user_account";
+			
+			if (!sig.equals("")) {
+				long userId = user.getId();
+				attr.addFlashAttribute("er", "Error: File must be an image");
+				return "redirect:/admin/account/" + userId;
+			}
+			if (f.equals("") && (sig.equals(""))) {
+				attr.addFlashAttribute("er", "Error: Please upload a signature image");
+			}
+			else {
+				attr.addFlashAttribute("er", "Error: File must be an image");
+			}
+			return "redirect:/admin/account/add_user";
 		}
 	}
+	//Brian's changes end here
 	
 	@GetMapping("/account/add_admin")
 	public String addAdmin(Model theModel) {		
