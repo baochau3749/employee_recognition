@@ -1,10 +1,14 @@
 package com.employee_recognition.Controller;
 
 import java.awt.PageAttributes.MediaType;
+import java.beans.PropertyEditorSupport;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +23,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +34,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.employee_recognition.Entity.AwardType;
 import com.employee_recognition.Entity.Report;
 import com.employee_recognition.Entity.User;
 import com.employee_recognition.Entity.UserProfile;
@@ -56,6 +64,8 @@ public class AdminController {
 	
 	public AdminController() {
 	}		
+	
+	
 
 //	@GetMapping("")
 //	public String showAdminMainPage(Model theModel) {
@@ -117,82 +127,26 @@ public class AdminController {
 	}
 	
 	
-	// User Update Page POST
-		@RequestMapping(value = "/user/{userID}", method=RequestMethod.POST)
-		public String saveUserPage(@ModelAttribute("user") User user, @RequestParam("targetFile") 
-		MultipartFile file, Model model)
-		{
-			String uploadDirectory = context.getRealPath("/signature_files");
-			System.out.println(uploadDirectory);
-			System.out.println("upload directory is  " + uploadDirectory);
-
-			String f = file.getOriginalFilename();
-			String fExt = f.replaceAll(".*\\.", "");
-
-			if (fExt.equals("jpeg") || fExt.equals("jpg") || fExt.equals("png") || fExt.equals("bmp") || fExt.equals("gif")){
-				user = userService.saveUser(user,"USER");
-				System.out.println("before userprof");
-				UserProfile profile = user.getUserProfile();
-				System.out.println("after userprof");
-				String fileName = user.getId().toString() + "." + fExt;
-				System.out.println("before path");
-				Path pathAndName = Paths.get(uploadDirectory, fileName);
-				System.out.println("after path");
-				profile.setTargetFile(fileName);
-				try {
-					Files.write(pathAndName, file.getBytes());
-
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
-				return "redirect:/admin/user_management"; 
-			}
-			else if (f.equals("")){
-				user = userService.saveUser(user,"USER");
-				return "redirect:/admin/user_management"; 
-			}
-			else {	
-				model.addAttribute("er", "Error: File must be an image");
-				return "user_account";
-			}
-
-		}
-	
 	@PostMapping("/account/save_user")
-	public String saveUser(@ModelAttribute("user") User user, @RequestParam("file") 
-	MultipartFile file, Model theModel) {		
+	public String saveUser(@ModelAttribute("user") User user, @ModelAttribute("userProfile") UserProfile prof,
+	MultipartFile file, Model theModel) {	
 		String uploadDirectory = context.getRealPath("/signature_files");
-		System.out.println(uploadDirectory);
-		System.out.println("upload directory is  " + uploadDirectory);
-
 		String f = file.getOriginalFilename();
 		String fExt = f.replaceAll(".*\\.", "");
-		System.out.println("file name is...." + f);
 		if (fExt.equals("jpeg") || fExt.equals("jpg") || fExt.equals("png") || fExt.equals("bmp") || fExt.equals("gif")){
 			user = userService.saveUser(user,"USER");
-			System.out.println("before user profile");
-			System.out.println("after user profile");
 			String fileName = user.getId().toString() + "." + fExt;
-			System.out.println("printing file name for user " + fileName);
-			System.out.println("before path");
 			Path pathAndName = Paths.get(uploadDirectory, fileName);
-			System.out.println("after path");
-			UserProfile profile = user.getUserProfile();
-			System.out.println("after get userprof");
 			//System.out.println("printing name from profile " + profile.getFirstName());
-			
-			System.out.println("after set targ file");
 			try {
 				Files.write(pathAndName, file.getBytes());
 
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println("before userservice");
-			profile.setTargetFile(fileName);
+			prof.setTargetFile(fileName);
+			user.setUserProfile(prof);
 			user = userService.saveUser(user,"USER");
-			System.out.println("after user service");
 			return "redirect:/admin/user_management"; 
 		}
 		else if (f.equals("")){
