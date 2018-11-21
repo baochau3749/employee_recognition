@@ -45,6 +45,7 @@ tr, th, td {
 <div>
 <div>	
 <div>
+<!-- Brian's changes start here -->
 <a href="/user/employee">Add Employee</a>
 	<br><br>
 		<table>
@@ -66,6 +67,8 @@ tr, th, td {
 						<td><a href="${deleteLink}">Delete</a></td>
 					</tr>
 				</c:forEach>
+				
+<!-- 				Brian's changes end here -->
 		</table>
 		</div>
 		</div>

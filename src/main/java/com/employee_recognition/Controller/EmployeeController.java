@@ -37,6 +37,7 @@ public class EmployeeController {
 		return "employee_management";
 	}
 	
+	
 	@GetMapping("/employee")
 	public String employeePage(Model model) {
 		states = employeeDAO.getStateList();
@@ -58,12 +59,16 @@ public class EmployeeController {
 		return "redirect:/user/employees";
 	}
 	
-	// Deleting an Award
+	//Brian's changes start here
+	
+	// Deleting an employee
 		@RequestMapping(value="/delete_employee")
 		public String deleteEmployee(@RequestParam("id") Long id)
 		{
 			employeeDAO.deleteByID(id);
 			return "redirect:/user/employees";
 		}
+		
+		//Brian's changes end here
 	
 }
