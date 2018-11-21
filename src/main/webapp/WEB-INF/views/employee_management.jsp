@@ -52,13 +52,18 @@ tr, th, td {
 				<th>First Name</th>
 				<th>Last Name</th>
 				<th>Email</th>
+				<th>Action</th>
 
 				<!-- loop over and print our employees -->
 				<c:forEach var="emp" items="${employees}">
+				<c:url var="deleteLink" value="/user/delete_employee">
+					<c:param name="id" value="${emp.id}"></c:param>
+				</c:url>
 					<tr>
 						<td> ${emp.firstName} </td> 
 						<td> ${emp.lastName} </td> 
-						<td> ${emp.email} </td> 
+						<td> ${emp.email} </td>
+						<td><a href="${deleteLink}">Delete</a></td>
 					</tr>
 				</c:forEach>
 		</table>

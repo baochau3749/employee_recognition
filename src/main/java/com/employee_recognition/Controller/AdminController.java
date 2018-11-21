@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.print.attribute.standard.Media;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,12 +23,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.employee_recognition.Entity.Report;
 import com.employee_recognition.Entity.User;
+import com.employee_recognition.Entity.UserProfile;
 import com.employee_recognition.Service.AwardService;
 import com.employee_recognition.Service.ReportService;
 import com.employee_recognition.Service.UserService;
@@ -45,6 +50,9 @@ public class AdminController {
 	
 	@Autowired
 	private AwardService awardService;
+	
+	 @Autowired
+     private ServletContext context;
 	
 	public AdminController() {
 	}		
@@ -108,10 +116,89 @@ public class AdminController {
 		return "user_account";
 	}
 	
+	
+	// User Update Page POST
+		@RequestMapping(value = "/user/{userID}", method=RequestMethod.POST)
+		public String saveUserPage(@ModelAttribute("user") User user, @RequestParam("targetFile") 
+		MultipartFile file, Model model)
+		{
+			String uploadDirectory = context.getRealPath("/signature_files");
+			System.out.println(uploadDirectory);
+			System.out.println("upload directory is  " + uploadDirectory);
+
+			String f = file.getOriginalFilename();
+			String fExt = f.replaceAll(".*\\.", "");
+
+			if (fExt.equals("jpeg") || fExt.equals("jpg") || fExt.equals("png") || fExt.equals("bmp") || fExt.equals("gif")){
+				user = userService.saveUser(user,"USER");
+				System.out.println("before userprof");
+				UserProfile profile = user.getUserProfile();
+				System.out.println("after userprof");
+				String fileName = user.getId().toString() + "." + fExt;
+				System.out.println("before path");
+				Path pathAndName = Paths.get(uploadDirectory, fileName);
+				System.out.println("after path");
+				profile.setTargetFile(fileName);
+				try {
+					Files.write(pathAndName, file.getBytes());
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				return "redirect:/admin/user_management"; 
+			}
+			else if (f.equals("")){
+				user = userService.saveUser(user,"USER");
+				return "redirect:/admin/user_management"; 
+			}
+			else {	
+				model.addAttribute("er", "Error: File must be an image");
+				return "user_account";
+			}
+
+		}
+	
 	@PostMapping("/account/save_user")
-	public String saveUser(@ModelAttribute("user") User user, Model theModel) {		
-		userService.saveUser(user, "USER");	
-		return "redirect:/admin/user_management";
+	public String saveUser(@ModelAttribute("user") User user, @RequestParam("targetFile") 
+	MultipartFile file, Model theModel) {		
+		String uploadDirectory = context.getRealPath("/signature_files");
+		System.out.println(uploadDirectory);
+		System.out.println("upload directory is  " + uploadDirectory);
+
+		String f = file.getOriginalFilename();
+		String fExt = f.replaceAll(".*\\.", "");
+		System.out.println("file name is...." + f);
+		if (fExt.equals("jpeg") || fExt.equals("jpg") || fExt.equals("png") || fExt.equals("bmp") || fExt.equals("gif")){
+			user = userService.saveUser(user,"USER");
+			System.out.println("before user profile");
+			System.out.println("after user profile");
+			String fileName = user.getId().toString() + "." + fExt;
+			System.out.println("printing file name for user " + fileName);
+			System.out.println("before path");
+			Path pathAndName = Paths.get(uploadDirectory, fileName);
+			System.out.println("after path");
+			user.getUserProfile().setTargetFile(fileName);
+			System.out.println("after set targ file");
+			try {
+				Files.write(pathAndName, file.getBytes());
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			System.out.println("before userservice");
+			user = userService.saveUser(user,"USER");
+			System.out.println("after user service");
+			return "redirect:/admin/user_management"; 
+		}
+		else if (f.equals("")){
+			user = userService.saveUser(user,"USER");
+			return "redirect:/admin/user_management";
+		}
+		else {	
+			theModel.addAttribute("er", "Error: File must be an image");
+			return "user_account";
+		}
 	}
 	
 	@GetMapping("/account/add_admin")

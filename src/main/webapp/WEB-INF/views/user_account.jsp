@@ -21,7 +21,7 @@
 
 	<hr><br>
 	
-	<form:form modelAttribute="account" method="POST"
+	<form:form modelAttribute="account" enctype="multipart/form-data" method="POST" 
 			   action="${pageContext.request.contextPath}/admin/account/save_user">
 		
 		<c:if test="${account != null}">
@@ -36,11 +36,14 @@
 		<p>First Name: <input type="text" name="firstName" value="" placeholder="First Name"/></p>
 		<p>Last Name: <input type="text" name="lastName" value="" placeholder="Last Name"/></p>
 		<p>Signature: <input type="file" name="targetFile"/></p>
-			
+		<c:if test="${not empty er}">
+   			${er}
+		</c:if>
 		<input type="submit" value="Save"/>
 		
 	</form:form>
-	
+	<br><br>
+
 	<hr><br>
 	<form:form action="${pageContect.request.contextPath}/logout" method="POST">
 		<input type="submit" value="Logout">

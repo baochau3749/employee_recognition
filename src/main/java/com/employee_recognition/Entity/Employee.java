@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -45,7 +47,7 @@ public class Employee {
 	@Column(name = "department_id")
 	private int department;
 	
-	@OneToMany(mappedBy="employee")
+	@OneToMany(mappedBy="employee", cascade = CascadeType.REMOVE)
 	private List<Award> awards;
 	
 	public Employee() {}

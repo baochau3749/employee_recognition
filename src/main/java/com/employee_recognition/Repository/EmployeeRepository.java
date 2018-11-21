@@ -110,7 +110,19 @@ public class EmployeeRepository {
 		return sList;
 	}
 	
-	
+	// Delete Award by ID
+	public void deleteByID(Long id)
+	{
+		String awardQuery = "DELETE FROM award WHERE employee_id=:employeeID";
+		Query awQuery = entityManager.createNativeQuery(awardQuery);
+		awQuery.setParameter("employeeID", id);
+		awQuery.executeUpdate();
+		String queryString = "DELETE FROM employee WHERE employee_id=:employeeID";
+		Query query = entityManager.createNativeQuery(queryString);
+		query.setParameter("employeeID", id);
+		query.executeUpdate();
+	}
+
 	//department functions
 	public Department findDepartmentById(int id)
 	{

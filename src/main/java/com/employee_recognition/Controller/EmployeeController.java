@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.employee_recognition.Entity.Department;
 import com.employee_recognition.Entity.Employee;
@@ -56,5 +57,13 @@ public class EmployeeController {
 		employeeDAO.save(emp);
 		return "redirect:/user/employees";
 	}
+	
+	// Deleting an Award
+		@RequestMapping(value="/delete_employee")
+		public String deleteEmployee(@RequestParam("id") Long id)
+		{
+			employeeDAO.deleteByID(id);
+			return "redirect:/user/employees";
+		}
 	
 }
