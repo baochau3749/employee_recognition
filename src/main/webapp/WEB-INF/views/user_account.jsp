@@ -33,8 +33,18 @@
 		<p>Email: <input type="email" name="email" value="${account.email}"/></p>
 		<p>Password: <input type="password" name="password" value="${account.password}"/></p>
 		
-		<p>First Name: <input type="text" name="firstName" value="" placeholder="First Name"/></p>
-		<p>Last Name: <input type="text" name="lastName" value="" placeholder="Last Name"/></p>
+		<c:if test="${account != null}">
+			<p>First Name: <input type="text" name="firstName" value="${account.userProfile.firstName}" placeholder="First Name"/></p>
+		</c:if>	
+		<c:if test="${account == null}">
+			<p>First Name: <input type="text" name="firstName" value="" placeholder="First Name"/></p>
+		</c:if>	
+		<c:if test="${account != null}">
+			<p>Last Name: <input type="text" name="lastName" value="${account.userProfile.firstName}" placeholder="Last Name"/></p>
+		</c:if>	
+		<c:if test="${account == null}">
+			<p>Last Name: <input type="text" name="lastName" value="${account.userProfile.firstName}" placeholder="Last Name"/></p>
+		</c:if>	
 		<p>Signature: <input type="file" name="file"/></p>
 		<c:if test="${not empty er}">
    			${er}
