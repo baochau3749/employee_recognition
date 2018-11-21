@@ -35,7 +35,7 @@
 		
 		<p>First Name: <input type="text" name="firstName" value="" placeholder="First Name"/></p>
 		<p>Last Name: <input type="text" name="lastName" value="" placeholder="Last Name"/></p>
-		<p>Signature: <input type="file" name="targetFile"/></p>
+		<p>Signature: <input type="file" name="file"/></p>
 		<c:if test="${not empty er}">
    			${er}
 		</c:if>

@@ -160,7 +160,7 @@ public class AdminController {
 		}
 	
 	@PostMapping("/account/save_user")
-	public String saveUser(@ModelAttribute("user") User user, @RequestParam("targetFile") 
+	public String saveUser(@ModelAttribute("user") User user, @RequestParam("file") 
 	MultipartFile file, Model theModel) {		
 		String uploadDirectory = context.getRealPath("/signature_files");
 		System.out.println(uploadDirectory);
@@ -178,7 +178,10 @@ public class AdminController {
 			System.out.println("before path");
 			Path pathAndName = Paths.get(uploadDirectory, fileName);
 			System.out.println("after path");
-			user.getUserProfile().setTargetFile(fileName);
+			UserProfile profile = user.getUserProfile();
+			System.out.println("after get userprof");
+			//System.out.println("printing name from profile " + profile.getFirstName());
+			
 			System.out.println("after set targ file");
 			try {
 				Files.write(pathAndName, file.getBytes());
@@ -187,6 +190,7 @@ public class AdminController {
 				e.printStackTrace();
 			}
 			System.out.println("before userservice");
+			profile.setTargetFile(fileName);
 			user = userService.saveUser(user,"USER");
 			System.out.println("after user service");
 			return "redirect:/admin/user_management"; 
