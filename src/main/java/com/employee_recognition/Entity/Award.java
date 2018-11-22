@@ -39,8 +39,7 @@ public class Award
 	
 	// default constructor
 	public Award()
-	{
-		
+	{		
 	}
 
 	// overload constructor
@@ -78,8 +77,6 @@ public class Award
 		return dateGiven;
 	}
 
-	@ManyToOne
-	@JoinColumn(name="employee_id")
 	public Long getEmployee()
 	{
 		return employee;
@@ -103,9 +100,6 @@ public class Award
 	public void setdateGiven(Timestamp dateGiven)
 	{
 		this.dateGiven = dateGiven;
-		
-		//Timestamp time = new Timestamp(parsedDate.getTime());
-		//this.dateGiven = time;
 	}
 		
 		

@@ -14,13 +14,19 @@
 	<h2>Login Page</h2>
 	<hr>
 	
-	<a href="${pageContext.request.contextPath}/user">Go to User Main Page</a>
-	<br><br>
-	<a href="${pageContext.request.contextPath}/admin">Go to Admin Main Page</a>	
-	
-	<hr><br>
-	<form:form action="${pageContect.request.contextPath}/logout" method="POST">
-		<input type="submit" value="Logout">
+	<form:form action="${pageContect.request.contextPath}/processLoginCredential" method="POST">
+		<c:if test="${param.error != null}">
+			<i>Invalid email and/or password.</i>
+		</c:if>
+		<c:if test="${param.logout != null}">
+			<i>You have been logged out.</i>
+		</c:if>
+		<p>Email: <input type="email" name="username" /></p>
+		<p>Password: <input type="password" name="password" /></p>	
+		<br>	
+		<input type="submit" value="Log in">
+		<br><br>
+		<a href="${pageContext.request.contextPath}/reset_password">Forget your password?</a>	
 	</form:form>
 </body>
 </html>

@@ -31,9 +31,7 @@
 	</div>
 		<div>
 			<form:form action="createAward" modelAttribute="award" method="POST">
-				<%-- user is ${user.email} --%>
-				<br>
-			
+				<br>			
 				Employee: <form:select path="employee">
 				<c:forEach var="e" items="${employees}">
 						<option value="${e.id}">${e.firstName} ${e.lastName}</option> 
@@ -51,7 +49,7 @@
 				Date and Time (ex. 11/2/2018 12:00 pm): <form:input name="dateGiven" path="dateGiven"/>
 				<br><br>
 				
-			<input type="submit" value="Create Award">
+			<input type="submit" value="Create and Email Award">
 	</form:form>
 	</div>
 

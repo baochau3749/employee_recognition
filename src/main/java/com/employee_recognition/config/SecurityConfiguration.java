@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -12,8 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.employee_recognition.Repository.UserRepository;
 import com.employee_recognition.Service.UserDetailsServiceImpl;
-
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
 
 @Configuration
 @EnableJpaRepositories(basePackageClasses = UserRepository.class)
@@ -37,7 +34,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers("/admin/**").hasRole("ADMIN")
 			.antMatchers("/user/**").hasRole("USER")
 			.and()
-			.formLogin().permitAll()
+			.formLogin()
+				.loginPage("/loginPage")
+				.loginProcessingUrl("/processLoginCredential")
+				.permitAll()
 			.and()
 			.logout().permitAll(); 
 	}

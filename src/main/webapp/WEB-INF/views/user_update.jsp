@@ -11,7 +11,7 @@
 <body>
 	<h2>User Update Page</h2>
 	
-	<a href="/user/employees">Employee Management</a>
+	<a href="${pageContect.request.contextPath}/user/employees">Employee Management</a>
 	<br><br>
 	<a href="">Create Award</a>
 	<br><br>
@@ -38,11 +38,14 @@
 		<c:if test="${not empty er}">
    			${er}
 		</c:if>
-		<br><br>
-		
+		<br><br>		
 		<input type="submit" value="Save">
 	</form:form>
-	<br><br>
+	
+	<br>
+	Your signature:
+	<br>
+	
 	<img src="/image" /> 
 
 </body>

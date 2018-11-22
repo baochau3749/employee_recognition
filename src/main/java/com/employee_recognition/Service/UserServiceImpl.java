@@ -15,8 +15,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.employee_recognition.Entity.Award;
+import com.employee_recognition.Entity.AwardType;
 import com.employee_recognition.Entity.Employee;
 import com.employee_recognition.Entity.User;
+import com.employee_recognition.Repository.EmployeeRepository;
 import com.employee_recognition.Repository.RoleRepository;
 import com.employee_recognition.Repository.UserRepository;
 
@@ -31,6 +34,9 @@ public class UserServiceImpl implements UserService
 	@Autowired
 	private RoleRepository roleRepository;
 
+	@Autowired
+	private EmployeeRepository employeeDAO;
+	
 	@Override
 	public List<User> getAllUsers()
 	{
@@ -91,54 +97,59 @@ public class UserServiceImpl implements UserService
 	@Override
 	public void sendEmailResetPassword(User user) throws EmailException
 	{
-		String name = user.getUserProfile().getFirstName() + " " + user.getUserProfile().getLastName();
+		String name = user.getUserProfile().getFullName();
 		String userEmail = user.getEmail();
 		String userPassword = user.getPassword();
-
+		
 		Email email = new SimpleEmail();
 		email.setHostName("smtp.mail.yahoo.com");
 		email.setSmtpPort(465);
 
 		email.setAuthenticator(new DefaultAuthenticator("cs467.project@yahoo.com", "employee123"));
 		email.setSSLOnConnect(true);
-
+	
 		email.setFrom("cs467.project@yahoo.com");
 		email.setSubject("Password Reset");
 
-		email.setMsg("Hello " + name + "\n\nWe receieved a request to reset your account password. "
+		email.setMsg("Hello " + name + ",\n\nWe received a request to reset your account password. "
 				+ "Your new password is: " + userPassword);
 
 		email.addTo(userEmail);
 		email.send();
 	}
 
-	// content is subject to change
-	// just pass the award file name (i.e awardFile.pdf) and the employee receiving the award
 	@Override
-	public void sendEmailAward(String award, Employee employee) throws EmailException
-	{
-		String awardPath = System.getProperty("user.dir")+"\\src\\main\\webapp\\award_files\\" + award;
-		String name = employee.getFirstName() + " " + employee.getLastName();
-		String employeeEmail = employee.getEmail();
-		
-		EmailAttachment attachment = new EmailAttachment();
-		attachment.setPath(awardPath);
-		attachment.setDisposition(EmailAttachment.ATTACHMENT);
+	public void sendEmailAward(String awardFile, Award award, User user) throws EmailException {
+
+		Employee employee = employeeDAO.findById(award.getEmployee());
+		AwardType awardType = award.getAwardType();			
+		String message;
 		
 		MultiPartEmail email = new MultiPartEmail();
 		email.setHostName("smtp.mail.yahoo.com");
 		email.setSmtpPort(465);
+
+		message = "Hello " + employee.getFullName() + ",\n\n";
+		message += "In recognition of your dedicated service to our customers " +
+				   "and our company, you have been chosen to receive the attached " +
+				   awardType.getType() + " award.\n\n" + 
+				   user.getUserProfile().getFullName();
 
 		email.setAuthenticator(new DefaultAuthenticator("cs467.project@yahoo.com", "employee123"));
 		email.setSSLOnConnect(true);
 
 		email.setFrom("cs467.project@yahoo.com");
 		email.setSubject("Employee Award");
-		email.setMsg("Hello " + name);
-		email.addTo(employeeEmail);
+		email.setMsg(message);
+		email.addTo(employee.getEmail());
 		
-		email.attach(attachment);
-		
-		email.send();
+		if (awardFile != null) {
+			EmailAttachment attachment = new EmailAttachment();
+			attachment.setPath(awardFile);
+			attachment.setDisposition(EmailAttachment.ATTACHMENT);
+			email.attach(attachment);
+		}
+	
+		email.send();		
 	}
 }

@@ -61,13 +61,10 @@ public class UserController {
 		List<String> employees = new ArrayList<String>();
 		User currentUser = userDAO.getUserById(userID); 
 		awards = currentUser.getUserAwards();
-		Employee emp = new Employee();
+
 		for (int i = 0; i < awards.size(); i++) {
-			Long empId = awards.get(i).getEmployee();
-			//System.out.println("printing employee info " + employeeDAO.findById(empId).getFirstName() + " " + 
-			//employeeDAO.findById(empId).getLastName());
-			employees.add(employeeDAO.findById(empId).getFirstName() + " " + 
-			employeeDAO.findById(empId).getLastName());
+			Long empId = awards.get(i).getEmployee();			
+			employees.add(employeeDAO.findById(empId).getFullName());
 		}
 		
 		model.addAttribute("user", currentUser);
@@ -93,9 +90,7 @@ public class UserController {
 	public String saveUserPage(@ModelAttribute("user") User user, @RequestParam("file") 
 	MultipartFile file, Model model)
 	{
-		String uploadDirectory = context.getRealPath("/signature_files");
-		System.out.println(uploadDirectory);
-		System.out.println("upload directory is  " + uploadDirectory);
+		String uploadDirectory = context.getRealPath("/award_files");
 
 		String f = file.getOriginalFilename();
 		String fExt = f.replaceAll(".*\\.", "");
@@ -133,7 +128,7 @@ public class UserController {
 	@RequestMapping(value = "/image")
     @ResponseBody
     public byte[] getImage(@ModelAttribute("user") User user) throws IOException {
-		String uploadDirectory = context.getRealPath("/signature_files");
+		String uploadDirectory = context.getRealPath("/award_files");
 		System.out.println("up " + uploadDirectory);
 		java.io.File serverFile = new java.io.File(uploadDirectory + "/" + user.getUserProfile().getTargetFile());
 

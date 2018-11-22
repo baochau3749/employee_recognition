@@ -13,7 +13,7 @@
 	
 	<p>${message}</p>
 	
-	<a href="/">Login</a>
+	<a href="/">Go to log in</a>
 	<hr>
 </body>
 </html>

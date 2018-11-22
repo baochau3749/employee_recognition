@@ -40,6 +40,7 @@ public class AwardRepository
 	
 	
 	// Get Awards for User
+	@SuppressWarnings("unchecked")
 	public List<Award> getUserAwards(Long userID)
 	{
 		String queryString = "SELECT * FROM award where user_id = :userID";
@@ -51,6 +52,7 @@ public class AwardRepository
 	
 	
 	// Get all the awards
+	@SuppressWarnings("unchecked")
 	public List<Award> getAwards()
 	{
 		String queryString = "SELECT * FROM award";

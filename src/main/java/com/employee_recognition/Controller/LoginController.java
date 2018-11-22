@@ -24,7 +24,7 @@ public class LoginController {
 	private UserService userService;
 	
 	@RequestMapping("/")
-	public String loginPage(Model theModel) {
+	public String mainPage(Model theModel) {
 
 		User user = userService.getLoggedInUser();
 		theModel.addAttribute("loggedInUser", user);
@@ -40,7 +40,12 @@ public class LoginController {
 		}
 	}
 	
-	@RequestMapping(value ="/reset", method= RequestMethod.GET)
+	@RequestMapping("/loginPage")
+	public String showLoginPage(Model theModel) {
+		return "login";
+	}
+	
+	@RequestMapping(value ="/reset_password", method= RequestMethod.GET)
 	public String resetPassword(Model model)
 	{
 		User temp = new User();
@@ -48,28 +53,28 @@ public class LoginController {
 		return "user_reset_password";
 	}
 	
-	@RequestMapping(value="/reset", method=RequestMethod.POST)
+	@RequestMapping(value="/reset_password", method=RequestMethod.POST)
 	public String sendNewPassword(@ModelAttribute("user") User current, Model model) throws EmailException
 	{
-		current = userService.getUserByEmail(current.getEmail());
-		
+		User user = userService.getUserByEmail(current.getEmail());
 		String message;
 		
-		if (current == null)
-		{
-			message = "Error: that email is not in our system";
+		if (user == null)
+		{			
+			message = "Error: That email is not in our system";
 			model.addAttribute("message", message);
 			return "user_reset_password";
 		}
 		else
 		{
 			// updating the user's credential and storing it
-			current.setPassword(userService.generateRandomPassword());
-			current = userService.saveUser(current, "USER");
+			user.setPassword(userService.generateRandomPassword());
+			
+			user = userService.saveUser(user, "USER");
 			
 			// sending the email notification
-			userService.sendEmailResetPassword(current);
-
+			userService.sendEmailResetPassword(user);
+			
 			return "redirect:/reset_valid";
 		}
 	}

@@ -30,7 +30,7 @@ public class UserRepositoryImpl implements UserRepository {
 		query.setParameter("user_email", email);
 		
 		List<?> resultList = query.getResultList();
-		
+				
 		return (resultList.size() == 1) ? (User)resultList.get(0) : null;
 	}
 	

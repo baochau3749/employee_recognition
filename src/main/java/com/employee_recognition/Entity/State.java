@@ -11,6 +11,7 @@ public class State {
 	@Id
 	@Column(name = "state_id")
 	private int state_id;
+	
 	@Column(name = "state")
 	private String state;
 	

@@ -27,13 +27,13 @@ public class AwardTypeRepository {
 	public AwardType findById(Long id) {
 		return entityManager.find(AwardType.class, id);
 	}
+	
 	//state functions
 	public int findAwardTypeByName(String type) {
 		String queryStr = "SELECT award_type_id FROM award_type WHERE type='" + type + "'";
 		Query q = entityManager.createNativeQuery(queryStr);
 		List<?> resultList = q.getResultList();
-		//int size = resultList.size(); 
-		//ArrayList<Integer> intList = new ArrayList<Integer>();
+
 		Integer id = (Integer) resultList.get(0);
 		
 		return id;
@@ -74,7 +74,7 @@ public class AwardTypeRepository {
 		for (int i = 0; i < types.size(); i++) {	
 			int id = findAwardTypeByName(types.get(i));
 			AwardType s = new AwardType(types.get(i), (long) id);
-			System.out.println(id);
+
 			sList.add(s);
 		}
 		return sList;

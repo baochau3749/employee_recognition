@@ -82,8 +82,10 @@ setTimeout(function () {
 	<h3>${title}</h3>
 	<ul>
 		<c:forEach var="current" items="${table}">
-			<li>${current.key}: <progress value="${current.value}"
-					max="${total}"></progress> ${current.value}
+			<li>
+				${current.key}: 
+				<progress value="${current.value}" max="${total}"></progress> 
+				${current.value}
 			</li>
 		</c:forEach>
 	</ul>
