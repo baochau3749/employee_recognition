@@ -11,8 +11,7 @@
 </head>
 
 <body>
-
-<a href="employees">Employee Management</a>
+	
 	<a href="${user.id}">Update Profile</a>
 	<br><br>
 	<a href="employees">Employee Management</a>
@@ -43,8 +42,8 @@
 				<br><br>
 		
 				Gender: <form:select path="gender">
-				<option value="f">Female</option>
-				<option value="m">Male</option>
+				<option value="Female">Female</option>
+				<option value="Male">Male</option>
 				</form:select>
 				<br><br>
 				
