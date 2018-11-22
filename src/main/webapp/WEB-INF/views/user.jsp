@@ -6,25 +6,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>User Main Account</title>
-
-<style>
-	table {
-		height: 100px;
-		width: auto;
-		margin: 5px;
-		background-color: black;
-		text-align: center;
-	}
+	<meta charset="ISO-8859-1">
+	<title>User Main Account</title>
 	
-	tr, th, td {
-		padding: 10px;
-		background-color: white;
-	}
-</style>
-
+	<style>
+		table {
+			height: 100px;
+			width: auto;
+			margin: 5px;
+			background-color: black;
+			text-align: center;
+		}
+		
+		tr, th, td {
+			padding: 10px;
+			background-color: white;
+		}
+	</style>
 </head>
+
 <body>
 	<h2>User Main Page</h2>
 

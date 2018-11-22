@@ -7,20 +7,20 @@
 <html>
 
 <head> 	
-<style>
-table {
-	height: 100px;
-	width: auto;
-	margin: 5px;
-	background-color: black;
-	text-align: center;
-}
-
-tr, th, td {
-	padding: 10px;
-	background-color: white;
-}
-</style>
+	<style>
+		table {
+			height: 100px;
+			width: auto;
+			margin: 5px;
+			background-color: black;
+			text-align: center;
+		}
+		
+		tr, th, td {
+			padding: 10px;
+			background-color: white;
+		}
+	</style>
 	<title>Employee Management</title>
 </head>
 
@@ -41,12 +41,10 @@ tr, th, td {
 			<h2>Employees</h2>
 		</div>
 	</div>
-<div>
-<div>
-<div>	
-<div>
-<a href="/user/employee">Add Employee</a>
-	<br><br>
+	
+	<div>
+		<a href="/user/employee">Add Employee</a>
+		<br><br>
 		<table>
 			<tr>
 				<th>First Name</th>
@@ -62,9 +60,6 @@ tr, th, td {
 					</tr>
 				</c:forEach>
 		</table>
-		</div>
-		</div>
-	</div>
 	</div>
 </body>
 </html>

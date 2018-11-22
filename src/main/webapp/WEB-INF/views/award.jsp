@@ -31,9 +31,7 @@
 	</div>
 		<div>
 			<form:form action="createAward" modelAttribute="award" method="POST">
-				<%-- user is ${user.email} --%>
-				<br>
-			
+				<br>			
 				Employee: <form:select path="employee">
 				<c:forEach var="e" items="${employees}">
 						<option value="${e.id}">${e.firstName} ${e.lastName}</option> 

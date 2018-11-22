@@ -5,8 +5,6 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import javax.servlet.ServletContext;
-
 import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +21,6 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.employee_recognition.Entity.Award;
 import com.employee_recognition.Entity.AwardType;
-import com.employee_recognition.Entity.Employee;
 import com.employee_recognition.Entity.User;
 import com.employee_recognition.Repository.AwardTypeRepository;
 import com.employee_recognition.Repository.EmployeeRepository;
@@ -92,11 +89,14 @@ public class AwardController {
 		User currentUser = userDAO.getUserById(userID);
 		award.setUser(currentUser);
 		model.addAttribute("user", currentUser);
+		
 		// generate award list
 		award.setAwardType(at);
 		model.addAttribute("awardTypes", awardTypeDAO.getAwardTypeList());
+		
 		// generate employee list
 		model.addAttribute("employees", employeeDAO.getEmployees());
+		
 		// add award
 		model.addAttribute(award);
 		return "award";

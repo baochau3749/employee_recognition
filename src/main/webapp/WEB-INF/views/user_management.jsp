@@ -6,23 +6,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>User Management</title>
-
-<style>
-table {
-	height: 100px;
-	width: auto;
-	margin: 5px;
-	background-color: black;
-	text-align: center;
-}
-
-tr, th, td {
-	padding: 10px;
-	background-color: white;
-}
-</style>
+	<meta charset="ISO-8859-1">
+	<title>User Management</title>
+	
+	<style>
+		table {
+			height: 100px;
+			width: auto;
+			margin: 5px;
+			background-color: black;
+			text-align: center;
+		}
+		
+		tr, th, td {
+			padding: 10px;
+			background-color: white;
+		}
+	</style>
 </head>
 
 <body>
@@ -58,7 +58,8 @@ tr, th, td {
 						<td>${user.email}</td>
 						<td>${user.timeCreated}</td>
 						<td>${user.role.role}</td>
-						<td><a href="${updateLink}">Update</a>
+						<td>
+							<a href="${updateLink}">Update</a>
 							<c:if test="${!loggedInUser.email.equals(user.email)}">
 								 | <a href="${deleteLink}">Delete</a>
 							</c:if>

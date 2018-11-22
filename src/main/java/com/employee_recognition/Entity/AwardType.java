@@ -18,6 +18,7 @@ public class AwardType {
 	@Id
 	@Column(name = "award_type_id")
 	private Long awardTypeId;
+	
 	@Column(name = "type")
 	private String type;
 	

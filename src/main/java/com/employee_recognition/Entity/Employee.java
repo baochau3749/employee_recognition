@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,24 +34,25 @@ public class Employee {
 
 	@Column(name = "gender")
 	private String gender;
-	
+
 	@Column(name = "birth_date")
 	private Date birthDate;
 
 	@Column(name = "state_id")
 	private int state;
-	
+
 	@Column(name = "position_id")
 	private int position;
-	
+
 	@Column(name = "department_id")
 	private int department;
-	
-	@OneToMany(mappedBy="employee")
+
+	@OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
 	private List<Award> awards;
-	
-	public Employee() {}
-	
+
+	public Employee() {
+	}
+
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
@@ -64,11 +67,10 @@ public class Employee {
 		this.id = id;
 	}
 
-	public String getFullName()
-	{
+	public String getFullName() {
 		return firstName + " " + lastName;
 	}
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -116,8 +118,6 @@ public class Employee {
 	}
 
 	public void setState(int id) {
-		//EmployeeRepository er = new EmployeeRepository();
-		//int id = er.findStateByName(state);
 		this.state = id;
 	}
 
@@ -144,10 +144,4 @@ public class Employee {
 	public void setAwards(List<Award> awards) {
 		this.awards = awards;
 	}
-	
-	/*public void add(Award award) {
-		awards.add(award);
-		award.setEmployee(this);
-	}*/
-	
 }

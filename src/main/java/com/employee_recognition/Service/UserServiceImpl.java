@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService
 	@Override
 	public void sendEmailResetPassword(User user) throws EmailException
 	{
-		String name = user.getUserProfile().getFirstName() + " " + user.getUserProfile().getLastName();
+		String name = user.getUserProfile().getFullName();
 		String userEmail = user.getEmail();
 		String userPassword = user.getPassword();
 		

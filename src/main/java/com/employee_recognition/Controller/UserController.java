@@ -61,13 +61,10 @@ public class UserController {
 		List<String> employees = new ArrayList<String>();
 		User currentUser = userDAO.getUserById(userID); 
 		awards = currentUser.getUserAwards();
-		//Employee emp = new Employee();
+
 		for (int i = 0; i < awards.size(); i++) {
-			Long empId = awards.get(i).getEmployee();
-			//System.out.println("printing employee info " + employeeDAO.findById(empId).getFirstName() + " " + 
-			//employeeDAO.findById(empId).getLastName());
-			employees.add(employeeDAO.findById(empId).getFirstName() + " " + 
-			employeeDAO.findById(empId).getLastName());
+			Long empId = awards.get(i).getEmployee();			
+			employees.add(employeeDAO.findById(empId).getFullName());
 		}
 		
 		model.addAttribute("user", currentUser);
@@ -94,8 +91,6 @@ public class UserController {
 	MultipartFile file, Model model)
 	{
 		String uploadDirectory = context.getRealPath("/award_files");
-		System.out.println(uploadDirectory);
-		System.out.println("upload directory is  " + uploadDirectory);
 
 		String f = file.getOriginalFilename();
 		String fExt = f.replaceAll(".*\\.", "");
