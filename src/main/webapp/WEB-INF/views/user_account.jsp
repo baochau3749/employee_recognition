@@ -21,7 +21,7 @@
 
 	<hr><br>
 	
-	<form:form modelAttribute="account" method="POST"
+	<form:form modelAttribute="account" method="POST" enctype="multipart/form-data"
 			   action="${pageContext.request.contextPath}/admin/account/save_user">
 		
 		<c:if test="${account != null}">
