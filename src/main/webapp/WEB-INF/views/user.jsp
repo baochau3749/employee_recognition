@@ -47,7 +47,8 @@
 		<thead>
 			<tr>
 				<th>Award Type</th>
-				<th>Employee</th>
+				<th>Employee Name</th>
+				<th>Employee Email</th>
 				<th>Date</th>
 				<th>Action</th>
 			</tr>
@@ -62,7 +63,7 @@
 				<tr>
 					<td>${award.awardType.type}</td>
 					<td>${employees[i.index]}</td>
-					
+					<td>${emails[i.index]}</td>
 					<td>${award.dateGiven}</td>
 					<td><a href="${deleteLink}">Delete</a></td>
 				</tr>

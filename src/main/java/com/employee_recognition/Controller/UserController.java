@@ -59,17 +59,21 @@ public class UserController {
 	public String userMainPage(@SessionAttribute("userID") Long userID, Model model) {
 		List<Award> awards;
 		List<String> employees = new ArrayList<String>();
+		List<String> emails = new ArrayList<String>();
 		User currentUser = userDAO.getUserById(userID); 
 		awards = currentUser.getUserAwards();
 
 		for (int i = 0; i < awards.size(); i++) {
-			Long empId = awards.get(i).getEmployee();			
-			employees.add(employeeDAO.findById(empId).getFullName());
+			Long empId = awards.get(i).getEmployee();		
+			Employee employee = employeeDAO.findById(empId);
+			employees.add(employee.getFullName());
+			emails.add(employee.getEmail());
 		}
 		
 		model.addAttribute("user", currentUser);
 		model.addAttribute("awards", currentUser.getUserAwards());
 		model.addAttribute("employees", employees);
+		model.addAttribute("emails", emails);
 		
 		return "user";
 	}
