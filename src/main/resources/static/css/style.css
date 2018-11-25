@@ -1,0 +1,218 @@
+#mainBody {
+   background-color: aliceblue;
+   margin: 0px;
+   padding: 0px;
+}
+
+#titleContainer {
+   background-color: lightseagreen;
+   margin: 0px;
+   padding: 0px;
+   top: 0px;
+}
+
+#appName {
+   position: relative;
+   padding-top: 15px;
+   padding-bottom: 0px;
+   text-align: center;
+   font-size: 40px;
+   font-weight: bold;
+   color: blue;
+}
+
+#projectDescription {
+   position: relative;
+   padding-bottom: 20px;
+   text-align: center;
+   font-size: 24px;
+   font-weight: bold;
+   color: black;
+}
+
+#contentContainer {
+   margin: 0px auto;
+   padding: 0px 20px;
+   max-width: 1000px;
+   justify-content: center;
+   text-align: center;
+}
+
+.contentTitleContainer {
+   margin-top: 50px;
+   min-width: 500px;
+}
+
+.contentTitle {
+   font-family: serif;
+   font-weight: bolder;
+}
+
+a.appButton {
+   margin: 10px 0px 15px 15px;
+   padding: 4px 10px;
+   float: right;
+   border-color: LightSteelBlue ;
+   background-color:  LightSteelBlue;
+   color: black;
+}
+
+a.appButton:hover {
+   border-color: blue;
+   background-color: antiquewhite;
+   color: black;
+}
+
+#mainTable {
+   background-color: aliceblue;
+   min-width: 500px;
+}
+
+#mainTable thead.mainTableHeader {
+   background-color: black;
+   color: antiquewhite;
+}
+
+#mainTable tr.mainTableHeader {
+   background-color: gray;
+   color: white;
+}
+
+table.table-bordered > thead > tr > th {
+    border: 1px solid gray;
+}
+
+#mainTable td {
+   vertical-align: middle;
+}
+
+#mainTable a.tableLink {
+   display: inline-block;
+   text-decoration: none;
+   min-width: 75px;
+   padding: 2px 10px;
+   margin: 2px 5px;
+   text-align: center;
+   border-color: gray;
+   font-weight: normal;
+   color: black;
+}
+
+#mainTable a:hover {
+   border-color: blue;
+   background-color: antiquewhite;
+}
+
+#menuNav {
+   background-color: LightSteelBlue  ;
+   margin: 0px;
+   padding: 3px;
+}
+
+#menuNav div.menu {
+   margin: 0px;
+   padding: 0px 10px;
+}
+
+#menuNav ul.menu {
+}
+
+#menuNav li.menu  {
+   display: inline-block;
+   text-decoration: none;
+   text-decoration-color: black;
+   padding: 3px 5px;
+}
+
+#menuNav a.menu {
+   display: inline-block;
+   text-decoration: none;
+   padding: 2px 10px;
+   text-align: center;
+   border: 1px;
+   border-color: transparent;
+   border-style: solid;
+   border-radius: 5px;
+   font-weight: bold;
+   color: black;
+}
+
+#menuNav li.lastMenu  {
+   display: inline-block;
+   text-decoration: none;
+   text-decoration-color: black;
+   padding: 3px 5px;
+   cursor: context-menu;
+   font-style: italic;
+   font-weight: normal;
+   color: black;
+}
+
+#menuNav a.lastMenu {
+   display: inline-block;
+   margin-left: 5px;
+   padding: 2px 5px;
+   text-align: center;
+   border: 1px;
+   border-color: transparent;
+   border-style: solid;
+   border-radius: 5px;
+   font-weight: bold;
+   color: black;
+}
+
+#menuNav a:hover {
+   border-color: blue;
+   background-color: antiquewhite;
+}
+
+#formDiv {
+   width: 450px;
+   margin: 30px auto 0px auto;
+   /* background-color: yellow; */
+   justify-content: center;
+}
+
+.formRowDiv {
+   margin: 20px 0px;
+}
+
+.formLabel {
+   width: 100px;
+   margin: 0px;
+   padding-left: 5px;
+   padding-top: 3px;
+   text-align: left;
+}
+
+.formInput {
+   width: 340px;
+   margin: auto 5px;
+   padding: 3px 5px;
+   border: 1px;
+   border-style: solid;
+   border-radius: 3px;
+   border-color: gray;
+}
+
+.formFileInput {
+   width: 340px;
+   margin: auto 5px;
+   padding: 3px 5px 3px 0px;
+}
+
+.formSubmitButton {
+   width: 120px;
+   margin: 10px auto;
+   padding: auto 5px;
+   border: 1px;
+   border-style: solid;
+   border-radius: 3px;
+   border-color: green;
+   background-color: LightGray;
+}
+
+.formSubmitButton:hover {
+   border-color: blue;
+   background-color: antiquewhite;
+}
