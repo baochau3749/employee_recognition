@@ -68,10 +68,10 @@
 					<input type="hidden" id="timeCreated" name="timeCreated" value="${account.timeCreated}"/>			
 				</c:if>	
 
-
 				<div style="margin: 20px 0px;" class="form-group row">
 					<label class="formLabel" for="email">Email:</label> 
-					<input class="formInput" type="email" name="email" value="${account.email}" />
+					<input class="formInput" type="email" name="email"
+						   value="${account.email}" placeholder="Email"/> 
 				</div>
 
 				<div style="margin: 20px 0px;" class="form-group row">
