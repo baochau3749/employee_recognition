@@ -68,4 +68,19 @@ public class EmployeeController {
 	}
 
 	// Brian's changes end here
+		@GetMapping("/editEmployee")
+		public String employeeEdit(@RequestParam("id") Long id, Model model) {
+			states = employeeDAO.getStateList();
+			departments = employeeDAO.getDepartmentList();
+			positions = employeeDAO.getPositionList();
+			ArrayList<State> sList = employeeDAO.createStateList(states);
+			ArrayList<Department> dList = employeeDAO.createDepartmentList(departments);
+			ArrayList<Position> pList = employeeDAO.createPositionList(positions);
+			model.addAttribute("employee", emp);
+			model.addAttribute("states", sList);
+			model.addAttribute("positions", pList);
+			model.addAttribute("departments", dList);
+			return "employee";
+		}
+
 }
