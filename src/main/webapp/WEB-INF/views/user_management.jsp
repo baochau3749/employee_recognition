@@ -7,6 +7,21 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
 	<title>User Management</title>
 	
 	<style>
@@ -22,64 +37,95 @@
 			padding: 10px;
 			background-color: white;
 		}
+		
+		.nav-item
+		{
+			margin: auto 10px auto;
+		}
+		
+		h2
+		{
+			margin-bottom: 20px;
+		}
+		h3
+		{
+			margin: 30px auto;
+		}
 	</style>
 </head>
 
 <body>
-	<h2>User Management Page</h2>
-	<h4>Logged In: ${loggedInUser.email}</h4>
-	<hr>
+	<div class="container">
 	
-	<a href="${pageContext.request.contextPath}/admin/user_management">User Management</a>
-	<a href="${pageContext.request.contextPath}/admin/award_report">Award Report</a>
-
-	<hr><br>
-	
-	<div>
-		<div>			
-			<h3>USER LIST</h3>
-		</div>
-		<table>
-			<thead>
-				<tr>
-					<th>Email</th>
-					<th>Created Date</th>
-					<th>Type</th>
-					<th>Action</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="user" items="${users}">
-					<c:url var="updateLink" value="/admin/account/${user.id}" />
-					<c:url var="deleteLink" value="/admin/account/delete_account">
-						<c:param name="id" value="${user.id}"></c:param>
-					</c:url>
+		<h2 class="display-3"  align="center">User Management Page</h2>
+		
+		<ul class="nav nav-pills justify-content-center">
+			<li class="nav-item">
+				<a class="nav-link btn btn-outline-primary active" href="${pageContext.request.contextPath}/admin/user_management">User Management</a>
+			</li>
+			
+			<li class="nav-item">
+				<a class="nav-link btn btn-outline-primary" href="${pageContext.request.contextPath}/admin/award_report">Award Report</a>
+			</li>
+			
+			<li class="nav-item">
+				<form:form action="${pageContect.request.contextPath}/logout"
+					method="POST">
+					<input class="nav-link btn btn-outline-primary" type="submit" value="Logout">
+				</form:form>
+			</li>
+		</ul>
+		
+		<hr>
+		
+		<h3>Welcome: ${loggedInUser.email}</h3>
+		
+		<div>
+			<div>			
+				<h3 align="center">USER LIST</h3>
+				<hr>
+			</div>
+			<table class="table table-bordered table-striped">
+				<thead>
 					<tr>
-						<td>${user.email}</td>
-						<td>${user.timeCreated}</td>
-						<td>${user.role.role}</td>
-						<td>
-							<a href="${updateLink}">Update</a>
-							<c:if test="${!loggedInUser.email.equals(user.email)}">
-								 | <a href="${deleteLink}">Delete</a>
-							</c:if>
-						</td>
+						<th scope="col">Email</th>
+						<th scope="col">Created Date</th>
+						<th scope="col">Type</th>
+						<th scope="col">Action</th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					<c:forEach var="user" items="${users}">
+						<c:url var="updateLink" value="/admin/account/${user.id}" />
+						<c:url var="deleteLink" value="/admin/account/delete_account">
+							<c:param name="id" value="${user.id}"></c:param>
+						</c:url>
+						<tr>
+							<td>${user.email}</td>
+							<td>${user.timeCreated}</td>
+							<td>${user.role.role}</td>
+							<td>
+								<a href="${updateLink}" class="btn btn-outline-primary" role="button">Update</a>
+								<c:if test="${!loggedInUser.email.equals(user.email)}">
+									  <a href="${deleteLink}" class="btn btn-outline-primary" role="button">Delete</a>
+								</c:if>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+	
+			<c:url var="addUserLink" value="/admin/account/add_user" />
+			<c:url var="addAdminLink" value="/admin/account/add_admin" />
 
-		<c:url var="addUserLink" value="/admin/account/add_user" />
-		<c:url var="addAdminLink" value="/admin/account/add_admin" />
-		<br><a href="${addUserLink}">Add New User</a><br>
-		<br><a href="${addAdminLink}">Add New Admin</a><br>
-		<div></div>
+			<div style="text-align:center">
+				<a class="btn btn-primary" href="${addUserLink}">Add New User</a>
+				<a class="btn btn-primary" href="${addAdminLink}">Add New Admin</a>
+			</div>
+		</div>
+	
+		<hr><br>
+		
 	</div>
-
-	<hr><br>
-	<form:form action="${pageContect.request.contextPath}/logout"
-		method="POST">
-		<input type="submit" value="Logout">
-	</form:form>
 </body>
 </html>

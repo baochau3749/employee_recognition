@@ -7,46 +7,102 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<title>User Update Page</title>
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+
+<style>
+.nav-item
+{
+	margin: auto 10px auto;
+}
+
+h2
+{
+	margin-bottom: 20px;
+}
+</style>
 </head>
 <body>
-	<h2>User Update Page</h2>
-	
-	<a href="${pageContect.request.contextPath}/user/employees">Employee Management</a>
-	<br><br>
-	<a href="">Create Award</a>
-	<br><br>
-	<form:form action="${pageContect.request.contextPath}/logout" method="POST">
-		<input type="submit" value="Logout">
-	</form:form>
-	<hr>
-	<br>
-	
-	<form:form modelAttribute="user" enctype="multipart/form-data">
-		First Name: <form:input path="userProfile.firstName"/>
-		<br><br>
+	<div class="container">
 		
-		Last Name: <form:input path="userProfile.lastName"/>
-		<br><br>
+		<h2 class="display-3"  align="center">User Update Page</h2>
 		
-		Email: <form:input path="email"/>
-		<br><br>
+		<ul class="nav nav-pills nav-justified">
+			<li class="nav-item">
+				<a class="nav-link btn btn-outline-primary" href="${pageContect.request.contextPath}/user">Home</a>
+			</li>
+			
+			<li class="nav-item">
+				<a class="nav-link btn btn-outline-primary" href="${pageContect.request.contextPath}/user/employees">Employee Management</a>
+			</li>
+			
+			<li class="nav-item">
+				<a class="nav-link btn btn-outline-primary" href="${pageContect.request.contextPath}/user/award">Create Award</a>
+			</li>
+			
+			<li class="nav-item">
+				<a class="nav-link btn btn-outline-primary active" href="${pageContect.request.contextPath}/user/${user.id}">Update Profile</a>
+			</li>
+			
+			<li class="nav-item">
+				<form:form action="${pageContect.request.contextPath}/logout" method="POST">
+					<input class="nav-link btn btn-outline-primary" type="submit" value="Logout">
+				</form:form>
+			</li>
+		</ul>
 		
-		Password: <form:input path="password"/>
-		<br><br>
+		<hr>
 		
-		Signature: <input type="file" name="file">
-		<c:if test="${not empty er}">
-   			${er}
-		</c:if>
-		<br><br>		
-		<input type="submit" value="Save">
-	</form:form>
-	
-	<br>
-	Your signature:
-	<br>
-	
-	<img src="/image" /> 
+		<form:form modelAttribute="user" enctype="multipart/form-data">
+			<div class="form-group row">
+				<label class="col-sm-2">First Name</label>
+				<form:input class="form-control col-sm-10" path="userProfile.firstName"/>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2">Last Name</label> 
+				<form:input class="form-control col-sm-10" path="userProfile.lastName"/>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2">Email</label> 
+				<form:input class="form-control col-sm-10" path="email"/>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2">Password</label> 
+				<form:input class="form-control col-sm-10" path="password"/>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2">Signature</label>
+				<input class="col-sm-8" type="file" name="file">
+				<c:if test="${not empty er}">
+		   			${er}
+				</c:if>
+			</div>
+		
+			<input type="submit" class="btn btn-primary" value="Save Changes">
+		</form:form>
+		
+		<br>
+		Your signature:
+		<br>
+		<img src="/image" /> 
+	</div>
 
 </body>
 </html>
