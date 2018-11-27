@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "employee")
 public class Employee {
@@ -34,8 +36,9 @@ public class Employee {
 
 	@Column(name = "gender")
 	private String gender;
-
+	
 	@Column(name = "birth_date")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private Date birthDate;
 
 	@Column(name = "state_id")
@@ -104,6 +107,8 @@ public class Employee {
 	}
 
 	public Date getBirthDate() {
+		//SimpleDateFormat dateFormatObj = new SimpleDateFormat("MM/dd/yyyy");
+		//String bd = dateFormatObj.format(birthDate);
 		return birthDate;
 	}
 

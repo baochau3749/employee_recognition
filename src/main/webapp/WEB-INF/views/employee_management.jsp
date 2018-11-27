@@ -96,11 +96,17 @@
 						<c:url var="deleteLink" value="/user/delete_employee">
 							<c:param name="id" value="${emp.id}"></c:param>
 						</c:url>
+						<c:url var="updateLink" value="/user/editEmployee">
+							    <c:param name="id" value="${emp.id}"></c:param>
+						</c:url>
 						<tr>
 							<td> ${emp.firstName} </td> 
 							<td> ${emp.lastName} </td> 
 							<td> ${emp.email} </td> 
-							<td><a href="${deleteLink}" class="btn btn-outline-primary"
+							<td>
+							<a href="${updateLink}" class="btn btn-outline-primary"
+							role="button">Update</a>
+							<a href="${deleteLink}" class="btn btn-outline-primary"
 							role="button">Delete</a></td>
 						</tr>
 					</c:forEach>
