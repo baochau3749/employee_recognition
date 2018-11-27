@@ -69,9 +69,13 @@ h2
 		<hr>
 			
 		<div>
+		
 			<c:if test="${not empty er}">
-		   			${er}
+			<div class="container" align="center">
+		   					${er}
+		   	</div>
 			</c:if>
+	
 			<form:form action="update_employee" modelAttribute="employee" method="GET">
 			<form:input type="hidden" path="id"/>
 				<div class="form-group row">
