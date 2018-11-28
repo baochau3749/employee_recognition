@@ -68,7 +68,6 @@
 		<form:form action="${pageContext.request.contextPath}/admin/account/save_admin"
 				   modelAttribute="account" method="POST">
 			<c:if test="${account != null}">
-				ACCOUNT NOT NULL
 				<form:input type="hidden" path="id"/>
 				<form:input type="hidden" path="timeCreated"/>			
 			</c:if>		   
