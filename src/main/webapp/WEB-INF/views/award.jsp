@@ -70,11 +70,15 @@ h2
 
 		<div>
 			<form:form action="createAward" modelAttribute="award" method="POST">
+				<form:errors path="*" cssClass="alert alert-danger" element="div"></form:errors>
 				<div class="form-group row">
 					<label class="col-sm-2">Employee</label>
 					<form:select class="form-control col-sm-10" path="employee">
 					<c:forEach var="e" items="${employees}">
-							<option value="${e.id}">${e.firstName} ${e.lastName}</option> 
+							<form:option value="${e.id}"
+								selected="${award.employee == e.id ? 'selected' : ''}">
+								${e.firstName} ${e.lastName}
+							</form:option> 
 					</c:forEach>
 					</form:select>
 				</div>
@@ -83,14 +87,18 @@ h2
 					<label class="col-sm-2">Award Type</label>
 					<form:select class="form-control col-sm-10" name="awardType" path="awardType">
 					<c:forEach var="t" items="${awardTypes}">
-							<option value="${t.awardTypeId}">${t.type}</option> 
+							<form:option value="${t.awardTypeId}" 
+									selected="${award.awardType.awardTypeId == t.awardTypeId ? 'selected' : ''}">
+									${t.type}
+							</form:option> 
 					</c:forEach>
 					</form:select>
 				</div>
 				
 				<div class="form-group row">
 					<label class="col-sm-2">Date and Time (ex. 11/2/2018 12:00 pm)</label>
-					<form:input class="form-control col-sm-10" name="dateGiven" path="dateGiven"/>
+					<form:input class="form-control col-sm-10" name="dateGiven" 
+								path="dateGiven" value="${dateGiven}"/>
 				</div>
 				
 				<input type="submit" class="btn btn-primary" value="Create and Email Award">

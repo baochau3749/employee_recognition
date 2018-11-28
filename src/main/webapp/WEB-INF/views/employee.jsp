@@ -69,21 +69,22 @@ h2
 		<hr>
 			
 		<div>
-			<form:form action="addEmployee" modelAttribute="employee" method="GET">
+			<form:form action="${pageContext.request.contextPath}/user/addEmployee" 
+					   modelAttribute="employee" method="POST">
+				<form:errors path="*" cssClass="alert alert-danger" element="div"></form:errors>
 				<div class="form-group row">
 					<label class="col-sm-2">First Name</label>
-					<form:input class="form-control col-sm-10" path="firstName"/>
-				</div>
-				
+					<form:input class="form-control col-sm-10" path="firstName" value="${employee.firstName}"/>				
+				</div>				
 				
 				<div class="form-group row">
 					<label class="col-sm-2">Last Name</label>
-					<form:input class="form-control col-sm-10" path="lastName"/>
+					<form:input class="form-control col-sm-10" path="lastName" value="${employee.lastName}"/>
 				</div>
 				
 				<div class="form-group row">
 					<label class="col-sm-2">Email</label>
-					<form:input class="form-control col-sm-10" path="email"/>
+					<form:input class="form-control col-sm-10" path="email" value="${employee.email}"/>
 				</div>
 				
 				<div class="form-group row">
@@ -94,35 +95,35 @@ h2
 				<div class="form-group row">
 					<label class="col-sm-2">Gender</label>
 					<form:select class="form-control col-sm-10" path="gender">
-						<option value="Female">Female</option>
-						<option value="Male">Male</option>
+						<form:option value="Male">Male</form:option>
+						<form:option value="Female">Female</form:option>						
 					</form:select>
 				</div>
 				
 				<div class="form-group row">
 					<label class="col-sm-2">State</label>
 					<form:select class="form-control col-sm-10" path="state">
-					<c:forEach var="s" items="${states}">
-							<option value="${s.state_id}">${s.state}</option> 
-					</c:forEach>
+						<c:forEach var="s" items="${states}">
+								<form:option value="${s.state_id}" >${s.state}</form:option> 
+						</c:forEach>
 					</form:select>
 				</div>
 				
 				<div class="form-group row">
 					<label class="col-sm-2">Position</label>
 					<form:select class="form-control col-sm-10" path="position">
-					<c:forEach var="p" items="${positions}">
-							<option value="${p.position_id}">${p.position}</option> 
-					</c:forEach>
+						<c:forEach var="p" items="${positions}">
+								<form:option value="${p.position_id}">${p.position}</form:option> 
+						</c:forEach>
 					</form:select>
 				</div>
 				
 				<div class="form-group row">
 					<label class="col-sm-2">Department</label>
 					<form:select class="form-control col-sm-10" path="department">
-					<c:forEach var="d" items="${departments}">
-							<option value="${d.department_id}">${d.department}</option> 
-					</c:forEach>
+						<c:forEach var="d" items="${departments}">
+								<form:option value="${d.department_id}">${d.department}</form:option> 
+						</c:forEach>
 					</form:select>
 				</div>
 	

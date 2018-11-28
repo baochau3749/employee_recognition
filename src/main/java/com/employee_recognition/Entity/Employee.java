@@ -13,6 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "employee")
@@ -23,12 +28,18 @@ public class Employee {
 	@Column(name = "employee_id")
 	private Long id;
 
+	@NotEmpty(message="First name is required.")
+	@Size(min=0, max=50, message="First name must be 50 characters or less.")
 	@Column(name = "first_name")
 	private String firstName;
 
+	@NotEmpty(message="Last name is required.")
+	@Size(min=0, max=50, message="Last name must be 50 characters or less.")
 	@Column(name = "last_name")
 	private String lastName;
 
+	@Pattern(regexp=".+@.+\\..+", message="Email is missing or invalid.")
+	@Size(max=255, message="Email must be 255 characters or less.")
 	@Column(name = "email")
 	private String email;
 
@@ -144,4 +155,5 @@ public class Employee {
 	public void setAwards(List<Award> awards) {
 		this.awards = awards;
 	}
+	
 }

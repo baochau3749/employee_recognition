@@ -76,14 +76,14 @@ h2
 		   	</div>
 			</c:if>
 	
-			<form:form action="update_employee" modelAttribute="employee" method="GET">
-			<form:input type="hidden" path="id"/>
+			<form:form action="update_employee" modelAttribute="employee" method="POST">
+				<form:errors path="*" cssClass="alert alert-danger" element="div"></form:errors>
+				<form:input type="hidden" path="id"/>
 				<div class="form-group row">
 					<label class="col-sm-2">First Name</label>
 					<form:input class="form-control col-sm-10" path="firstName"/>
 				</div>
-				
-				
+								
 				<div class="form-group row">
 					<label class="col-sm-2">Last Name</label>
 					<form:input class="form-control col-sm-10" path="lastName"/>

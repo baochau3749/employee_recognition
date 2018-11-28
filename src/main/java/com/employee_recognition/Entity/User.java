@@ -16,6 +16,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "user")
@@ -26,9 +29,13 @@ public class User {
 	@Column(name = "user_id")
 	private Long id;
 
+	@Pattern(regexp=".+@.+\\..+", message="Email is missing or invalid.")
+	@Size(max=255, message="Email must be 255 characters or less.")
 	@Column(name = "email")
 	private String email;
 
+	@NotEmpty(message="Password is missing.")
+	@Size(min=0, max=20, message="Password must be 1-20 characters.")
 	@Column(name = "password")
 	private String password;
 

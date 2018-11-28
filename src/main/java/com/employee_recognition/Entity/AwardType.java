@@ -49,4 +49,10 @@ public class AwardType {
 	public void setType(String awardType) {
 		this.type = awardType;
 	}
+
+	@Override
+	public String toString() {
+		return "AwardType [awardTypeId=" + awardTypeId + ", type=" + type + "]";
+	}
+	
 }
