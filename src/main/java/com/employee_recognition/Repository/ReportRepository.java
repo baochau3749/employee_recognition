@@ -8,27 +8,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.employee_recognition.Entity.Award;
 import com.employee_recognition.Entity.Employee;
-import com.employee_recognition.Entity.State;
 import com.employee_recognition.Service.AwardService;
 import com.employee_recognition.Service.EmployeeService;
 
 @Repository
-public class ReportRepository
-{
+public class ReportRepository {
 	@Autowired
 	private AwardService awardDAO;
 
 	@Autowired
 	private EmployeeService employeeDAO;
 
+	@Autowired
+	private ServletContext context;
+
 	// get all awarded employees
-	public List<Employee> getEmployees()
-	{
+	public List<Employee> getEmployees() {
 		// get all the awards
 		List<Award> awardList = awardDAO.getAwards();
 
@@ -36,8 +38,7 @@ public class ReportRepository
 		List<Employee> employeeList = new ArrayList<>();
 
 		// collecting the employees which have received an award
-		for (Award current : awardList)
-		{
+		for (Award current : awardList) {
 			employeeList.add(employeeDAO.getEmployeeById(current.getEmployee()));
 		}
 
@@ -45,38 +46,32 @@ public class ReportRepository
 	}
 
 	// generate csv file
-	public void generateFile(Map<String, Integer> table, String fileName, String title)
-	{
-		String filePath = System.getProperty("user.dir") + "\\src\\main\\webapp\\report_files\\";
-		try (PrintWriter output = new PrintWriter(new File(filePath + fileName)))
-		{
+	public void generateFile(Map<String, Integer> table, String fileName, String title) {
+		String filePath = context.getRealPath("/report_files"); 
+		
+		try (PrintWriter output = new PrintWriter(new File(filePath + "/" + fileName))) {
 			output.println(title + ",AWARD_COUNT");
-			for (Map.Entry<String, Integer> current : table.entrySet())
-			{
+
+			for (Map.Entry<String, Integer> current : table.entrySet()) {
 				output.println(current.getKey() + "," + current.getValue());
 			}
-		} catch (FileNotFoundException e)
-		{
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 
 	// create the state report
-	public Map<String, Map<String, Integer>> stateReport()
-	{
+	public Map<String, Map<String, Integer>> stateReport() {
 		// table for generating the state report
 		Map<String, Integer> table = new HashMap<>();
 
 		// analyzing the content of each employee that received an award
-		for (Employee current : getEmployees())
-		{
+		for (Employee current : getEmployees()) {
 			String currentState = employeeDAO.getStateById(current.getState()).getState();
 
-			if (table.containsKey(currentState))
-			{
+			if (table.containsKey(currentState)) {
 				table.replace(currentState, table.get(currentState) + 1);
-			} else
-			{
+			} else {
 				table.put(currentState, 1);
 			}
 		}
@@ -91,21 +86,17 @@ public class ReportRepository
 	}
 
 	// create the department report
-	public Map<String, Map<String, Integer>> departmentReport()
-	{
+	public Map<String, Map<String, Integer>> departmentReport() {
 		// table for generating the department report
 		Map<String, Integer> table = new HashMap<>();
 
 		// analyzing the content of each employee that received an award
-		for (Employee current : getEmployees())
-		{
+		for (Employee current : getEmployees()) {
 			String currentDepartment = employeeDAO.getDepartmentById(current.getDepartment()).getDepartment();
 
-			if (table.containsKey(currentDepartment))
-			{
+			if (table.containsKey(currentDepartment)) {
 				table.replace(currentDepartment, table.get(currentDepartment) + 1);
-			} else
-			{
+			} else {
 				table.put(currentDepartment, 1);
 			}
 		}
@@ -120,21 +111,17 @@ public class ReportRepository
 	}
 
 	// create the position report
-	public Map<String, Map<String, Integer>> positionReport()
-	{
+	public Map<String, Map<String, Integer>> positionReport() {
 		// table for generating the position report
 		Map<String, Integer> table = new HashMap<>();
 
 		// analyzing the content of each employee that received an award
-		for (Employee current : getEmployees())
-		{
+		for (Employee current : getEmployees()) {
 			String currentPosition = employeeDAO.getPositionById(current.getPosition()).getPosition();
 
-			if (table.containsKey(currentPosition))
-			{
+			if (table.containsKey(currentPosition)) {
 				table.replace(currentPosition, table.get(currentPosition) + 1);
-			} else
-			{
+			} else {
 				table.put(currentPosition, 1);
 			}
 		}
@@ -149,21 +136,17 @@ public class ReportRepository
 	}
 
 	// create the gender report
-	public Map<String, Map<String, Integer>> genderReport()
-	{
+	public Map<String, Map<String, Integer>> genderReport() {
 		// table for generating the position report
 		Map<String, Integer> table = new HashMap<>();
 
 		// analyzing the content of each employee that received an award
-		for (Employee current : getEmployees())
-		{
+		for (Employee current : getEmployees()) {
 			String currentGender = current.getGender();
 
-			if (table.containsKey(currentGender))
-			{
+			if (table.containsKey(currentGender)) {
 				table.replace(currentGender, table.get(currentGender) + 1);
-			} else
-			{
+			} else {
 				table.put(currentGender, 1);
 			}
 		}
@@ -178,21 +161,17 @@ public class ReportRepository
 	}
 
 	// create the award type report
-	public Map<String, Map<String, Integer>> awardTypeReport()
-	{
+	public Map<String, Map<String, Integer>> awardTypeReport() {
 		// table for generating the award type report
 		Map<String, Integer> table = new HashMap<>();
 
 		// analyzing each award
-		for (Award current : awardDAO.getAwards())
-		{
+		for (Award current : awardDAO.getAwards()) {
 			String currentAward = current.getAwardType().getType();
 
-			if (table.containsKey(currentAward))
-			{
+			if (table.containsKey(currentAward)) {
 				table.replace(currentAward, table.get(currentAward) + 1);
-			} else
-			{
+			} else {
 				table.put(currentAward, 1);
 			}
 		}

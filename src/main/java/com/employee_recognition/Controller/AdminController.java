@@ -249,11 +249,14 @@ public class AdminController {
 	{
 		// create CSV file based on label provided
 		String filename = createReportData(label, model, false);
-		
+		System.out.println("filename = " + filename);
 		// target the new CSV file
-		String filePath = System.getProperty("user.dir") + "\\src\\main\\webapp\\report_files";
+		//String filePath = System.getProperty("user.dir") + "\\src\\main\\webapp\\report_files";
+		String filePath = context.getRealPath("/report_files");
 		Path file = Paths.get(filePath, filename);
 
+		System.out.println("Complete report file name = " + file.toString());
+		
 		// type of download
 		response.setContentType("text/csv");
 		response.addHeader("Content-Disposition", "attachment; filename=" + filename);
