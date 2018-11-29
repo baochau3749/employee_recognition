@@ -111,7 +111,7 @@
 							<td>
 							<a href="${updateLink}" class="btn btn-outline-primary"
 							role="button">Update</a>
-							<a href="${deleteLink}" class="btn btn-outline-primary"
+							<a style="margin-left: 15px" ref="${deleteLink}" class="btn btn-outline-primary"
 							role="button">Delete</a></td>
 						</tr>
 					</c:forEach>

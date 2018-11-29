@@ -57,7 +57,10 @@
 
 <body>
 	<div class="container">
-	
+		<c:url var="reportLink" value="${pageContext.request.contextPath}/admin/award_report">
+			<c:param name="label" value="default"></c:param>
+		</c:url>
+			
 		<h2 class="display-3"  align="center">User Management Page</h2>
 		
 		<ul class="nav nav-pills justify-content-center">
@@ -66,7 +69,7 @@
 			</li>
 			
 			<li class="nav-item">
-				<a class="nav-link btn btn-outline-primary" href="${pageContext.request.contextPath}/admin/award_report">Award Report</a>
+				<a class="nav-link btn btn-outline-primary" href="${reportLink}">Award Report</a>
 			</li>
 			
 			<li class="nav-item">
@@ -112,7 +115,7 @@
 							<td>${user.role.role}</td>
 							<td>
 								<a href="${updateLink}" class="btn btn-outline-primary" role="button">Update</a>
-								<a href="${deleteLink}"  role="button" class="btn btn-outline-primary 
+								<a style="margin-left: 15px" href="${deleteLink}"  role="button" class="btn btn-outline-primary 
 										${loggedInUser.email.equals(user.email) ? 'disabled' : ''}">Delete</a>
 							</td>
 						</tr>

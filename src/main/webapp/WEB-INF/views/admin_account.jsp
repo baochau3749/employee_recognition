@@ -47,6 +47,9 @@
 		<c:if test="${account != null}">
 			<c:set var="pageLabel" value="Update Admin Account"/>
 		</c:if>		
+		<c:url var="reportLink" value="${pageContext.request.contextPath}/admin/award_report">
+			<c:param name="label" value="default"></c:param>
+		</c:url>
 		<h2 class="display-3"  align="center">${pageLabel}</h2>			
 		
 		<ul class="nav nav-pills justify-content-center">
@@ -55,7 +58,7 @@
 				</li>
 				
 				<li class="nav-item">
-					<a class="nav-link btn btn-outline-primary" href="${pageContext.request.contextPath}/admin/award_report">Award Report</a>
+					<a class="nav-link btn btn-outline-primary" href="${reportLink}">Award Report</a>
 				</li>
 				
 				<li class="nav-item">

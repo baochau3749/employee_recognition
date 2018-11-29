@@ -75,7 +75,10 @@ setTimeout(function () {
 
 <body>
 	<div class="container">
-	
+		<c:url var="reportLink" value="${pageContext.request.contextPath}/admin/award_report">
+			<c:param name="label" value="default"></c:param>
+		</c:url>
+			
 		<h2 class="display-3"  align="center">Award Reporting Page</h2>
 		
 		<ul class="nav nav-pills justify-content-center">
@@ -84,7 +87,7 @@ setTimeout(function () {
 			</li>
 			
 			<li class="nav-item">
-				<a class="nav-link btn btn-outline-primary active" href="${pageContext.request.contextPath}/admin/award_report">Award Report</a>
+				<a class="nav-link btn btn-outline-primary active" href="${reportLink}">Award Report</a>
 			</li>
 			
 			<li class="nav-item">
@@ -116,16 +119,23 @@ setTimeout(function () {
 						<c:url var="downloadLink" value="/admin/account/download_report">
 							<c:param name="label" value="${report.label}"></c:param>
 						</c:url>
+						<c:url var="analysisLink" value="${pageContext.request.contextPath}/admin/award_report">
+							<c:param name="label" value="${report.label}"></c:param>
+						</c:url>
 						<tr>
 							<td>${report.name}</td>
-							<td><a href="${downloadLink}" class="btn btn-outline-primary" role="button" onClick="alert('After the download, please refresh the page for the chart to update')">Download</a></td>
+							<td>
+								<a href="${downloadLink}" class="btn btn-outline-primary" role="button" 
+									onClick="alert('After the download, please refresh the page for the chart to update')">Download</a>
+								<a style="margin-left: 15px" href="${analysisLink}" class="btn btn-outline-primary" role="button">Show Analysis</a>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 	
-		<h2 style="text-align:center">${title}</h2>
+		<h2 style="text-align:center; margin-top: 50px">${title}</h2>
 
 		<!-- Backup if other approach shows problems last minute 
 		<ul>
