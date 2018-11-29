@@ -110,10 +110,9 @@ public class UserProfile
 		
 		if (!newFileName.isEmpty()) {
 			String fExt = newFileName.replaceAll(".*\\.", "");
-			boolean isNewFileExtensionValid = fExt.equals("jpeg") || fExt.equals("jpg") || 
-					  						  fExt.equals("png") || fExt.equals("bmp") || fExt.equals("gif");
+			boolean isNewFileExtensionValid = fExt.equals("jpeg") || fExt.equals("jpg") || fExt.equals("png");
 			if (!isNewFileExtensionValid) {
-				String errorMsg = "Signature file must be a jpeg, jpg, png, bmp, or gif file. ";
+				String errorMsg = "Signature file must be a jpeg, jpg, or png file. ";
 				bindingResult.rejectValue(errorFieldName, errorFieldName, errorMsg);
 			}
 		}

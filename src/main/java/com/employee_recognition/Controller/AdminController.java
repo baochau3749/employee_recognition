@@ -106,7 +106,7 @@ public class AdminController {
 			return "user_account";
 		}
 		
-		if (fExt.equals("jpeg") || fExt.equals("jpg") || fExt.equals("png") || fExt.equals("bmp") || fExt.equals("gif")) 
+		if (fExt.equals("jpeg") || fExt.equals("jpg") || fExt.equals("png")) 
 		{
 			try {
 				if (account.getUserId() == null) {

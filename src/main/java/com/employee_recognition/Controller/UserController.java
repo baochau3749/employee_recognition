@@ -107,7 +107,7 @@ public class UserController {
 			return "user_update";
 		}
 		
-		if (fExt.equals("jpeg") || fExt.equals("jpg") || fExt.equals("png") || fExt.equals("bmp") || fExt.equals("gif")) {				
+		if (fExt.equals("jpeg") || fExt.equals("jpg") || fExt.equals("png")) {				
 			try {
 				String fileName = user.getUserId().toString() + "." + fExt;
 				Path pathAndName = Paths.get(uploadDirectory, fileName);
