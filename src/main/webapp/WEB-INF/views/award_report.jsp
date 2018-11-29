@@ -125,8 +125,7 @@ setTimeout(function () {
 						<tr>
 							<td>${report.name}</td>
 							<td>
-								<a href="${downloadLink}" class="btn btn-outline-primary" role="button" 
-									onClick="alert('After the download, please refresh the page for the chart to update')">Download</a>
+								<a href="${downloadLink}" class="btn btn-outline-primary" role="button">Download</a>
 								<a style="margin-left: 15px" href="${analysisLink}" class="btn btn-outline-primary" role="button">Show Analysis</a>
 							</td>
 						</tr>

@@ -178,7 +178,7 @@ public class AdminController {
 		return "award_report";
 	}
 	
-	private String createReportData(String label, Model model, Boolean download) {
+	private String createReportData(String label, Model model, Boolean showAnalysis) {
 		System.out.println("Inside createReportData");
 		String filename = new String();
 		String title = new String();
@@ -234,7 +234,7 @@ public class AdminController {
 			}
 		}
 
-		if (!download) {
+		if (showAnalysis) {
 			model.addAttribute("title", title);
 			model.addAttribute("table", table);
 			model.addAttribute("total", awardService.getAwards().size());	
