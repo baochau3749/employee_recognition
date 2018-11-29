@@ -173,7 +173,7 @@ public class AdminController {
 		model.addAttribute("loggedInUser", userService.getLoggedInUser());
 			
 		System.out.println("label = " + label);
-		createReportData(label, model, false);
+		createReportData(label, model, true);
 		
 		return "award_report";
 	}

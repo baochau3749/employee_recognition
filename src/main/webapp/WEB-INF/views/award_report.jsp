@@ -64,13 +64,6 @@
 			margin-bottom: 30px;
 		}
 	</style>
-
-<!--
-<script>
-setTimeout(function () {
-    window.location.reload(1);
-}, 3000); 
-</script>-->
 </head>
 
 <body>
@@ -204,10 +197,7 @@ setTimeout(function () {
 			  }
 			});
 		</script>
-		
-		
 		<hr><br>
-
 	</div>
 </body>
 </html>
