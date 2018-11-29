@@ -103,7 +103,7 @@
 				<thead>
 					<tr>
 						<th scope="col">Report/Analytics</th>
-						<th scope="col">Download Report</th>
+						<th scope="col">Action</th>
 					</tr>
 				</thead>
 				<tbody>
