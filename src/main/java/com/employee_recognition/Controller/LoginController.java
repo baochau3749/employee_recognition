@@ -17,7 +17,7 @@ import com.employee_recognition.Service.UserService;
 
 
 @Controller
-@SessionAttributes("userID")
+@SessionAttributes("userId")
 public class LoginController {
 	
 	@Autowired
@@ -34,8 +34,7 @@ public class LoginController {
 		}
 		else
 		{
-			Long userID = user.getId();
-			theModel.addAttribute("userID",userID);
+			theModel.addAttribute("userId", user.getUserId());
 			return "redirect:/user";
 		}
 	}
@@ -70,7 +69,7 @@ public class LoginController {
 			// updating the user's credential and storing it
 			user.setPassword(userService.generateRandomPassword());
 			
-			user = userService.saveUser(user, "USER");
+			user = userService.saveUser(user, user.getRole().getRole());
 			
 			// sending the email notification
 			userService.sendEmailResetPassword(user);

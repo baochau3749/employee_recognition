@@ -2,6 +2,7 @@ package com.employee_recognition.Entity;
 
 import java.sql.Timestamp;
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -72,11 +73,21 @@ public class Award
 		this.user = user;
 	}
 
-	public Timestamp getdateGiven()
+	public String getFormattedDateTime() {
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy hh:mm aa");
+		return dateFormat.format(this.dateGiven).toString();
+	}
+	
+	public Timestamp getDateGiven()
 	{
 		return dateGiven;
 	}
 
+	public void setDateGiven(Timestamp dateGiven)
+	{
+		this.dateGiven = dateGiven;
+	}
+	
 	public Long getEmployee()
 	{
 		return employee;
@@ -95,12 +106,5 @@ public class Award
 	public void setAwardType(AwardType awardType)
 	{
 		this.awardType = awardType;
-	}
-
-	public void setdateGiven(Timestamp dateGiven)
-	{
-		this.dateGiven = dateGiven;
-	}
-		
-		
+	}		
 }

@@ -20,17 +20,16 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.employee_recognition.Entity.Report;
 import com.employee_recognition.Entity.User;
 import com.employee_recognition.Entity.UserProfile;
-import com.employee_recognition.Repository.UserProfileRepository;
 import com.employee_recognition.Service.AwardService;
 import com.employee_recognition.Service.ReportService;
 import com.employee_recognition.Service.UserService;
@@ -51,9 +50,6 @@ public class AdminController {
 
 	@Autowired
 	private ServletContext context;
-
-	@Autowired
-	private UserProfileRepository profileDAO;
 
 	public AdminController() {
 	}
@@ -85,12 +81,11 @@ public class AdminController {
 		return "award_report";
 	}
 
-	@GetMapping("/account/{id}")
-	public String updateUser(@ModelAttribute("id") Long id, Model theModel) {
-
+	@GetMapping("/account/{userId}")
+	public String updateUser(@PathVariable("userId") Long userId, Model theModel) {
+		
 		theModel.addAttribute("loggedInUser", userService.getLoggedInUser());
-
-		User user = userService.getUserById(id);
+		User user = userService.getUserById(userId);	
 		theModel.addAttribute("account", user);
 
 		if (user.getRole().getRole().compareTo("USER") == 0)
@@ -102,70 +97,54 @@ public class AdminController {
 	@GetMapping("/account/add_user")
 	public String addUser(Model theModel) {
 		theModel.addAttribute("loggedInUser", userService.getLoggedInUser());
-		theModel.addAttribute("user", null);
+		theModel.addAttribute("account", null);
 		return "user_account";
 	}
 
-	// Brian's changes start here
 	@PostMapping("/account/save_user")
-	public String saveUser(@ModelAttribute("user") User user, @ModelAttribute("sig") String sig,
-			@ModelAttribute("userProfile") UserProfile prof, @ModelAttribute("userProfileId") Long pid,
-			@RequestParam("file") MultipartFile file, RedirectAttributes attr, Model theModel) {
+	public String saveUser(@ModelAttribute("account") @Valid User account, 
+			BindingResult bindingResult, @ModelAttribute("userProfile") UserProfile prof,
+			@RequestParam("file") MultipartFile file, Model theModel) {	
 
 		String uploadDirectory = context.getRealPath("/award_files");
-		String f = file.getOriginalFilename();
-		String fExt = f.replaceAll(".*\\.", "");
-
-		if (fExt.equals("jpeg") || fExt.equals("jpg") || fExt.equals("png") || fExt.equals("bmp")
-				|| fExt.equals("gif")) {
-			user = userService.saveUser(user, "USER");
-			String fileName = user.getId().toString() + "." + fExt;
-			Path pathAndName = Paths.get(uploadDirectory, fileName);
-
+		String newFileName = file.getOriginalFilename();
+		String fExt = newFileName.replaceAll(".*\\.", "");
+		
+		account.setUserProfile(prof);
+		
+		// Additional custom validations.
+		account.validate(bindingResult, userService);
+		prof.validate(bindingResult, newFileName, "userProfile");
+		
+		if (bindingResult.hasErrors()) {
+			theModel.addAttribute("loggedInUser", userService.getLoggedInUser());
+			theModel.addAttribute("account", account);
+			return "user_account";
+		}
+		
+		if (fExt.equals("jpeg") || fExt.equals("jpg") || fExt.equals("png") || fExt.equals("bmp") || fExt.equals("gif")) 
+		{
 			try {
-				Files.write(pathAndName, file.getBytes());
+				if (account.getUserId() == null) {
+					// Save account to get the assigned (auto_increment) user id.
+					account = userService.saveUser(account, "USER");
+				}				
 
+				String fileName = account.getUserId().toString() + "." + fExt;
+				Path pathAndName = Paths.get(uploadDirectory, fileName);
+				
+				Files.write(pathAndName, file.getBytes());
+				account.getUserProfile().setTargetFile(fileName);
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			prof.setTargetFile(fileName);
-			user.setUserProfile(prof);
-			// if user already has a profile, delete the old one
-			if (pid >= 0) {
-				UserProfile oldProf = profileDAO.findById(pid);
-				profileDAO.removeProfile(oldProf);
-			}
-			userService.saveUser(user, "USER");
-			return "redirect:/admin/user_management";
 		}
-		// only enters if no sig file was included and if updating user,
-		// due to sig != null condition, will not enter block on new user creation
-		else if (f.equals("") && (!sig.equals(""))) {
-			user.setUserProfile(prof);
-			prof.setTargetFile(sig);
-			UserProfile oldProf = profileDAO.findById(pid);
-			profileDAO.removeProfile(oldProf);
-			user = userService.saveUser(user, "USER");
-			return "redirect:/admin/user_management";
-		}
-		// improper file format for new user or current user, or no file chosen
-		else {
 
-			if (!sig.equals("")) {
-				long userId = user.getId();
-				attr.addFlashAttribute("er", "Error: File must be an image");
-				return "redirect:/admin/account/" + userId;
-			}
-			if (f.equals("") && (sig.equals(""))) {
-				attr.addFlashAttribute("er", "Error: Please upload a signature image");
-			} else {
-				attr.addFlashAttribute("er", "Error: File must be an image");
-			}
-			return "redirect:/admin/account/add_user";
-		}
+		userService.saveUser(account, "USER");
+		return "redirect:/admin/user_management";	
 	}
-	// Brian's changes end here
-
+		
 	@GetMapping("/account/add_admin")
 	public String addAdmin(Model theModel) {
 		theModel.addAttribute("loggedInUser", userService.getLoggedInUser());
@@ -176,6 +155,8 @@ public class AdminController {
 	@PostMapping("/account/save_admin")
 	public String saveAdmin(@Valid @ModelAttribute("account") User account, 
 			BindingResult bindingResult, Model theModel) {       		
+		
+		account.validate(bindingResult, userService);
 		
 		if (bindingResult.hasErrors()) {
 			theModel.addAttribute("loggedInUser", userService.getLoggedInUser());
@@ -188,8 +169,8 @@ public class AdminController {
 	}
 
 	@RequestMapping("/account/delete_account")
-	public String deleteAccount(@RequestParam("id") Long id) {
-		userService.deleteUserById(id);
+	public String deleteAccount(@RequestParam("userId") Long userId) {
+		userService.deleteUserById(userId);
 		return "redirect:/admin/user_management";
 	}
 

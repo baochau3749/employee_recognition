@@ -49,7 +49,8 @@
 		}
 		h3
 		{
-			margin: 30px auto;
+			margin-top: 50px;
+			margin-bottom: 30px;
 		}
 	</style>
 </head>
@@ -82,8 +83,13 @@
 		
 		<div>
 			<div>			
-				<h3 align="center">USER LIST</h3>
-				<hr>
+				<h3 style="margin-bottom: 20px" align="center">USER LIST</h3>				
+			</div>
+			<div style="margin: 0px 0px 20px 10px">
+				<c:url var="addUserLink" value="/admin/account/add_user" />
+				<c:url var="addAdminLink" value="/admin/account/add_admin" />
+				<a style="margin-right: 20px" class="btn btn-primary" href="${addUserLink}">Add New User</a>
+				<a class="btn btn-primary" href="${addAdminLink}">Add New Admin</a>
 			</div>
 			<table class="table table-bordered table-striped">
 				<thead>
@@ -96,9 +102,9 @@
 				</thead>
 				<tbody>
 					<c:forEach var="user" items="${users}">
-						<c:url var="updateLink" value="/admin/account/${user.id}" />
+						<c:url var="updateLink" value="/admin/account/${user.userId}" />
 						<c:url var="deleteLink" value="/admin/account/delete_account">
-							<c:param name="id" value="${user.id}"></c:param>
+							<c:param name="userId" value="${user.userId}"></c:param>
 						</c:url>
 						<tr>
 							<td>${user.email}</td>
@@ -106,25 +112,16 @@
 							<td>${user.role.role}</td>
 							<td>
 								<a href="${updateLink}" class="btn btn-outline-primary" role="button">Update</a>
-								<c:if test="${!loggedInUser.email.equals(user.email)}">
-									  <a href="${deleteLink}" class="btn btn-outline-primary" role="button">Delete</a>
-								</c:if>
+								<a href="${deleteLink}"  role="button" class="btn btn-outline-primary 
+										${loggedInUser.email.equals(user.email) ? 'disabled' : ''}">Delete</a>
 							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 	
-			<c:url var="addUserLink" value="/admin/account/add_user" />
-			<c:url var="addAdminLink" value="/admin/account/add_admin" />
 
-			<div style="text-align:center">
-				<a class="btn btn-primary" href="${addUserLink}">Add New User</a>
-				<a class="btn btn-primary" href="${addAdminLink}">Add New Admin</a>
-			</div>
 		</div>
-	
-		<hr><br>
 		
 	</div>
 </body>

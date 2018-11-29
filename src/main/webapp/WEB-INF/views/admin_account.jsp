@@ -33,6 +33,11 @@
 	{
 		margin-bottom: 20px;
 	}
+	h3
+	{
+		margin-top: 50px;
+		margin-bottom: 50px;
+	}
 	</style>
 </head>
 
@@ -54,8 +59,7 @@
 				</li>
 				
 				<li class="nav-item">
-					<form:form action="${pageContect.request.contextPath}/logout"
-						method="POST">
+					<form:form action="${pageContect.request.contextPath}/logout" method="POST">
 						<input class="nav-link btn btn-outline-primary" type="submit" value="Logout">
 					</form:form>
 				</li>
@@ -67,40 +71,25 @@
 		
 		<form:form action="${pageContext.request.contextPath}/admin/account/save_admin"
 				   modelAttribute="account" method="POST">
+			
+			<form:errors path="*" cssClass="alert alert-danger" element="div"></form:errors>
+			
 			<c:if test="${account != null}">
-				<form:input type="hidden" path="id"/>
-				<form:input type="hidden" path="timeCreated"/>			
-			</c:if>		   
-			
-			<form:errors path ="*" cssClass ="errorblock" element ="div" />
+				<form:input type="hidden" path="userId"/>
+				<form:input type="hidden" path="timeCreated"/>	
+			</c:if>		   					
 			
 			<div class="form-group row">
 				<label class="col-sm-2">Email</label>
-				<form:input class="form-control col-sm-10" type="email" path="email"/>
+				<input class="form-control col-sm-10" type="email" name="email" 
+					   value="${account == null ? '' : account.email}" placeholder="Email"/>
 			</div>
 
 			<div class="form-group row">
 				<label class="col-sm-2">Password</label>
-				<form:input class="form-control col-sm-10" type="password" path="password"/>
-			</div>
-			
-<%-- 			<c:if test="${account != null}">
-				<input type="hidden" id="id" name="id" value="${id}"/>
-				<input type="hidden" id="timeCreated" name="timeCreated" value="${timeCreated}"/>			
-			</c:if>		   
-			
-			<form:errors path ="*" cssClass ="errorblock" element ="div" />
-			
-			<div class="form-group row">
-				<label class="col-sm-2">Email</label>
-				<input class="form-control col-sm-10" type="email" name="email" value="${email}"}/>
-			</div>
-
-			<div class="form-group row">
-				<label class="col-sm-2">Password</label>
-				<input class="form-control col-sm-10" type="password" name="password" value="${password}"}/>
-			</div> --%>
-
+				<input class="form-control col-sm-10" type="password" name="password" 
+					   value="${account == null ? '' : account.password}" placeholder="Password"/>
+			</div>			
 			<input type="submit" class="btn btn-primary" value="Save"/>
 		</form:form>
 	</div>

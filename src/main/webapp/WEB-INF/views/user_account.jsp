@@ -7,32 +7,37 @@
 	<meta charset="ISO-8859-1">
 	<title>User Main Page</title>
 	<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	crossorigin="anonymous"></script>
-	
-<style>
-.nav-item
-{
-	margin: auto 10px auto;
-}
-
-h2
-{
-	margin-bottom: 20px;
-}
-</style>
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+		crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+		
+	<style>
+		.nav-item
+		{
+			margin: auto 10px auto;
+		}
+		
+		h2
+		{
+			margin-bottom: 20px;
+		}
+		h3
+		{
+			margin-top: 50px;
+			margin-bottom: 50px;
+		}
+	</style>
 </head>
 
 <body>
@@ -64,71 +69,51 @@ h2
 		
 		<h3>Welcome: ${loggedInUser.email}</h3>	
 	
-		<form:form modelAttribute="account" method="POST" enctype="multipart/form-data"
-				   action="${pageContext.request.contextPath}/admin/account/save_user">
-			
+		<form:form action="${pageContext.request.contextPath}/admin/account/save_user"
+		   		   modelAttribute="account" method="POST" enctype="multipart/form-data">
+		   		   
+			<form:errors path="*" cssClass="alert alert-danger" element="div"></form:errors>		   
 			<c:if test="${account != null}">
-				<input type="hidden" id="id" name="id" value="${id}"/>
-				<input type="hidden" id="timeCreated" name="timeCreated" value="${account.timeCreated}"/>
-				<input type="hidden" id="sig" name="sig" value="${account.userProfile.targetFile }"/>
-				<input type="hidden" id="userProfileId" name="userProfileId" value="${account.userProfile.id}"/>
-				<%-- <input type="hidden" id="userProfile" name="userProfile" value="${account.userProfile}"/> --%>
-			</c:if>			   
-			<c:if test="${account == null}">
-				<input type="hidden" id="userProfileId" name="userProfileId" value="${-1}"/>
-			</c:if>
+				<form:input type="hidden" path="userId"/>
+				<form:input type="hidden" path="timeCreated"/>
+				<input type="hidden" name="profileId" value="${account.userProfile.profileId}"/>												
+			</c:if>								
+				   
+			<input type="hidden" name="targetFile" 
+				   value="${account == null ? '' : account.userProfile.targetFile}"/>				 			
+						   		
+			<div class="form-group row">
+				<label class="col-sm-2">First Name</label>
+				<input class="form-control col-sm-10" type="text" name="firstName" 
+					   value="${account == null ? '' : account.userProfile.firstName}" placeholder="First Name"/>
+			</div>
 			
 			<div class="form-group row">
+				<label class="col-sm-2">Last Name</label>
+				<input class="form-control col-sm-10" type="text" name="lastName" 
+					   value="${account == null ? '' : account.userProfile.lastName}" placeholder="Last Name"/>
+			</div>
+
+			<div class="form-group row">
 				<label class="col-sm-2">Email</label>
-				<input class="form-control col-sm-10" type="email" name="email" value="${account.email}"/>
+				<input class="form-control col-sm-10" type="email" name="email" 
+					   value="${account == null ? '' : account.email}" placeholder="Email"/>
 			</div>
 			
 			<div class="form-group row">
 				<label class="col-sm-2">Password</label>
-				<input class="form-control col-sm-10" type="password" name="password" value="${account.password}"/>
+				<input class="form-control col-sm-10" type="password" name="password" 
+					   value="${account == null ? '' : account.password}" placeholder="Password"/>
 			</div>
-
-			<c:if test="${account != null}">
-				<div class="form-group row">
-					<label class="col-sm-2">First Name</label>
-					<input class="form-control col-sm-10" type="text" name="firstName" value="${account.userProfile.firstName}" placeholder="First Name"/></p>
-				</div>
-			</c:if>
-				
-			<c:if test="${account == null}">
-				<div class="form-group row">
-					<label class="col-sm-2">First Name</label>
-					<input class="form-control col-sm-10" type="text" name="firstName" value="" placeholder="First Name"/></p>
-				</div>
-			</c:if>	
-			
-			<c:if test="${account != null}">
-				<div class="form-group row">
-					<label class="col-sm-2">Last Name</label>
-					<input class="form-control col-sm-10" type="text" name="lastName" value="${account.userProfile.lastName}" placeholder="Last Name"/></p>
-				</div>
-			</c:if>	
-			
-			<c:if test="${account == null}">
-				<div class="form-group row">
-					<label class="col-sm-2">Last Name</label>
-					<input class="form-control col-sm-10" type="text" name="lastName" value="" placeholder="Last Name"/></p>
-				</div>
-			</c:if>	
-			
+							
 			<div class="form-group row">
 				<label class="col-sm-2">Signature</label>
-				<input class="col-sm-8" type="file" name="file"/></p>
+				<input class="col-sm-8" type="file" name="file"/>
 			</div>
-			
+										
 			<input type="submit" class="btn btn-primary" value="Save"/>
-			
-			<c:if test="${not empty er}">
-				${er}
-			</c:if>
+
 		</form:form>
-	</div>
-	
-	
+	</div>		
 </body>
 </html>

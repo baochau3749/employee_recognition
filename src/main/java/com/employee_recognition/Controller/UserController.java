@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.validation.Valid;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -37,7 +38,7 @@ import com.employee_recognition.Service.AwardService;
 import com.employee_recognition.Service.UserService;
 
 @Controller
-@SessionAttributes({"userID","user"})
+@SessionAttributes({"userId","user"})
 public class UserController {
 
 	@Autowired
@@ -51,16 +52,14 @@ public class UserController {
 	
 	 @Autowired
      private ServletContext context;
-	 
-
-	
+	 	
 	// User Main Page
 	@GetMapping("/user")
-	public String userMainPage(@SessionAttribute("userID") Long userID, Model model) {
+	public String userMainPage(@SessionAttribute("userId") Long userId, Model model) {
 		List<Award> awards;
 		List<String> employees = new ArrayList<String>();
 		List<String> emails = new ArrayList<String>();
-		User currentUser = userDAO.getUserById(userID); 
+		User currentUser = userDAO.getUserById(userId); 
 		awards = currentUser.getUserAwards();
 
 		for (int i = 0; i < awards.size(); i++) {
@@ -79,61 +78,56 @@ public class UserController {
 	}
 	
 	// User Update Page GET
-	@RequestMapping(value = "/user/{userID}", method=RequestMethod.GET )
-	public String updateUserPage(@PathVariable("userID") Long userID, Model model)
+	@RequestMapping(value = "/user/{id}", method=RequestMethod.GET )
+	public String updateUserPage(@PathVariable("id") Long id, Model model)
 	{
-		User temp = userDAO.getUserById(userID);
-		
-		model.addAttribute("user", temp);
-		
+		User temp = userDAO.getUserById(id);		
+		model.addAttribute("user", temp);		
 		return "user_update";
 	}
 	
 	// User Update Page POST
-	@RequestMapping(value = "/user/{userID}", method=RequestMethod.POST)
-	public String saveUserPage(@ModelAttribute("user") User user, @RequestParam("file") 
-	MultipartFile file, Model model)
+	@RequestMapping(value = "/user/{id}", method=RequestMethod.POST)
+	public String saveUserPage(@PathVariable("id") Long id, 
+				@Valid @ModelAttribute("user") User user,
+				BindingResult bindingResult,
+				@RequestParam("file") MultipartFile file, Model model) 
 	{
+		
 		String uploadDirectory = context.getRealPath("/award_files");
-
-		String f = file.getOriginalFilename();
-		String fExt = f.replaceAll(".*\\.", "");
-
-		if (fExt.equals("jpeg") || fExt.equals("jpg") || fExt.equals("png") || fExt.equals("bmp") || fExt.equals("gif")){
-			UserProfile profile = user.getUserProfile();
-			String fileName = user.getId().toString() + "." + fExt;
-
-			Path pathAndName = Paths.get(uploadDirectory, fileName);
-			profile.setTargetFile(fileName);
+		String newFileName = file.getOriginalFilename();
+		String fExt = newFileName.replaceAll(".*\\.", "");
+			
+		// Additional custom validations.
+		user.validate(bindingResult, userDAO);		
+		user.getUserProfile().validate(bindingResult, newFileName, "userProfile");
+		
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("user", user);
+			return "user_update";
+		}
+		
+		if (fExt.equals("jpeg") || fExt.equals("jpg") || fExt.equals("png") || fExt.equals("bmp") || fExt.equals("gif")) {				
 			try {
+				String fileName = user.getUserId().toString() + "." + fExt;
+				Path pathAndName = Paths.get(uploadDirectory, fileName);
+				
 				Files.write(pathAndName, file.getBytes());
-
+				user.getUserProfile().setTargetFile(fileName);
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			user = userDAO.saveUser(user,"USER");
-			return "redirect:/user"; 
 		}
-		else if (f.equals("")){
-			user = userDAO.saveUser(user,"USER");
-			return "redirect:/user"; 
-		}
-		else {
-			user = userDAO.saveUser(user,"USER");
-			
-			model.addAttribute("user", user);
-			
-			model.addAttribute("er", "Error: File must be an image");
-			return "user_update";
-		}
-
+		
+		user = userDAO.saveUser(user,"USER");
+		return "redirect:/user"; 
 	}
 	
 	@RequestMapping(value = "/image")
     @ResponseBody
     public byte[] getImage(@ModelAttribute("user") User user) throws IOException {
 		String uploadDirectory = context.getRealPath("/award_files");
-		System.out.println("up " + uploadDirectory);
 		java.io.File serverFile = new java.io.File(uploadDirectory + "/" + user.getUserProfile().getTargetFile());
 
         return Files.readAllBytes(serverFile.toPath());

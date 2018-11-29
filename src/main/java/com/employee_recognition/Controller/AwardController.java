@@ -2,7 +2,6 @@ package com.employee_recognition.Controller;
 
 import java.beans.PropertyEditorSupport;
 import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -31,7 +30,7 @@ import com.employee_recognition.Service.LatexService;
 import com.employee_recognition.Service.UserService;
 
 @Controller
-@SessionAttributes({ "userID", "user" })
+@SessionAttributes({ "userId", "user" })
 @RequestMapping("/user")
 public class AwardController {
 
@@ -90,13 +89,9 @@ public class AwardController {
 	}
 
 	@GetMapping("/award")
-	public String employeeMainPage(@SessionAttribute("userID") Long userID, Model model) {
+	public String employeeMainPage(@SessionAttribute("userId") Long userId, Model model) {
 		Award award = new Award();
 		AwardType at = new AwardType();
-		
-//		User currentUser = userDAO.getUserById(userID);
-//		award.setUser(currentUser);
-//		model.addAttribute("user", currentUser);
 		
 		// generate award list
 		award.setAwardType(at);
@@ -114,12 +109,12 @@ public class AwardController {
 	public String saveAward(@ModelAttribute("dateGiven") String dateGiven,
 			@ModelAttribute("award") Award award, 
 			BindingResult bindingResult, 
-			@SessionAttribute("userID") Long userId, Model model) {
+			@SessionAttribute("userId") Long userId, Model model) {
 					
-		if (award.getdateGiven() == null) {
+		if (award.getDateGiven() == null) {
 			model.addAttribute("awardTypes", awardTypeDAO.getAwardTypeList());
 			model.addAttribute("employees", employeeDAO.getEmployees());
-			model.addAttribute("dateGiven", dateGiven);			
+			model.addAttribute("dateGiven", dateGiven);
 			model.addAttribute("award", award);
 			bindingResult.rejectValue("dateGiven", "dateGiven", errorMsg);
 			return "award";
@@ -128,7 +123,6 @@ public class AwardController {
 			User currentUser = userDAO.getUserById(userId);
 			award.setUser(currentUser);
 			awardDAO.saveAward(award);
-			
 			String awardFile = latexService.CreateAwardFile(award);
 
 			try {

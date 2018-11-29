@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.validation.BindingResult;
+
 @Entity
 @Table(name = "user_profile")
 public class UserProfile
@@ -14,11 +16,15 @@ public class UserProfile
 	@Id
 	@Column(name = "user_profile_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
+	private Long profileId;
 	
+//	@NotEmpty(message="First Name is missing.")
+//	@Size(max=50, message="First Name must be 50 characters or less.")
 	@Column(name="first_name")
 	private String firstName;
 	
+//	@NotEmpty(message="Last Name is missing.")
+//	@Size(max=50, message="Last Name must be 50 characters or less.")
 	@Column(name="last_name")
 	private String lastName;
 	
@@ -31,20 +37,20 @@ public class UserProfile
 	// overload constructor
 	public UserProfile(String firstName, String lastName, String signatureFile)
 	{
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.targetFile = signatureFile;
+		this.setFirstName(firstName);
+		this.setLastName(lastName);
+		this.setTargetFile(signatureFile);
 	}
 	
 	// getters and setters
-	public Long getId()
+	public Long getProfileId()
 	{
-		return id;
+		return profileId;
 	}
 
-	public void setId(Long id)
+	public void setProfileId(Long profileId)
 	{
-		this.id = id;
+		this.profileId = profileId;
 	}
 
 	public String getFullName()
@@ -59,7 +65,7 @@ public class UserProfile
 
 	public void setFirstName(String firstName)
 	{
-		this.firstName = firstName;
+		this.firstName = (firstName == null) ? "" : firstName.trim();
 	}
 
 	public String getLastName()
@@ -69,7 +75,7 @@ public class UserProfile
 
 	public void setLastName(String lastName)
 	{
-		this.lastName = lastName;
+		this.lastName = (lastName == null) ? "" : lastName.trim();
 	}
 
 	public String getTargetFile()
@@ -79,11 +85,40 @@ public class UserProfile
 
 	public void setTargetFile(String targetFile)
 	{
-		this.targetFile = targetFile;
+		this.targetFile = (targetFile == null) ? "" : targetFile.trim();
 	}
 
 	@Override
 	public String toString() {
-		return "UserProfile [id=" + id + ", fullName=" + getFullName() + ", targetFile=" + targetFile + "]";
+		return "UserProfile [profileId=" + profileId + ", fullName=" + getFullName() + ", targetFile=" + targetFile + "]";
+	}
+	
+	public void validate(BindingResult bindingResult, String newFileName, String errorFieldName) {
+		if (this.firstName.isEmpty()) {
+			bindingResult.rejectValue(errorFieldName, errorFieldName, "First name is missing.");
+		}
+		else if (this.firstName.length() > 50) {
+			bindingResult.rejectValue(errorFieldName, errorFieldName, "First name must be 50 characters or less.");
+		}
+
+		if (this.lastName.isEmpty()) {
+			bindingResult.rejectValue(errorFieldName, errorFieldName, "Last name is missing.");
+		}
+		else if (this.lastName.length() > 50) {
+			bindingResult.rejectValue(errorFieldName, errorFieldName, "Last name must be 50 characters or less.");
+		}
+		
+		if (!newFileName.isEmpty()) {
+			String fExt = newFileName.replaceAll(".*\\.", "");
+			boolean isNewFileExtensionValid = fExt.equals("jpeg") || fExt.equals("jpg") || 
+					  						  fExt.equals("png") || fExt.equals("bmp") || fExt.equals("gif");
+			if (!isNewFileExtensionValid) {
+				String errorMsg = "Signature file must be a jpeg, jpg, png, bmp, or gif file. ";
+				bindingResult.rejectValue(errorFieldName, errorFieldName, errorMsg);
+			}
+		}
+		else if (this.targetFile.isEmpty()) {
+			bindingResult.rejectValue(errorFieldName, errorFieldName, "Signature file is required.");
+		}
 	}
 }

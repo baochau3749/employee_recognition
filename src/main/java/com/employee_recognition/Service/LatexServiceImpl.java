@@ -40,7 +40,7 @@ public class LatexServiceImpl implements LatexService {
 		Employee employee = employeeDAO.findById(award.getEmployee());
 		AwardType awardType = award.getAwardType();
 
-		String awardDate = new SimpleDateFormat("MM/dd/yyyy").format(award.getdateGiven());
+		String awardDate = new SimpleDateFormat("MM/dd/yyyy").format(award.getDateGiven());
 		String employeeName = employee.getFirstName() + " " + employee.getLastName();
 		String userName = currentUser.getUserProfile().getFirstName() + " "
 				+ currentUser.getUserProfile().getLastName();

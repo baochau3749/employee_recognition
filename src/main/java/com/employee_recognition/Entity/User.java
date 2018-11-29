@@ -20,6 +20,10 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.validation.BindingResult;
+
+import com.employee_recognition.Service.UserService;
+
 @Entity
 @Table(name = "user")
 public class User {
@@ -27,9 +31,9 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
-	private Long id;
+	private Long userId;
 
-	@Pattern(regexp=".+@.+\\..+", message="Email is missing or invalid.")
+	@Pattern(regexp=".+@.+\\..+", message="Email is missing or invalid (must be in \"___@___.___\" format).")
 	@Size(max=255, message="Email must be 255 characters or less.")
 	@Column(name = "email")
 	private String email;
@@ -62,17 +66,17 @@ public class User {
 	// overload constructor
 	public User(String email, String password) {
 		this();
-		this.email = email;
-		this.password = password;
+		this.setEmail(email);
+		this.setPassword(password);
 	}
 
 	// getters and setters
-	public Long getId() {
-		return id;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public String getEmail() {
@@ -80,7 +84,7 @@ public class User {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = (email == null) ? "" : email.trim();		
 	}
 
 	public String getPassword() {
@@ -88,7 +92,7 @@ public class User {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = (password == null) ? "" : password.trim();
 	}
 
 	public Timestamp getTimeCreated() {
@@ -137,7 +141,14 @@ public class User {
 	
 	@Override
 	public String toString() {	
-		return "User [id=" + id + ", email=" + email + ", password=" + password + 
+		return "User [UserId=" + userId + ", email=" + email + ", password=" + password + 
 				", roles=(" + role.getRole() + "), " + userProfile + "]";
+	}
+	
+	public void validate(BindingResult bindingResult, UserService userService) {		
+		Boolean emailAvailable = userService.isEmailAvailable(this.email, this.userId);		
+		if (!emailAvailable) {
+			bindingResult.rejectValue("email", "user.email", "Email address has been used by another account.");
+		}		
 	}
 }

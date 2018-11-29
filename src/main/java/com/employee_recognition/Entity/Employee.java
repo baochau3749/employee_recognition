@@ -1,7 +1,8 @@
 package com.employee_recognition.Entity;
 
+
 import java.sql.Date;
-import java.text.ParseException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -17,10 +18,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 @Entity
-@Table(name = "employee")
+@Table(name = "employee") 
 public class Employee {
 
 	@Id
@@ -38,14 +37,15 @@ public class Employee {
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Pattern(regexp=".+@.+\\..+", message="Email is missing or invalid.")
+	@Pattern(regexp=".+@.+\\..+", 
+			message="Email is missing or invalid (must be in \"___@___.___\" format).")
 	@Size(max=255, message="Email must be 255 characters or less.")
 	@Column(name = "email")
 	private String email;
 
 	@Column(name = "gender")
 	private String gender;
-
+	
 	@Column(name = "birth_date")
 	private Date birthDate;
 
@@ -87,7 +87,7 @@ public class Employee {
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstName = (firstName == null) ? "" : firstName.trim();	
 	}
 
 	public String getLastName() {
@@ -95,7 +95,7 @@ public class Employee {
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastName = (lastName == null) ? "" : lastName.trim();
 	}
 
 	public String getEmail() {
@@ -103,7 +103,7 @@ public class Employee {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = (email == null) ? "" : email.trim();
 	}
 
 	public String getGender() {
@@ -114,16 +114,19 @@ public class Employee {
 		this.gender = gender;
 	}
 
+	public String getFormattedBirthDate() {
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
+		return dateFormat.format(this.birthDate).toString();
+	}
+	
 	public Date getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(String birthDate) throws ParseException {
-		SimpleDateFormat dateFormatObj = new SimpleDateFormat("MM/dd/yyyy");
-		java.util.Date parsedBD = dateFormatObj.parse(birthDate);
-		this.birthDate = new Date(parsedBD.getTime());
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
 	}
-
+	
 	public int getState() {
 		return state;
 	}

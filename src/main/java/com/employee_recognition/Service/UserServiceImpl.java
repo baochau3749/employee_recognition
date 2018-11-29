@@ -50,6 +50,11 @@ public class UserServiceImpl implements UserService
 	}
 
 	@Override
+	public Boolean isEmailAvailable(String email, Long excludeId) {
+		return userRepository.isEmailAvailable(email, excludeId);
+	}
+	
+	@Override
 	public User getUserById(Long id)
 	{
 		return userRepository.findById(id);
@@ -97,9 +102,13 @@ public class UserServiceImpl implements UserService
 	@Override
 	public void sendEmailResetPassword(User user) throws EmailException
 	{
-		String name = user.getUserProfile().getFullName();
+		String name = "Admin";
 		String userEmail = user.getEmail();
 		String userPassword = user.getPassword();
+		
+		if (user.getUserProfile() != null) {
+			name = user.getUserProfile().getFullName();
+		}
 		
 		Email email = new SimpleEmail();
 		email.setHostName("smtp.mail.yahoo.com");

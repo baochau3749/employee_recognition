@@ -47,7 +47,7 @@ public class AwardType {
 		return type;
 	}
 	public void setType(String awardType) {
-		this.type = awardType;
+		this.type = (awardType == null) ? "" : awardType.trim();	
 	}
 
 	@Override

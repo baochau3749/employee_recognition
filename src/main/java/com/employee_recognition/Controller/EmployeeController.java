@@ -1,9 +1,7 @@
 package com.employee_recognition.Controller;
 
-import java.awt.Component;
 import java.beans.PropertyEditorSupport;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,7 +10,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.employee_recognition.Entity.Award;
 import com.employee_recognition.Entity.AwardType;
@@ -50,15 +46,29 @@ public class EmployeeController {
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder, WebRequest request) {
-		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");		
-		binder.registerCustomEditor(Date.class, "birthDate", new CustomDateEditor(format, true));				    
+		binder.registerCustomEditor(Date.class, "birthDate", new PropertyEditorSupport() {			
+			@Override
+			public void setAsText(String date) {	
+				Date bDate = null;
+												
+				try {
+					SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy");	
+					java.util.Date parsedDate = format.parse(date);
+					bDate = new Date(parsedDate.getTime());
+					  
+				} catch (ParseException e) {
+					bDate = null;
+				}
+				setValue(bDate);
+			}
+		});
 	}
-	
+		
 	@GetMapping("/employees")
 	public String employeeMainPage(Model model) {
 		employees = employeeDAO.getEmployees();
 		model.addAttribute("employees", employees);
-		return "employee_management";
+		return "employee_management"; 
 	}
 	
 	@GetMapping("/employee")
@@ -78,9 +88,13 @@ public class EmployeeController {
 	
 	@PostMapping("/addEmployee")
 	public String addEmployee(@Valid @ModelAttribute("employee") Employee empl,
-			BindingResult bindingResult, 
-			@SessionAttribute("userID") Long userId, Model model) {	
-								
+			BindingResult bindingResult, @ModelAttribute("birthDate") String birthDate, Model model) 
+	{							
+		if (empl.getBirthDate() == null) {
+			String errorMsg = "Birth date is missing or invalid (must be in \"MM/dd/yyyy\" format).";
+			bindingResult.rejectValue("birthDate", "birthDate", errorMsg);
+		}
+		
 		if (bindingResult.hasErrors()) {
 			states = employeeDAO.getStateList();
 			departments = employeeDAO.getDepartmentList();
@@ -89,6 +103,7 @@ public class EmployeeController {
 			ArrayList<Department> dList = employeeDAO.createDepartmentList(departments);
 			ArrayList<Position> pList = employeeDAO.createPositionList(positions);
 			model.addAttribute("employee", empl);
+			model.addAttribute("prevBirthDate", birthDate);
 			model.addAttribute("states", sList);
 			model.addAttribute("positions", pList);
 			model.addAttribute("departments", dList);
@@ -111,10 +126,15 @@ public class EmployeeController {
 
 	// Deleting an employee
 	@RequestMapping(value = "/update_employee")
-	public String updateEmployee(@Valid @ModelAttribute("employee") Employee empl,
-			BindingResult bindingResult, 
-			@SessionAttribute("userID") Long userId, Model model) {
-
+	public String updateEmployee(@ModelAttribute("birthDate") String birthDate,
+			@ModelAttribute("employee") @Valid Employee empl,
+			BindingResult bindingResult, Model model) 
+	{	
+		if (empl.getBirthDate() == null) {
+			String errorMsg = "Birth date is missing or invalid (must be in \"MM/dd/yyyy\" format).";
+			bindingResult.rejectValue("birthDate", "birthDate", errorMsg);
+		}
+		
 		if (bindingResult.hasErrors()) {
 			states = employeeDAO.getStateList();
 			departments = employeeDAO.getDepartmentList();
@@ -123,6 +143,7 @@ public class EmployeeController {
 			ArrayList<Department> dList = employeeDAO.createDepartmentList(departments);
 			ArrayList<Position> pList = employeeDAO.createPositionList(positions);
 			model.addAttribute("employee", empl);
+			model.addAttribute("prevBirthDate", birthDate);
 			model.addAttribute("states", sList);
 			model.addAttribute("positions", pList);
 			model.addAttribute("departments", dList);

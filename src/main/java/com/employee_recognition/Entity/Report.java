@@ -20,7 +20,7 @@ public class Report
 	}
 	public void setName(String name)
 	{
-		this.name = name;
+		this.name = (name == null) ? "" : name.trim();
 	}
 	public String getLabel()
 	{
@@ -28,7 +28,7 @@ public class Report
 	}
 	public void setLabel(String label)
 	{
-		this.label = label;
+		this.label = (label == null) ? "" : label.trim();
 	}
 	
 	

@@ -25,17 +25,37 @@ public class UserRepositoryImpl implements UserRepository {
 	
 	@Override
 	public User findByEmail(String email) {
+		return findByEmail(email, null);
+	}
+	
+	@Override
+	public User findByEmail(String email, Long excludeId) {			
+		Query query;
 		String queryStr = "SELECT * FROM user WHERE email = :user_email";
-		Query query = entityManager.createNativeQuery(queryStr, User.class);
-		query.setParameter("user_email", email);
-		
-		List<?> resultList = query.getResultList();
+		if (excludeId == null) {
+			query = entityManager.createNativeQuery(queryStr, User.class);
+			query.setParameter("user_email", email);
+		}
+		else {
+			queryStr += " AND user_id != :user_id";
+			query = entityManager.createNativeQuery(queryStr, User.class);
+			query.setParameter("user_email", email);
+			query.setParameter("user_id", excludeId);
+		}
 				
+		List<?> resultList = query.getResultList();				
 		return (resultList.size() == 1) ? (User)resultList.get(0) : null;
 	}
 	
+	@Override
+	public Boolean isEmailAvailable(String email, Long excludeId) {
+		User tempUser = findByEmail(email, excludeId);
+		return (tempUser == null);
+	}
+
+	
 	public User save(User user) {
-		if (user.getId() == null)
+		if (user.getUserId() == null)
 			entityManager.persist(user);
 		else
 			entityManager.merge(user);
