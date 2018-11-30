@@ -56,7 +56,7 @@
 
 	<div class="container">
 	
-		<h2 class="display-3"  align="center">Employee Management</h2>
+		<h2 class="display-3" align="center">Employee Management</h2>
 		
 		<ul class="nav nav-pills nav-justified">
 			<li class="nav-item">
@@ -87,8 +87,9 @@
 		<div>
 			<h3 align="center">EMPLOYEE LIST</h3>
 		
-			<a class="btn btn-primary" href="/user/employee">Add Employee</a>
-			<br><br>
+			<div style="margin: 20px;" align="center">
+				<a class="btn btn-primary" href="/user/employee">Add Employee</a>
+			</div>
 			<table class="table table-bordered table-striped">
 				<tr>
 					<th scope="col">First Name</th>
@@ -111,7 +112,7 @@
 							<td>
 							<a href="${updateLink}" class="btn btn-outline-primary"
 							role="button">Update</a>
-							<a style="margin-left: 15px" ref="${deleteLink}" class="btn btn-outline-primary"
+							<a style="margin-left: 15px" href="${deleteLink}" class="btn btn-outline-primary"
 							role="button">Delete</a></td>
 						</tr>
 					</c:forEach>

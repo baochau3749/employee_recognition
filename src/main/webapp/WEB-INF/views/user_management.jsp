@@ -88,7 +88,7 @@
 			<div>			
 				<h3 style="margin-bottom: 20px" align="center">USER LIST</h3>				
 			</div>
-			<div style="margin: 0px 0px 20px 10px">
+			<div style="margin: 20px;" align="center">
 				<c:url var="addUserLink" value="/admin/account/add_user" />
 				<c:url var="addAdminLink" value="/admin/account/add_admin" />
 				<a style="margin-right: 20px" class="btn btn-primary" href="${addUserLink}">Add New User</a>

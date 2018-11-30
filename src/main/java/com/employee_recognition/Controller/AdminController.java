@@ -172,14 +172,12 @@ public class AdminController {
 		model.addAttribute("report", reportList);
 		model.addAttribute("loggedInUser", userService.getLoggedInUser());
 			
-		System.out.println("label = " + label);
 		createReportData(label, model, true);
 		
 		return "award_report";
 	}
 	
 	private String createReportData(String label, Model model, Boolean showAnalysis) {
-		System.out.println("Inside createReportData");
 		String filename = new String();
 		String title = new String();
 		Map<String, Integer> table = new HashMap<>();
@@ -249,14 +247,12 @@ public class AdminController {
 	{
 		// create CSV file based on label provided
 		String filename = createReportData(label, model, false);
-		System.out.println("filename = " + filename);
+
 		// target the new CSV file
 		//String filePath = System.getProperty("user.dir") + "\\src\\main\\webapp\\report_files";
 		String filePath = context.getRealPath("/report_files");
 		Path file = Paths.get(filePath, filename);
-
-		System.out.println("Complete report file name = " + file.toString());
-		
+	
 		// type of download
 		response.setContentType("text/csv");
 		response.addHeader("Content-Disposition", "attachment; filename=" + filename);
