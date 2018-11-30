@@ -1,6 +1,7 @@
 package com.employee_recognition.Controller;
 
 import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.employee_recognition.Entity.DaysMonthsYears;
 import com.employee_recognition.Entity.Department;
 import com.employee_recognition.Entity.Employee;
+import com.employee_recognition.Entity.EmployeeForm;
 import com.employee_recognition.Entity.Position;
 import com.employee_recognition.Entity.State;
+import com.employee_recognition.Entity.StringDate;
 import com.employee_recognition.Repository.EmployeeRepository;
 
 @Controller
@@ -83,8 +87,10 @@ public class EmployeeController {
 
 	// Deleting an employee
 	@RequestMapping(value = "/update_employee")
-	public String updateEmployee(@ModelAttribute("employee")Employee empl, BindingResult br,
+	public String updateEmployee(@ModelAttribute("employeeForm")EmployeeForm emplfr, BindingResult br,
 			RedirectAttributes attr) {
+		Employee empl = emplfr.getEmployee();
+		StringDate sd = emplfr.getStringDate();
 		if (empl.getFirstName().equals("") || empl.getLastName().equals("") || empl.getEmail().equals(""))
 		{
 			attr.addFlashAttribute("er", "Error: Please fill in all fields");
@@ -95,20 +101,31 @@ public class EmployeeController {
 //			attr.addFlashAttribute("er2", "Error: Please fill in a birth date with MM/dd/yyyy format. Ex: 08/20/1980");
 //			return "redirect:/user/editEmployee?id=" + empl.getId();
 //	    }
+		String bd = "10/" + sd.getDay() + "/" + sd.getYear();
+		try {
+			empl.setBirthDate(bd);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		employeeDAO.save(empl);
 		return "redirect:/user/employees";
 	}
 
 	@GetMapping("/editEmployee")
 	public String employeeEdit(@RequestParam("id") Long id, Model model) {
 		Employee curEmp = employeeDAO.findById(id);
-		System.out.println("printing id: " + curEmp.getId());
+		StringDate stringDate = new StringDate();
+		EmployeeForm employeeForm = new EmployeeForm(curEmp, stringDate);
+		DaysMonthsYears dmy = new DaysMonthsYears();
 		states = employeeDAO.getStateList();
 		departments = employeeDAO.getDepartmentList();
 		positions = employeeDAO.getPositionList();
 		ArrayList<State> sList = employeeDAO.createStateList(states);
 		ArrayList<Department> dList = employeeDAO.createDepartmentList(departments);
 		ArrayList<Position> pList = employeeDAO.createPositionList(positions);
-		model.addAttribute("employee", curEmp);
+		model.addAttribute("dmy", dmy);
+		model.addAttribute("employeeForm", employeeForm);
 		model.addAttribute("states", sList);
 		model.addAttribute("positions", pList);
 		model.addAttribute("departments", dList);

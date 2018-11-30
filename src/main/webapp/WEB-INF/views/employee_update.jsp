@@ -76,32 +76,56 @@ h2
 		   	</div>
 			</c:if>
 	
-			<form:form action="update_employee" modelAttribute="employee" method="GET">
-			<form:input type="hidden" path="id"/>
+			<form:form action="update_employee" modelAttribute="employeeForm" method="GET">
+			<form:input type="hidden" path="employee.id"/>
+			<form:input type="hidden" path="employee.birthDate" value="10/10/2000"/>
 				<div class="form-group row">
 					<label class="col-sm-2">First Name</label>
-					<form:input class="form-control col-sm-10" path="firstName"/>
+					<form:input class="form-control col-sm-10" path="employee.firstName"/>
 				</div>
 				
 				
 				<div class="form-group row">
 					<label class="col-sm-2">Last Name</label>
-					<form:input class="form-control col-sm-10" path="lastName"/>
+					<form:input class="form-control col-sm-10" path="employee.lastName"/>
 				</div>
 				
 				<div class="form-group row">
 					<label class="col-sm-2">Email</label>
-					<form:input class="form-control col-sm-10" path="email"/>
+					<form:input class="form-control col-sm-10" path="employee.email"/>
 				</div>
 				
 				<div class="form-group row">
 					<label class="col-sm-2">Birth Date</label>
-					<form:input class="form-control col-sm-10" path="birthDate"/>
+					<form:select class="form-control col-sm-2" path="stringDate.day">
+					<c:forEach var="m" items="${dmy.months}">
+
+							<option value="${m}">${m}</option>
+
+					</c:forEach>
+					</form:select>
+					
+					<form:select class="form-control col-sm-2" path="stringDate.day">
+					<c:forEach var="d" items="${dmy.days}">
+
+							<option value="${d}">${d}</option>
+
+					</c:forEach>
+					</form:select>
+					
+					<form:select class="form-control col-sm-2" path="stringDate.day">
+					<c:forEach var="y" items="${dmy.years}">
+
+							<option value="${y}">${y}</option>
+
+					</c:forEach>
+					</form:select>
+					
 				</div>
 				
 				<div class="form-group row">
 					<label class="col-sm-2">Gender</label>
-					<form:select class="form-control col-sm-10" path="gender">
+					<form:select class="form-control col-sm-10" path="employee.gender">
 					<c:if test="${employee.gender == 'Male'}">
 							<option value="Male" ${'selected="selected"'}>Male</option>
 					</c:if>
@@ -119,7 +143,7 @@ h2
 				
 				<div class="form-group row">
 					<label class="col-sm-2">State</label>
-					<form:select class="form-control col-sm-10" path="state">
+					<form:select class="form-control col-sm-10" path="employee.state">
 					<c:forEach var="s" items="${states}">
 						<c:if test="${s.state_id == employee.state}">
 							<option value="${s.state_id}" ${'selected="selected"'}>${s.state}</option>
@@ -133,7 +157,7 @@ h2
 				
 				<div class="form-group row">
 					<label class="col-sm-2">Position</label>
-					<form:select class="form-control col-sm-10" path="position">
+					<form:select class="form-control col-sm-10" path="employee.position">
 					<c:forEach var="p" items="${positions}">
 						<c:if test="${p.position_id == employee.position}">
 							<option value="${p.position_id}" ${'selected="selected"'}>${p.position}</option>
@@ -148,7 +172,7 @@ h2
 				
 				<div class="form-group row">
 					<label class="col-sm-2">Department</label>
-					<form:select class="form-control col-sm-10" path="department">
+					<form:select class="form-control col-sm-10" path="employee.department">
 					<c:forEach var="d" items="${departments}">
 					<c:if test="${d.department_id == employee.department}">
 							<option value="${d.department_id}" ${'selected="selected"'}>${d.department}</option>

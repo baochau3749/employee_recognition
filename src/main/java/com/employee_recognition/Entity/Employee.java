@@ -38,7 +38,6 @@ public class Employee {
 	private String gender;
 	
 	@Column(name = "birth_date")
-	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private Date birthDate;
 
 	@Column(name = "state_id")
