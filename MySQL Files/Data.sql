@@ -4,6 +4,7 @@
 USE `cs467_employee_recognition` ;
 
 -- DELETE FROM user_role WHERE user_id > 0;
+DELETE FROM `award` WHERE award_id > 0;
 DELETE FROM user WHERE user_id > 0;
 DELETE FROM role WHERE role_id > 0;
 DELETE FROM user_profile WHERE user_profile_id > 0;
@@ -11,7 +12,7 @@ DELETE FROM employee WHERE employee_id > 0;
 DELETE FROM state WHERE state_id > 0;
 DELETE FROM department WHERE department_id > 0;
 DELETE FROM `position` WHERE position_id > 0;
-
+DELETE FROM `award_type` WHERE award_type_id > 0;
 
 # Set data in the role table
 ALTER TABLE role AUTO_INCREMENT = 1;
@@ -20,8 +21,8 @@ INSERT INTO role (role) VALUES ("ADMIN"), ("USER");
 # Set data in the user_profile table
 ALTER TABLE user_profile AUTO_INCREMENT = 1;
 INSERT INTO user_profile (first_name, last_name, signature_file) VALUES 
-	("Bao", "Chau", "Bao_signature"),
-    ("Carlos", "Leonard", "Carlos_signature");
+	("Bao", "Chau", "Bao-Signature"),
+    ("Carlos", "Leonard", "Carlos-ignature");
     
     
 # Set data in the user table
@@ -77,6 +78,39 @@ INSERT INTO employee (first_name, last_name, email, gender, birth_date, state_id
     ("Michael", "Martinez", "michael@gmail.com", "Male", '1992-03-03', 2, 1, 1),
     ("Britney", "Nguyen", "britney@gmail.com", "Female", '1993-04-04', 3, 3, 3),
     ("Dustin", "Chang", "dustin@gmail.com", "Male", '1994-05-05', 4, 4, 1);
+    
+# Set data in the award_type table
+ALTER TABLE `award_type` AUTO_INCREMENT = 1;
+INSERT INTO `award_type` (type) VALUES
+	(Employee of the Month),
+	(Leadership Skill),
+	(Most Productive Employee);
+	
+# Set data in the award table
+ALTER TABLE award AUTO_INCREMENT = 1;
+INSERT INTO award (user_id, employee_id, award_type_id, date_time) VALUES 
+	("", "", "", ""), 
+	("", "", "", ""),
+	("", "", "", ""),
+	("", "", "", ""),
+	("", "", "", ""),
+	("", "", "", ""),
+	("", "", "", ""),
+	("", "", "", ""),
+	("", "", "", ""),
+	("", "", "", ""),
+	("", "", "", ""),
+	("", "", "", ""),
+	("", "", "", ""),
+	("", "", "", ""),
+	("", "", "", ""),
+	("", "", "", ""),
+	("", "", "", ""),
+	("", "", "", ""),
+	("", "", "", ""),
+	("", "", "", "");
+	
+	
 
 
 
